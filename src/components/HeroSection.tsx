@@ -38,230 +38,217 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <div className="grid grid-cols-12 gap-4 lg:gap-5">
 
         {/* 1. Main Headline Bento Tile (Col 12 / Lg 8) */}
-        <div className="col-span-12 lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#d4af37]/30 shadow-sm flex flex-col justify-between relative overflow-hidden">
-          {/* Abstract Islamic corner arc */}
-          <div className="absolute top-0 right-0 w-36 h-36 bg-[#1a4d2e]/5 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>
+        <div className="col-span-12 lg:col-span-8 bg-[#0B223D] rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#C89B48]/40 shadow-xl flex flex-col justify-between relative overflow-hidden text-white">
+          {/* Subtle glowing radial background */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#38BDF8]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#C89B48]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
           
-          <div>
+          <div className="relative z-10">
             <div className="flex items-center gap-2 mb-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#d4af37]"></span>
-              <p className="text-[#1a4d2e] font-bold text-xs sm:text-sm tracking-wider uppercase">
-                إدارة الشؤون الثقافية والدعوية
+              <span className="w-2.5 h-2.5 rounded-full bg-[#38BDF8] animate-ping"></span>
+              <p className="text-[#DFB76C] font-bold text-xs sm:text-sm tracking-wider uppercase">
+                الهيئة العامة للأوقاف والشؤون الإسلامية | إدارة الشؤون الثقافية والدعوية
               </p>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-amiri font-bold text-[#1a4d2e] leading-tight mb-4">
-              دورة إعداد وتأهيل الخطباء
+            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-amiri font-bold text-white leading-tight mb-4">
+              برنامج <span className="text-[#38BDF8] drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">(إعداد)</span> لتأهيل الخطباء
             </h1>
 
-            <p className="text-sm sm:text-base text-[#2d3436]/90 leading-relaxed font-tajawal mb-6 max-w-2xl">
-              برنامج نوعي مكثف لتأهيل فرسان المنابر وحفظة كتاب الله وطلبة العلم وفق المنهج الشرعي الوسطي، لإعداد خطباء متمكنين في حسن البيان ومعالجة قضايا المجتمع بالحكمة والموعظة الحسنة.
+            <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-tajawal mb-6 max-w-2xl">
+              برنامج نوعي مكثف لتأهيل فرسان المنابر وحفظة كتاب الله وطلبة العلم وفق المنهج الشرعي الوسطي الأصيل، لإعداد خطباء متمكنين في حسن البيان ومعالجة قضايا المجتمع بالحكمة والموعظة الحسنة.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="bg-[#1a4d2e] text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-xs">
-                النسخة الخامسة - 1448هـ / 2026م
+              <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-4 py-1.5 rounded-full text-xs font-black shadow-md">
+                الدفعة الثالثة (3) - للعام 1447هـ / 2025م
               </span>
-              <span className="text-[#1a4d2e] font-amiri font-bold text-base bg-[#f4f1ea] px-3.5 py-1 rounded-full border border-[#d4af37]/30">
+              <span className="text-[#DFB76C] font-amiri font-bold text-base bg-white/10 px-4 py-1 rounded-full border border-[#C89B48]/40">
                 ﴿ ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ ﴾
               </span>
             </div>
           </div>
 
           {/* Action CTAs inside Main Tile */}
-          <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-stone-100">
+          <div className="relative z-10 flex flex-wrap items-center gap-3 pt-5 border-t border-white/15">
             <button
               id="hero-register-cta"
               onClick={onRegisterClick}
-              className="px-6 py-3.5 bg-[#d4af37] hover:bg-[#c49b2c] text-[#1a4d2e] font-black text-sm sm:text-base rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 border-2 border-amber-300 ring-2 ring-amber-400/20"
+              className="px-6 py-3.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] hover:brightness-110 text-[#08192E] font-black text-sm sm:text-base rounded-2xl shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 border border-amber-300 ring-4 ring-amber-400/20"
             >
-              <UserPlus className="w-5 h-5 text-[#1a4d2e]" />
+              <UserPlus className="w-5 h-5 text-[#08192E]" />
               <span>تعبئة استمارة التسجيل الآن</span>
             </button>
 
             <button
               id="hero-terms-cta"
               onClick={onTermsClick}
-              className="px-5 py-3.5 bg-[#e8e4d9] hover:bg-[#ded8cb] text-[#1a4d2e] font-bold text-sm rounded-2xl transition border border-[#d4af37]/30 flex items-center gap-2"
+              className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold text-sm rounded-2xl transition border border-[#C89B48]/40 flex items-center gap-2"
             >
-              <ShieldAlert className="w-4 h-4 text-[#1a4d2e]" />
+              <ShieldAlert className="w-4 h-4 text-[#38BDF8]" />
               <span>شروط وضوابط القبول</span>
             </button>
 
             <button
               id="hero-lookup-cta"
               onClick={onLookupClick}
-              className="px-4 py-3.5 bg-white hover:bg-[#f4f1ea] text-[#2d3436] font-semibold text-xs sm:text-sm rounded-2xl border border-stone-200 transition flex items-center gap-1.5"
+              className="px-4 py-3.5 bg-white/5 hover:bg-white/15 text-slate-200 font-semibold text-xs sm:text-sm rounded-2xl border border-white/20 transition flex items-center gap-1.5"
             >
-              <Search className="w-4 h-4 text-[#1a4d2e]" />
+              <Search className="w-4 h-4 text-[#DFB76C]" />
               <span>استعلام بالرقم المتسلسل</span>
             </button>
           </div>
         </div>
 
-        {/* 2. Key Venue & Date Bento Tile (Col 12 / Lg 4) */}
-        <div className="col-span-12 lg:col-span-4 bg-[#1a4d2e] rounded-3xl p-6 sm:p-8 text-white flex flex-col justify-between border-4 border-white shadow-xl relative overflow-hidden">
-          {/* Subtle Islamic pattern */}
-          <div className="absolute inset-0 bg-islamic-pattern opacity-25 pointer-events-none"></div>
-
-          <div className="relative z-10 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/20 pb-4">
-              <span className="text-xs uppercase tracking-wider text-[#d4af37] font-bold">موعد الانعقاد والمقر</span>
-              <span className="p-2 bg-white/10 rounded-xl text-[#d4af37]">
-                <Calendar className="w-5 h-5" />
+        {/* 2. Official Poster Preview Tile (Col 12 / Lg 4) */}
+        <div className="col-span-12 lg:col-span-4 bg-[#08192E] rounded-3xl p-5 text-white flex flex-col justify-between border-2 border-[#C89B48]/40 shadow-xl relative overflow-hidden group">
+          <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-black aspect-4/3 sm:aspect-square flex items-center justify-center">
+            <img 
+              src="/assets/official-poster.jpg" 
+              alt="الملصق الرسمي لبرنامج إعداد لتأهيل الخطباء"
+              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#08192E] via-transparent to-transparent opacity-80"></div>
+            <div className="absolute bottom-3 right-3 left-3 flex justify-between items-center text-xs">
+              <span className="bg-[#08192E]/90 text-[#DFB76C] px-3 py-1 rounded-lg border border-[#C89B48]/40 font-bold">
+                الإعلان الرسمي المعتمد
               </span>
-            </div>
-
-            <div>
-              <p className="text-xs text-white/70 mb-1">تاريخ انطلاق الدورة</p>
-              <p className="text-2xl sm:text-3xl font-bold font-mono text-white">24 أغسطس 2026م</p>
-              <p className="text-sm text-[#d4af37] font-medium mt-1">11 ربيع الأول 1448هـ</p>
-            </div>
-
-            <div className="pt-4 border-t border-white/20">
-              <p className="text-xs text-white/70 mb-1 flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-                <span>المقر المعتمد</span>
-              </p>
-              <p className="text-xl font-bold text-white">مسجد حي دمشق</p>
-              <p className="text-xs text-white/80">منطقة حي دمشق</p>
+              <span className="text-[#38BDF8] font-bold">@AwqafLibya</span>
             </div>
           </div>
 
-          <div className="relative z-10 mt-6 pt-4 border-t border-white/20 flex items-center justify-between text-xs">
-            <span className="flex items-center gap-1.5 text-white/90">
-              <Home className="w-4 h-4 text-[#d4af37]" />
-              <span>إقامة وسكن للوافدين</span>
+          <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-xs text-slate-300">
+            <span className="flex items-center gap-1.5">
+              <Award className="w-4 h-4 text-[#DFB76C]" />
+              <span>الدفعة الثالثة (3)</span>
             </span>
-            <span className="bg-[#d4af37] text-[#1a4d2e] px-2.5 py-0.5 rounded-full font-bold text-[10px]">
-              متاح بالتزام المبيت
+            <span className="bg-white/10 text-sky-300 px-2.5 py-0.5 rounded-full font-bold text-[11px]">
+              1447هـ / 2025م
             </span>
           </div>
         </div>
 
-        {/* 3. Live Countdown Bento Tile (Col 12 / Sm 6 / Lg 4) */}
-        <div className="col-span-12 sm:col-span-6 lg:col-span-4 bg-[#e8e4d9] rounded-3xl p-6 border border-[#d4af37]/30 flex flex-col justify-between shadow-xs">
+        {/* 3. Acceptance Dates Bento Tile (Col 12 / Sm 6 / Lg 4) */}
+        <div className="col-span-12 sm:col-span-6 lg:col-span-4 bg-[#0F2744] text-white rounded-3xl p-6 border border-[#C89B48]/30 flex flex-col justify-between shadow-md">
           <div>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-cairo text-sm font-bold text-[#1a4d2e] flex items-center gap-2">
-                <Clock className="w-4 h-4 text-[#1a4d2e]" />
-                <span>العد التنازلي للافتتاح</span>
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
+              <h3 className="font-cairo text-sm font-bold text-white flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#DFB76C]" />
+                <span>مواعيد وفترة القبول</span>
               </h3>
-              <span className="text-[10px] bg-white/70 text-[#1a4d2e] px-2 py-0.5 rounded-full font-bold">
-                24 أغسطس
+              <span className="text-[11px] bg-[#C89B48]/20 text-[#DFB76C] border border-[#C89B48]/30 px-2.5 py-0.5 rounded-full font-bold">
+                محددة رسمياً
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-2.5 text-center my-3">
-              <div className="bg-white p-3 rounded-2xl border border-[#d4af37]/20 shadow-xs">
-                <div className="text-2xl font-bold font-mono text-[#1a4d2e]">{timeLeft.days}</div>
-                <div className="text-[10px] text-gray-500 font-semibold mt-0.5">يوم</div>
+            <div className="space-y-3">
+              <div className="bg-gradient-to-r from-emerald-950/60 to-emerald-900/30 p-3.5 rounded-2xl border border-emerald-500/30">
+                <p className="text-xs text-emerald-300 font-semibold mb-0.5">بداية القبول والتسجيل:</p>
+                <p className="text-lg font-bold text-white">السبت 5 يوليو 2025 م</p>
               </div>
-              <div className="bg-white p-3 rounded-2xl border border-[#d4af37]/20 shadow-xs">
-                <div className="text-2xl font-bold font-mono text-[#1a4d2e]">{timeLeft.hours}</div>
-                <div className="text-[10px] text-gray-500 font-semibold mt-0.5">ساعة</div>
-              </div>
-              <div className="bg-white p-3 rounded-2xl border border-[#d4af37]/20 shadow-xs">
-                <div className="text-2xl font-bold font-mono text-[#1a4d2e]">{timeLeft.minutes}</div>
-                <div className="text-[10px] text-gray-500 font-semibold mt-0.5">دقيقة</div>
+
+              <div className="bg-gradient-to-r from-rose-950/60 to-rose-900/30 p-3.5 rounded-2xl border border-rose-500/30">
+                <p className="text-xs text-rose-300 font-semibold mb-0.5">نهاية القبول والتسجيل:</p>
+                <p className="text-lg font-bold text-white">السبت 12 يوليو 2025 م</p>
               </div>
             </div>
           </div>
 
-          <p className="text-xs text-[#2d3436]/70 leading-relaxed font-tajawal mt-2">
-            يبدأ استقبال المشاركين صباح يوم الاثنين الساعة 08:00 صباحاً بمسجد حي دمشق.
+          <p className="text-xs text-slate-300 leading-relaxed font-tajawal mt-3">
+            يرجى تعبئة استمارة التسجيل الإلكترونية قبل انتهاء الموعد المحدد.
           </p>
         </div>
 
         {/* 4. Core Features Bento Tile (Col 12 / Sm 6 / Lg 4) */}
-        <div className="col-span-12 sm:col-span-6 lg:col-span-4 bg-white rounded-3xl p-6 border border-stone-200 shadow-sm flex flex-col justify-between">
+        <div className="col-span-12 sm:col-span-6 lg:col-span-4 bg-white rounded-3xl p-6 border border-slate-200 shadow-md flex flex-col justify-between">
           <div>
-            <h3 className="font-cairo text-base font-bold text-[#1a4d2e] mb-3 border-r-4 border-[#d4af37] pr-3">
-              مميزات البرنامج العلمي
+            <h3 className="font-cairo text-base font-bold text-[#08192E] mb-3 border-r-4 border-[#C89B48] pr-3 flex items-center justify-between">
+              <span>مميزات البرنامج العلمي</span>
+              <Sparkles className="w-4 h-4 text-[#C89B48]" />
             </h3>
             
-            <ul className="space-y-2.5 text-xs text-[#2d3436] font-tajawal">
+            <ul className="space-y-2.5 text-xs text-slate-700 font-tajawal">
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#1a4d2e] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0" />
                 <span>تدريب تطبيقي على الإلقاء ولغة الجسد المنبرية</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#1a4d2e] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0" />
                 <span>إشراف نخبة من كبار المشايخ والعلماء والأساتذة</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#1a4d2e] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0" />
                 <span>منهج وسطي أصيل وفق الكتاب والسنة النبوية</span>
               </li>
               <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#1a4d2e] shrink-0" />
-                <span>شهادة معتمدة ورقم قيد خطابي للمجتازين</span>
+                <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0" />
+                <span>شهادة معتمدة ورقم قيد خطابي رسمي للمجتازين</span>
               </li>
             </ul>
           </div>
 
-          <div className="mt-4 pt-3 border-t border-stone-100 flex items-center justify-between text-xs text-[#1a4d2e] font-semibold">
-            <span>إجمالي الساعات: 48 ساعة تدريبية</span>
-            <Award className="w-4 h-4 text-[#d4af37]" />
+          <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#08192E] font-bold">
+            <span>سكن داخلي متاح للمغتربين</span>
+            <Home className="w-4 h-4 text-[#C89B48]" />
           </div>
         </div>
 
         {/* 5. Instant Serial Review Number Notice (Col 12 / Lg 4) */}
-        <div className="col-span-12 lg:col-span-4 bg-white rounded-3xl p-6 border border-[#d4af37]/40 shadow-sm flex flex-col justify-between relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-24 h-24 bg-[#d4af37]/10 rounded-br-full pointer-events-none"></div>
+        <div className="col-span-12 lg:col-span-4 bg-[#08192E] text-white rounded-3xl p-6 border border-[#C89B48]/40 shadow-xl flex flex-col justify-between relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-24 h-24 bg-[#C89B48]/10 rounded-br-full pointer-events-none"></div>
 
           <div>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-cairo text-base font-bold text-[#1a4d2e] flex items-center gap-2">
-                <Compass className="w-4 h-4 text-[#d4af37]" />
-                <span>بطاقة المراجعة الفورية</span>
+              <h3 className="font-cairo text-base font-bold text-white flex items-center gap-2">
+                <Compass className="w-4 h-4 text-[#38BDF8]" />
+                <span>بطاقة المراجعة الإلكترونية</span>
               </h3>
-              <span className="font-mono text-xs bg-[#f4f1ea] text-[#1a4d2e] px-2.5 py-0.5 rounded-full border border-[#d4af37]/30 font-bold">
+              <span className="font-mono text-xs bg-[#C89B48]/20 text-[#DFB76C] px-2.5 py-0.5 rounded-full border border-[#C89B48]/40 font-bold">
                 KHT-1448-XXX
               </span>
             </div>
 
-            <p className="text-xs text-[#2d3436]/80 leading-relaxed font-tajawal mb-4">
-              فور إرسال النموذج، يحصل المتقدم على بطاقة مراجعة رسمية جاهزة للطباعة فوراً ليقدمها للجنة الاستقبال والمقابلة يوم 24 أغسطس 2026م.
+            <p className="text-xs text-slate-300 leading-relaxed font-tajawal mb-4">
+              فور إرسال النموذج، يحصل المتقدم على بطاقة مراجعة رسمية بباركود مخصص جاهزة للطباعة فوراً لمراجعة إدارة الشؤون الثقافية والدعوية.
             </p>
           </div>
 
           <button
             onClick={onLookupClick}
-            className="w-full py-2.5 bg-[#f4f1ea] hover:bg-[#e8e4d9] text-[#1a4d2e] font-bold text-xs rounded-xl border border-[#d4af37]/40 flex items-center justify-center gap-2 transition"
+            className="w-full py-3 bg-white/10 hover:bg-white/20 text-[#DFB76C] font-bold text-xs rounded-xl border border-[#C89B48]/40 flex items-center justify-center gap-2 transition"
           >
-            <Search className="w-3.5 h-3.5" />
+            <Search className="w-3.5 h-3.5 text-[#38BDF8]" />
             <span>استعلام وطباعة استمارة سابقة</span>
           </button>
         </div>
 
         {/* 6. Bento Bottom Master Ribbon (Col 12) */}
-        <div className="col-span-12 bg-[#1a4d2e] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between text-white text-xs gap-4 shadow-md border border-[#d4af37]/30">
-          <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-white/90">
+        <div className="col-span-12 bg-gradient-to-r from-[#061526] via-[#0A1C30] to-[#061526] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between text-white text-xs gap-4 shadow-lg border border-[#C89B48]/30">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-slate-300">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#d4af37]"></span>
-              <strong>المدة التدريبية:</strong> 48 ساعة مكثفة
+              <span className="w-2 h-2 rounded-full bg-[#38BDF8]"></span>
+              <strong className="text-white">الجهة المنظمة:</strong> الهيئة العامة للأوقاف والشؤون الإسلامية
             </span>
             <span className="hidden md:flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#d4af37]"></span>
-              <strong>الهدف:</strong> تأهيل كوادر شرعية منبرية متميزة
+              <span className="w-2 h-2 rounded-full bg-[#DFB76C]"></span>
+              <strong className="text-white">الإدارة:</strong> إدارة الشؤون الثقافية والدعوية
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#d4af37]"></span>
-              <strong>الجهة:</strong> إدارة الشؤون الثقافية والدعوية
+              <span className="w-2 h-2 rounded-full bg-[#38BDF8]"></span>
+              <strong className="text-white">التواصل:</strong> @AwqafLibya | @AwqafofLibya
             </span>
           </div>
 
-          <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-xl border border-white/20">
-            <span className="font-bold text-[#d4af37]">رقم مراجعة الطلب:</span>
-            <span className="tracking-widest font-mono text-xs bg-white text-[#1a4d2e] px-2.5 py-0.5 rounded-lg font-bold">
+          <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-xl border border-white/15">
+            <span className="font-bold text-[#DFB76C]">رقم المراجعة:</span>
+            <span className="tracking-widest font-mono text-xs bg-white text-[#08192E] px-2.5 py-0.5 rounded-lg font-black">
               KHT-1448-XXXX
             </span>
             <button 
               onClick={onLookupClick}
-              className="underline text-white/80 hover:text-white font-medium"
+              className="underline text-sky-300 hover:text-white font-semibold"
             >
-              طباعة التذكرة
+              طباعة البطاقة
             </button>
           </div>
         </div>

@@ -67,8 +67,8 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
     },
     {
       id: 8,
-      title: 'تعبئة الاستبيان وتقديم نسخة ورقية',
-      explanation: 'إتمام التسجيل عبر هذه البوابة وطباعة بطاقة المراجعة والاستمارة وإحضارها يوم الافتتاح 24 أغسطس 2026م.',
+      title: 'تعبئة الاستمارة والالتزام بمواعيد القبول',
+      explanation: 'إتمام التسجيل خلال فترة القبول المحددة (5 - 12 يوليو 2025م) وطباعة بطاقة المراجعة المحتوية على الرقم المتسلسل والباركود.',
       icon: FileText,
       badge: 'إجراء إداري',
       highlight: true
@@ -88,37 +88,37 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
   return (
     <section id="terms-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Bento Container for Terms */}
-      <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#d4af37]/30 shadow-sm relative overflow-hidden">
+      <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-md relative overflow-hidden">
         {/* Subtle decorative background */}
-        <div className="absolute top-0 left-0 w-48 h-48 bg-[#1a4d2e]/5 rounded-br-full pointer-events-none"></div>
+        <div className="absolute top-0 left-0 w-48 h-48 bg-[#08192E]/5 rounded-br-full pointer-events-none"></div>
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#e8e4d9] text-[#1a4d2e] text-xs font-bold border border-[#d4af37]/30">
-            <ShieldCheck className="w-4 h-4 text-[#1a4d2e]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-50 text-[#0284C7] text-xs font-bold border border-sky-200">
+            <ShieldCheck className="w-4 h-4 text-[#0284C7]" />
             <span>ضوابط واعتماد القبول</span>
           </div>
 
-          <h2 className="font-amiri text-2xl sm:text-4xl font-bold text-[#1a4d2e] tracking-wide">
-            شروط وضوابط القبول في الدورة
+          <h2 className="font-amiri text-2xl sm:text-4xl font-bold text-[#08192E] tracking-wide">
+            شروط وضوابط القبول في برنامج (إعداد)
           </h2>
 
-          <p className="text-[#2d3436]/80 text-sm sm:text-base font-tajawal">
-            يرجى قراءة الشروط والضوابط بعناية تامة؛ حيث يُعد استيفاؤها شرطاً أساسياً لاعتماد طلب التسجيل ومنح رقم المراجعة المعتمد.
+          <p className="text-slate-600 text-sm sm:text-base font-tajawal">
+            يرجى قراءة الشروط والضوابط المعتمدة بعناية؛ حيث يُعد استيفاؤها شرطاً أساسياً لاعتماد طلب التسجيل ومنح رقم المراجعة الرسمي.
           </p>
         </div>
 
         {/* Highlighted Warning Alert */}
-        <div className="max-w-4xl mx-auto mb-8 bg-[#f4f1ea] border-2 border-[#d4af37]/50 rounded-2xl p-5 text-[#2d3436] flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-[#1a4d2e] text-[#d4af37] flex items-center justify-center shrink-0 shadow-xs">
-            <AlertOctagon className="w-6 h-6" />
+        <div className="max-w-4xl mx-auto mb-8 bg-[#08192E] border-2 border-[#C89B48]/50 rounded-2xl p-5 text-white flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-lg">
+          <div className="w-12 h-12 rounded-2xl bg-[#0B2545] text-[#DFB76C] flex items-center justify-center shrink-0 border border-[#C89B48]/30 shadow-xs">
+            <AlertOctagon className="w-6 h-6 text-[#38BDF8]" />
           </div>
           <div className="space-y-1">
-            <div className="font-cairo font-bold text-sm sm:text-base text-[#1a4d2e]">
-              تنبيه مهم لجميع المتقدمين:
+            <div className="font-cairo font-bold text-sm sm:text-base text-[#DFB76C]">
+              تنبيه مهم لجميع المتقدمين لبرنامج إعداد:
             </div>
-            <p className="text-xs sm:text-sm font-tajawal leading-relaxed text-[#2d3436]/85">
-              سيتم إجراء مقابلة واختبار مبدئي للتحقق من سلامة النطق والفصاحة ومطابقة الشروط المذكورة أدناه. يرجى إحضار نسخة ورقية مطبوعة من الاستمارة المحتوية على الرقم المتسلسل لمراجعة لجنة الاستقبال.
+            <p className="text-xs sm:text-sm font-tajawal leading-relaxed text-slate-200">
+              سيتم إجراء مقابلة واختبار مبدئي للتحقق من سلامة النطق والفصاحة ومطابقة الشروط المعتمدة. يرجى حفظ وطباعة بطاقة المراجعة المحتوية على الرقم المتسلسل لمراجعة لجنة القبول.
             </p>
           </div>
         </div>
@@ -136,8 +136,8 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
                 onClick={() => handleToggleTerm(term.id)}
                 className={`cursor-pointer rounded-2xl p-5 border-2 transition-all duration-200 flex flex-col justify-between select-none ${
                   isChecked
-                    ? 'bg-[#1a4d2e] text-white border-[#1a4d2e] shadow-md'
-                    : 'bg-[#f4f1ea] border-stone-200/80 hover:border-[#d4af37] hover:bg-white text-[#2d3436]'
+                    ? 'bg-[#08192E] text-white border-[#08192E] shadow-lg ring-2 ring-[#C89B48]/40'
+                    : 'bg-slate-50 border-slate-200 hover:border-[#C89B48]/50 hover:bg-white text-slate-800'
                 }`}
               >
                 <div>
@@ -145,12 +145,12 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <div className="flex items-center gap-1.5">
                       <span className={`w-6 h-6 rounded-full font-bold text-xs flex items-center justify-center ${
-                        isChecked ? 'bg-white/20 text-[#d4af37]' : 'bg-[#e8e4d9] text-[#1a4d2e]'
+                        isChecked ? 'bg-white/20 text-[#DFB76C]' : 'bg-slate-200 text-[#08192E]'
                       }`}>
                         {index + 1}
                       </span>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                        isChecked ? 'bg-white/10 text-white' : 'bg-white text-[#1a4d2e] border border-stone-200'
+                        isChecked ? 'bg-white/10 text-sky-300' : 'bg-white text-slate-700 border border-slate-200'
                       }`}>
                         {term.badge}
                       </span>
@@ -158,30 +158,30 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
 
                     <div>
                       {isChecked ? (
-                        <CheckCircle className="w-5 h-5 text-[#d4af37]" />
+                        <CheckCircle className="w-5 h-5 text-[#38BDF8]" />
                       ) : (
-                        <div className="w-5 h-5 rounded-full border-2 border-stone-400 hover:border-[#1a4d2e] flex items-center justify-center"></div>
+                        <div className="w-5 h-5 rounded-full border-2 border-slate-300 hover:border-[#08192E] flex items-center justify-center"></div>
                       )}
                     </div>
                   </div>
 
                   {/* Term Title */}
                   <h3 className={`font-cairo text-sm sm:text-base font-bold mb-2 leading-snug flex items-center gap-2 border-r-4 ${
-                    isChecked ? 'text-white border-[#d4af37]' : 'text-[#1a4d2e] border-[#d4af37]'
+                    isChecked ? 'text-white border-[#DFB76C]' : 'text-[#08192E] border-[#C89B48]'
                   } pr-2`}>
                     <span>{term.title}</span>
                   </h3>
 
                   {/* Term Explanation */}
                   <p className={`text-xs font-tajawal leading-relaxed ${
-                    isChecked ? 'text-white/85' : 'text-stone-600'
+                    isChecked ? 'text-slate-300' : 'text-slate-600'
                   }`}>
                     {term.explanation}
                   </p>
                 </div>
 
                 <div className={`mt-3 pt-2 border-t text-[11px] flex items-center justify-between ${
-                  isChecked ? 'border-white/20 text-[#d4af37]' : 'border-stone-200 text-stone-500'
+                  isChecked ? 'border-white/15 text-[#DFB76C]' : 'border-slate-200 text-slate-500'
                 }`}>
                   <span>الضابط {term.id}</span>
                   <span>{isChecked ? '✓ مستوفٍ للشرط' : 'انقر للتأكيد'}</span>
@@ -192,31 +192,31 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
         </div>
 
         {/* Quick Eligibility Test Box */}
-        <div className="max-w-3xl mx-auto bg-[#e8e4d9] border border-[#d4af37]/30 rounded-3xl p-6 text-center space-y-4 shadow-2xs">
+        <div className="max-w-3xl mx-auto bg-[#08192E] border border-[#C89B48]/40 rounded-3xl p-6 text-center space-y-4 shadow-xl text-white">
           <div className="flex items-center justify-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-[#1a4d2e]" />
-            <h4 className="font-cairo text-base sm:text-lg font-bold text-[#1a4d2e]">
+            <ShieldCheck className="w-5 h-5 text-[#38BDF8]" />
+            <h4 className="font-cairo text-base sm:text-lg font-bold text-white">
               مقياس التأكد من مطابقة شروط القبول
             </h4>
           </div>
 
-          <p className="text-xs sm:text-sm text-[#2d3436]/80 font-tajawal max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm text-slate-300 font-tajawal max-w-lg mx-auto">
             قمت بتأكيد ({checkedCount} من {termsList.length}) شروط. يمكنك الضغط على البطاقات أعلاه للتأكد من مطابقتك لكافة المتطلبات.
           </p>
 
           {/* Progress Bar */}
-          <div className="w-full bg-white h-2.5 rounded-full overflow-hidden max-w-md mx-auto border border-stone-300">
+          <div className="w-full bg-white/10 h-2.5 rounded-full overflow-hidden max-w-md mx-auto border border-white/20">
             <div
               className={`h-full transition-all duration-300 ${
-                allChecked ? 'bg-[#1a4d2e]' : 'bg-[#d4af37]'
+                allChecked ? 'bg-[#38BDF8]' : 'bg-gradient-to-r from-[#C89B48] to-[#DFB76C]'
               }`}
               style={{ width: `${(checkedCount / termsList.length) * 100}%` }}
             ></div>
           </div>
 
           {allChecked && (
-            <div className="p-3 bg-white border border-[#1a4d2e]/30 rounded-2xl text-[#1a4d2e] text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-2xs">
-              <CheckCircle className="w-5 h-5 text-[#1a4d2e]" />
+            <div className="p-3 bg-white/10 border border-[#38BDF8]/40 rounded-2xl text-sky-200 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-sm">
+              <CheckCircle className="w-5 h-5 text-[#38BDF8]" />
               <span>ممتاز! أنت مستوفٍ لكافة شروط القبول؛ تفضل بتعبئة الاستمارة والحصول على رقمك المتسلسل.</span>
             </div>
           )}
@@ -225,10 +225,10 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
             <button
               id="terms-proceed-to-form-btn"
               onClick={onProceedToRegister}
-              className="px-7 py-3.5 bg-[#d4af37] hover:bg-[#c49b2c] text-[#1a4d2e] font-black rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 text-sm sm:text-base border-2 border-amber-300 ring-2 ring-amber-400/20"
+              className="px-7 py-3.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] hover:brightness-110 text-[#08192E] font-black rounded-2xl shadow-xl transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2 text-sm sm:text-base border border-amber-300 ring-4 ring-amber-400/20"
             >
               <span>الانتقال إلى استمارة التسجيل الإلكترونية</span>
-              <ArrowDown className="w-5 h-5 animate-bounce text-[#1a4d2e]" />
+              <ArrowDown className="w-5 h-5 animate-bounce text-[#08192E]" />
             </button>
           </div>
         </div>

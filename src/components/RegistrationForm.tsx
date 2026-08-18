@@ -158,28 +158,28 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
       <div className="bg-white rounded-3xl border border-[#d4af37]/30 shadow-sm overflow-hidden">
         
         {/* Header Banner */}
-        <div className="bg-[#1a4d2e] text-white p-6 sm:p-8 relative overflow-hidden border-b-4 border-[#d4af37]">
+        <div className="bg-gradient-to-r from-[#061526] via-[#0A1C30] to-[#061526] text-white p-6 sm:p-8 relative overflow-hidden border-b-4 border-[#C89B48]">
           {/* Subtle pattern background */}
           <div className="absolute inset-0 bg-islamic-pattern opacity-20 pointer-events-none"></div>
           
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
             <div className="space-y-1.5">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[#d4af37] text-xs font-bold border border-white/20">
-                <UserCheck className="w-4 h-4 text-[#d4af37]" />
-                <span>استمارة التسجيل الرسمية 1448هـ</span>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 text-[#38BDF8] text-xs font-bold border border-white/20">
+                <UserCheck className="w-4 h-4 text-[#DFB76C]" />
+                <span>استمارة التسجيل الرسمية - الدفعة الثالثة (3)</span>
               </div>
               <h3 className="font-amiri text-2xl sm:text-3xl font-bold text-white">
-                طلب الالتحاق بدورة إعداد وتأهيل الخطباء
+                طلب الالتحاق ببرنامج (إعداد) لتأهيل الخطباء
               </h3>
-              <p className="text-white/80 text-xs sm:text-sm font-tajawal">
-                سيتم منحك رقماً متسلسلاً فورياً (بطاقة مراجعة رسمية) لاستخدامه في المقابلة والاستلام.
+              <p className="text-slate-300 text-xs sm:text-sm font-tajawal">
+                سيتم منحك رقماً متسلسلاً فورياً (بطاقة مراجعة رسمية بباركود) لمراجعة لجنة القبول.
               </p>
             </div>
 
-            <div className="bg-white/10 border border-white/20 p-3.5 rounded-2xl text-center shrink-0 backdrop-blur-xs">
-              <div className="text-[11px] text-[#d4af37] font-semibold">تاريخ انطلاق الدورة</div>
-              <div className="text-base font-bold text-white font-mono">24 / 08 / 2026م</div>
-              <div className="text-[11px] text-white/80">11 ربيع الأول 1448هـ</div>
+            <div className="bg-white/10 border border-[#C89B48]/40 p-3.5 rounded-2xl text-center shrink-0 backdrop-blur-xs">
+              <div className="text-[11px] text-[#DFB76C] font-semibold">فترة القبول المعتمدة</div>
+              <div className="text-base font-bold text-white font-mono">5 - 12 يوليو 2025م</div>
+              <div className="text-[11px] text-sky-300 font-mono">1447هـ</div>
             </div>
           </div>
         </div>
@@ -199,15 +199,15 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
 
           {/* Section 1: Personal Information */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b border-stone-200 text-[#1a4d2e] font-bold text-lg">
-              <IdCard className="w-5 h-5 text-[#1a4d2e]" />
+            <div className="flex items-center gap-2 pb-2 border-b border-slate-200 text-[#08192E] font-bold text-lg">
+              <IdCard className="w-5 h-5 text-[#0284C7]" />
               <h4>البيانات الشخصية للمتقدم</h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Full Name */}
               <div className="sm:col-span-2">
-                <label htmlFor="fullName" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="fullName" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   الاسم الرباعي كاملاً <span className="text-rose-600">*</span>
                 </label>
                 <input
@@ -218,13 +218,13 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   onChange={handleChange}
                   required
                   placeholder="مثال: عبد الرحمن محمد عبد الله السنوسي"
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-[#f4f1ea]/40"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-slate-50/50"
                 />
               </div>
 
               {/* National ID */}
               <div>
-                <label htmlFor="nationalId" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="nationalId" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   الرقم الوطني / رقم الهوية <span className="text-rose-600">*</span>
                 </label>
                 <input
@@ -235,13 +235,13 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   onChange={handleChange}
                   required
                   placeholder="أدخل الرقم الوطني المعتمد"
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm font-mono bg-[#f4f1ea]/40"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm font-mono bg-slate-50/50"
                 />
               </div>
 
               {/* Phone */}
               <div>
-                <label htmlFor="phone" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="phone" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   رقم الهاتف (الواتساب) <span className="text-rose-600">*</span>
                 </label>
                 <input
@@ -252,13 +252,13 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   onChange={handleChange}
                   required
                   placeholder="09XXXXXXXX"
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm font-mono bg-[#f4f1ea]/40"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm font-mono bg-slate-50/50"
                 />
               </div>
 
               {/* Birth date & Age calculation */}
               <div>
-                <label htmlFor="birthDate" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="birthDate" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   تاريخ الميلاد <span className="text-rose-600">* (يشترط 18 عاماً فما فوق)</span>
                 </label>
                 <input
@@ -268,10 +268,10 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   value={formData.birthDate}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-[#f4f1ea]/40"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-slate-50/50"
                 />
                 {calculatedAge !== null && (
-                  <div className={`text-xs mt-1 font-semibold ${calculatedAge >= 18 ? 'text-[#1a4d2e]' : 'text-rose-600'}`}>
+                  <div className={`text-xs mt-1 font-semibold ${calculatedAge >= 18 ? 'text-[#0284C7]' : 'text-rose-600'}`}>
                     العمر المحسوب: {calculatedAge} سنة {calculatedAge < 18 ? '(غير مطابق لشرط السن الأدنى)' : '✓ (مستوفٍ لشرط السن)'}
                   </div>
                 )}
@@ -279,8 +279,8 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
 
               {/* Email (Optional) */}
               <div>
-                <label htmlFor="email" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
-                  البريد الإلكتروني <span className="text-stone-400 font-normal">(اختياري)</span>
+                <label htmlFor="email" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
+                  البريد الإلكتروني <span className="text-slate-400 font-normal">(اختياري)</span>
                 </label>
                 <input
                   type="email"
@@ -289,13 +289,13 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="name@example.com"
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-[#f4f1ea]/40"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-slate-50/50"
                 />
               </div>
 
               {/* City */}
               <div>
-                <label htmlFor="city" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="city" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   المدينة / المنطقة <span className="text-rose-600">*</span>
                 </label>
                 <input
@@ -305,14 +305,14 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   value={formData.city}
                   onChange={handleChange}
                   required
-                  placeholder="مثال: حي دمشق / طرابلس / مصراتة / الزاوية"
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-[#f4f1ea]/40"
+                  placeholder="مثال: طرابلس / بنغازي / مصراتة / الزاوية"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-slate-50/50"
                 />
               </div>
 
               {/* Detailed Address */}
               <div>
-                <label htmlFor="address" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="address" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   العنوان التفصيلي ومكان السكن <span className="text-rose-600">*</span>
                 </label>
                 <input
@@ -323,7 +323,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   onChange={handleChange}
                   required
                   placeholder="مثال: قرب مسجد التقوى، المحلة الأولى"
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-[#f4f1ea]/40"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-slate-50/50"
                 />
               </div>
             </div>
@@ -331,14 +331,14 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
 
           {/* Section 2: Educational & Quranic Background */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 pb-2 border-b border-stone-200 text-[#1a4d2e] font-bold text-lg">
-              <GraduationCap className="w-5 h-5 text-[#1a4d2e]" />
+            <div className="flex items-center gap-2 pb-2 border-b border-slate-200 text-[#08192E] font-bold text-lg">
+              <GraduationCap className="w-5 h-5 text-[#0284C7]" />
               <h4>المؤهل العلمي وحفظ القرآن الكريم</h4>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="educationalLevel" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="educationalLevel" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   المؤهل العلمي / الدراسي <span className="text-rose-600">*</span>
                 </label>
                 <select
@@ -346,7 +346,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   name="educationalLevel"
                   value={formData.educationalLevel}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-white"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-white"
                 >
                   <option value="بكالوريوس دراسات إسلامية / شريعة">بكالوريوس دراسات إسلامية / شريعة</option>
                   <option value="طالب علم بمعهد العلوم الشرعية">طالب علم بمعهد العلوم الشرعية</option>
@@ -358,7 +358,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
               </div>
 
               <div>
-                <label htmlFor="quranMemorization" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
+                <label htmlFor="quranMemorization" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
                   مقدار حفظ القرآن الكريم <span className="text-rose-600">*</span>
                 </label>
                 <select
@@ -366,7 +366,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   name="quranMemorization"
                   value={formData.quranMemorization}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-white"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-white"
                 >
                   <option value="حافظ للقرآن الكريم كاملاً">حافظ للقرآن الكريم كاملاً</option>
                   <option value="أكثر من 15 جزءاً">أكثر من 15 جزءاً</option>
@@ -378,9 +378,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
           </div>
 
           {/* Section 3: Housing / Accommodation Option */}
-          <div className="space-y-4 bg-[#e8e4d9]/50 border border-[#d4af37]/30 p-5 rounded-2xl">
-            <div className="flex items-center gap-2 text-[#1a4d2e] font-bold text-base">
-              <BedDouble className="w-5 h-5 text-[#1a4d2e]" />
+          <div className="space-y-4 bg-slate-50 border border-slate-200 p-5 rounded-2xl">
+            <div className="flex items-center gap-2 text-[#08192E] font-bold text-base">
+              <BedDouble className="w-5 h-5 text-[#C89B48]" />
               <h4>خدمة السكن والإقامة الداخلية</h4>
             </div>
 
@@ -391,28 +391,28 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   name="housingNeeded"
                   checked={formData.housingNeeded}
                   onChange={handleChange}
-                  className="w-5 h-5 text-[#1a4d2e] rounded border-stone-400 focus:ring-[#1a4d2e]"
+                  className="w-5 h-5 text-[#08192E] rounded border-slate-400 focus:ring-[#08192E]"
                 />
-                <span className="text-sm font-semibold text-[#2d3436]">
+                <span className="text-sm font-semibold text-slate-800">
                   أرغب في الاستفادة من السكن الداخلي المخصص للمشاركين القادمين من مناطق بعيدة.
                 </span>
               </label>
 
               {formData.housingNeeded && (
-                <div className="pr-8 space-y-2 border-r-2 border-[#1a4d2e] pt-1">
-                  <label className="flex items-center gap-2.5 cursor-pointer text-[#2d3436] text-xs sm:text-sm font-semibold">
+                <div className="pr-8 space-y-2 border-r-2 border-[#C89B48] pt-1">
+                  <label className="flex items-center gap-2.5 cursor-pointer text-slate-800 text-xs sm:text-sm font-semibold">
                     <input
                       type="checkbox"
                       name="housingCommitment"
                       checked={formData.housingCommitment}
                       onChange={handleChange}
-                      className="w-4 h-4 text-[#1a4d2e] rounded border-stone-400 focus:ring-[#1a4d2e]"
+                      className="w-4 h-4 text-[#08192E] rounded border-slate-400 focus:ring-[#08192E]"
                     />
-                    <span className="text-[#1a4d2e]">
-                      ألتزم التزاماً كاملاً بالمبيت في السكن طيلة أيام الدورة والمحافظة على مرافق السكن ونظافته. <span className="text-rose-600">*</span>
+                    <span className="text-[#08192E] font-bold">
+                      ألتزم التزاماً كاملاً بالمبيت في السكن طيلة أيام البرنامج والمحافظة على مرافق السكن ونظافته. <span className="text-rose-600">*</span>
                     </span>
                   </label>
-                  <p className="text-xs text-stone-600 font-tajawal">
+                  <p className="text-xs text-slate-600 font-tajawal">
                     * ملاحظة: السكن مشروط بالالتزام التام بالمبيت اليومي وحضور صلاة الفجر والبرامج التدريبية المسائية.
                   </p>
                 </div>
@@ -421,17 +421,17 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
           </div>
 
           {/* Section 4: Mandatory Conditions & Declarations */}
-          <div className="space-y-4 bg-[#f4f1ea] border border-[#d4af37]/30 p-5 sm:p-6 rounded-2xl">
-            <div className="flex items-center gap-2 pb-2 border-b border-stone-200 text-[#1a4d2e] font-bold text-base">
-              <FileText className="w-5 h-5 text-[#1a4d2e]" />
+          <div className="space-y-4 bg-[#08192E]/5 border border-slate-200 p-5 sm:p-6 rounded-2xl">
+            <div className="flex items-center gap-2 pb-2 border-b border-slate-200 text-[#08192E] font-bold text-base">
+              <FileText className="w-5 h-5 text-[#0284C7]" />
               <h4>الإقرارات وضوابط القبول الإلزامية</h4>
             </div>
 
-            <div className="space-y-3.5 text-sm text-[#2d3436] font-tajawal">
+            <div className="space-y-3.5 text-sm text-slate-800 font-tajawal">
               
               {/* Check: Not currently khateeb */}
-              <div className="p-3.5 bg-white rounded-xl border border-stone-200 space-y-1.5 shadow-2xs">
-                <div className="font-semibold text-[#1a4d2e]">
+              <div className="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1.5 shadow-xs">
+                <div className="font-semibold text-[#08192E]">
                   1. هل أنت خطيب جمعة ممارس حالياً في أي مسجد؟ <span className="text-rose-600">*</span>
                 </div>
                 <div className="flex items-center gap-6 text-sm">
@@ -442,9 +442,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                       value="no"
                       checked={formData.isCurrentlyKhateeb === 'no'}
                       onChange={handleChange}
-                      className="text-[#1a4d2e] focus:ring-[#1a4d2e]"
+                      className="text-[#0284C7] focus:ring-[#0284C7]"
                     />
-                    <span className="font-bold text-[#1a4d2e]">لا، لست خطيباً (مستوفٍ للشرط)</span>
+                    <span className="font-bold text-[#0284C7]">لا، لست خطيباً (مستوفٍ للشرط)</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -460,14 +460,14 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                 </div>
                 {formData.isCurrentlyKhateeb === 'yes' && (
                   <p className="text-xs text-rose-600 font-bold">
-                    * تنبيه: يشترط في الدورة ألا يكون المتقدم خطيباً لإتاحة المجال للكوادر الجديدة.
+                    * تنبيه: يشترط في برنامج إعداد ألا يكون المتقدم خطيباً لإتاحة المجال للكوادر الجديدة.
                   </p>
                 )}
               </div>
 
               {/* Check: Previous participation */}
-              <div className="p-3.5 bg-white rounded-xl border border-stone-200 space-y-1.5 shadow-2xs">
-                <div className="font-semibold text-[#1a4d2e]">
+              <div className="p-3.5 bg-white rounded-xl border border-slate-200 space-y-1.5 shadow-xs">
+                <div className="font-semibold text-[#08192E]">
                   2. هل شاركت في أي دورة من دورات إعداد الخطيب السابقة؟ <span className="text-rose-600">*</span>
                 </div>
                 <div className="flex items-center gap-6 text-sm">
@@ -478,9 +478,9 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                       value="no"
                       checked={formData.hasAttendedPreviousCourses === 'no'}
                       onChange={handleChange}
-                      className="text-[#1a4d2e] focus:ring-[#1a4d2e]"
+                      className="text-[#0284C7] focus:ring-[#0284C7]"
                     />
-                    <span className="font-bold text-[#1a4d2e]">لا، لم أشارك سابقاً (مستوفٍ للشرط)</span>
+                    <span className="font-bold text-[#0284C7]">لا، لم أشارك سابقاً (مستوفٍ للشرط)</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
@@ -502,50 +502,50 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
               </div>
 
               {/* Affirmation Checkboxes */}
-              <label className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-stone-200 cursor-pointer shadow-2xs">
+              <label className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 cursor-pointer shadow-xs">
                 <input
                   type="checkbox"
                   name="fluencyAndSpeechClear"
                   checked={formData.fluencyAndSpeechClear}
                   onChange={handleChange}
-                  className="w-5 h-5 text-[#1a4d2e] rounded border-stone-300 focus:ring-[#1a4d2e] mt-0.5"
+                  className="w-5 h-5 text-[#0284C7] rounded border-slate-300 focus:ring-[#0284C7] mt-0.5"
                 />
                 <div>
-                  <span className="font-bold text-[#1a4d2e]">3. الإقرار بسلامة النطق والفصاحة:</span>
-                  <p className="text-xs text-stone-600 mt-0.5">
+                  <span className="font-bold text-[#08192E]">3. الإقرار بسلامة النطق والفصاحة:</span>
+                  <p className="text-xs text-slate-600 mt-0.5">
                     أقر بأنني سليم النطق ومخارج الحروف وفصيح البيان وقادر على الأداء الخطابي دون عيوب كلامية مانعة.
                   </p>
                 </div>
               </label>
 
-              <label className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-stone-200 cursor-pointer shadow-2xs">
+              <label className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 cursor-pointer shadow-xs">
                 <input
                   type="checkbox"
                   name="agreedToBehaviorAndAppearance"
                   checked={formData.agreedToBehaviorAndAppearance}
                   onChange={handleChange}
-                  className="w-5 h-5 text-[#1a4d2e] rounded border-stone-300 focus:ring-[#1a4d2e] mt-0.5"
+                  className="w-5 h-5 text-[#0284C7] rounded border-slate-300 focus:ring-[#0284C7] mt-0.5"
                 />
                 <div>
-                  <span className="font-bold text-[#1a4d2e]">4. حسن السيرة والسلوك والمظهر اللائق:</span>
-                  <p className="text-xs text-stone-600 mt-0.5">
+                  <span className="font-bold text-[#08192E]">4. حسن السيرة والسلوك والمظهر اللائق:</span>
+                  <p className="text-xs text-slate-600 mt-0.5">
                     أقر بالالتزام بالأخلاق والسمت الإسلامي القويم، وحسن المظهر بما يتوافق مع الأحكام والآداب الشرعية المرعية.
                   </p>
                 </div>
               </label>
 
-              <label className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-stone-200 cursor-pointer shadow-2xs">
+              <label className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200 cursor-pointer shadow-xs">
                 <input
                   type="checkbox"
                   name="attendanceCommitment"
                   checked={formData.attendanceCommitment}
                   onChange={handleChange}
-                  className="w-5 h-5 text-[#1a4d2e] rounded border-stone-300 focus:ring-[#1a4d2e] mt-0.5"
+                  className="w-5 h-5 text-[#0284C7] rounded border-slate-300 focus:ring-[#0284C7] mt-0.5"
                 />
                 <div>
-                  <span className="font-bold text-[#1a4d2e]">5. الالتزام بالحضور وتعبئة الاستبيان:</span>
-                  <p className="text-xs text-stone-600 mt-0.5">
-                    ألتزم بحضور جميع الدروس والورش الميدانية، والالتزام بالمبيت لمن سجل بالسكن، وطباعة هذا الاستبيان وتقديم نسخة ورقية منه للجنة الاستقبال يوم 24 أغسطس 2026م.
+                  <span className="font-bold text-[#08192E]">5. الالتزام بالحضور والضوابط المعتمدة:</span>
+                  <p className="text-xs text-slate-600 mt-0.5">
+                    ألتزم بحضور جميع الدروس والورش الميدانية، والالتزام بالمبيت لمن سجل بالسكن، وحفظ بطاقة المراجعة وتقديمها للجنة القبول.
                   </p>
                 </div>
               </label>
@@ -555,8 +555,8 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
 
           {/* Notes (Optional) */}
           <div>
-            <label htmlFor="notes" className="block text-xs sm:text-sm font-bold text-[#2d3436] mb-1">
-              ملاحظات إضافية أو خبرات سابقة في طلب العلم <span className="text-stone-400 font-normal">(اختياري)</span>
+            <label htmlFor="notes" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
+              ملاحظات إضافية أو خبرات سابقة في طلب العلم <span className="text-slate-400 font-normal">(اختياري)</span>
             </label>
             <textarea
               id="notes"
@@ -565,7 +565,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
               value={formData.notes}
               onChange={handleChange}
               placeholder="اذكر أي إجازات في القرآن الكريم أو متون علمية تم حفظها..."
-              className="w-full px-4 py-2.5 rounded-xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] transition text-stone-900 text-sm bg-[#f4f1ea]/40"
+              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-slate-50/50"
             ></textarea>
           </div>
 
@@ -575,23 +575,23 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
               type="submit"
               id="submit-registration-btn"
               disabled={loading}
-              className="w-full py-4 px-6 bg-[#d4af37] hover:bg-[#c49b2c] text-[#1a4d2e] font-black text-base sm:text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 border-2 border-amber-300 ring-4 ring-amber-400/20 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full py-4 px-6 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] hover:brightness-110 text-[#08192E] font-black text-base sm:text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center gap-3 border border-amber-300 ring-4 ring-amber-400/20 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {loading ? (
-                <div className="flex items-center gap-2 text-[#1a4d2e]">
-                  <span className="w-5 h-5 border-2 border-[#1a4d2e] border-t-transparent rounded-full animate-spin"></span>
+                <div className="flex items-center gap-2 text-[#08192E]">
+                  <span className="w-5 h-5 border-2 border-[#08192E] border-t-transparent rounded-full animate-spin"></span>
                   <span>جارٍ معالجة وتوليد رقم المراجعة...</span>
                 </div>
               ) : (
                 <>
-                  <Send className="w-5 h-5 text-[#1a4d2e]" />
-                  <span>تأكيد التسجيل واستخراج بطاقة المراجعة المتسلسلة</span>
+                  <Send className="w-5 h-5 text-[#08192E]" />
+                  <span>تأكيد التسجيل واستخراج بطاقة المراجعة الرسمية</span>
                 </>
               )}
             </button>
             
-            <p className="text-center text-xs text-stone-500 mt-3 font-tajawal">
-              بمجرد الضغط على تأكيد التسجيل، ستظهر لك بطاقة المراجعة الرسمية المحتوية على رقمك التسلسلي ورابط الطباعة الفورية.
+            <p className="text-center text-xs text-slate-500 mt-3 font-tajawal">
+              بمجرد الضغط على تأكيد التسجيل، ستظهر لك بطاقة المراجعة الرسمية المحتوية على رقمك المتسلسل ورابط الطباعة الفورية.
             </p>
           </div>
 

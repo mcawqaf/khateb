@@ -297,9 +297,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         className="relative bg-white w-full max-w-7xl rounded-3xl shadow-2xl border-2 border-[#d4af37]/40 overflow-hidden min-h-[85vh] flex flex-col my-4 print:m-0 print:border-none print:shadow-none"
       >
         {/* Top Bar */}
-        <div className="bg-[#1a4d2e] text-white px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#d4af37] no-print">
+        <div className="bg-[#08192E] text-white px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#C89B48] no-print">
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-white text-[#1a4d2e] flex items-center justify-center shadow-xs border border-[#d4af37]">
+            <div className="w-11 h-11 rounded-2xl bg-white/10 text-[#38BDF8] flex items-center justify-center shadow-xs border border-[#C89B48]/40">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -307,11 +307,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <h3 className="font-cairo text-lg sm:text-xl font-bold text-white">
                   لوحة تحكم المشرفين واللجنة العلمية
                 </h3>
-                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-[#d4af37] border border-white/20 font-semibold">
-                  دورة 1448هـ
+                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-[#DFB76C] border border-white/20 font-semibold">
+                  برنامج إعداد 1447هـ
                 </span>
               </div>
-              <p className="text-xs text-white/80 font-tajawal">
+              <p className="text-xs text-slate-300 font-tajawal">
                 متابعة المسجلين، اعتماد المقبولين، تصدير الكشوفات وإصدار بطاقات المراجعة
               </p>
             </div>
@@ -323,10 +323,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <button
                   id="admin-supabase-schema-btn"
                   onClick={onOpenSupabaseGuide}
-                  className="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-[#d4af37] hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-white/20"
+                  className="px-3.5 py-2 bg-white/10 hover:bg-white/20 text-[#DFB76C] hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-white/20"
                   title="مخطط جدول Supabase SQL"
                 >
-                  <Database className="w-4 h-4 text-[#d4af37]" />
+                  <Database className="w-4 h-4 text-[#38BDF8]" />
                   <span className="hidden sm:inline">جدول Supabase</span>
                 </button>
 
@@ -334,10 +334,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   id="admin-export-csv-btn"
                   onClick={handleExportCSV}
                   disabled={registrations.length === 0}
-                  className="px-3.5 py-2 bg-white text-[#1a4d2e] hover:bg-stone-100 rounded-xl text-xs font-bold transition flex items-center gap-1.5 shadow-xs border border-[#d4af37] disabled:opacity-50"
+                  className="px-3.5 py-2 bg-gradient-to-r from-[#C89B48] to-[#DFB76C] hover:brightness-110 text-[#08192E] rounded-xl text-xs font-black transition flex items-center gap-1.5 shadow-sm border border-amber-300 disabled:opacity-50"
                   title="تصدير كشف إكسل CSV"
                 >
-                  <FileSpreadsheet className="w-4 h-4 text-[#1a4d2e]" />
+                  <FileSpreadsheet className="w-4 h-4 text-[#08192E]" />
                   <span className="hidden sm:inline">تصدير كشف Excel/CSV</span>
                 </button>
 
@@ -355,8 +355,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <button
               id="admin-close-btn"
               onClick={onClose}
-              className="p-2 text-white/70 hover:text-white rounded-xl transition"
-              title="إغلاق"
+              className="p-2 text-slate-300 hover:text-white rounded-xl transition"
+              title="إإغلاق"
             >
               <X className="w-6 h-6" />
             </button>
@@ -365,25 +365,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
         {/* Auth Barrier if not authenticated */}
         {!isAuthenticated ? (
-          <div className="flex-1 flex items-center justify-center p-6 bg-[#f4f1ea]">
-            <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-[#d4af37]/40 shadow-xl text-center space-y-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#f4f1ea] text-[#1a4d2e] mx-auto flex items-center justify-center border border-[#d4af37]/40">
-                <Lock className="w-8 h-8 text-[#1a4d2e]" />
+          <div className="flex-1 flex items-center justify-center p-6 bg-[#08192E]/5">
+            <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-[#C89B48]/40 shadow-2xl text-center space-y-6">
+              <div className="w-16 h-16 rounded-2xl bg-[#08192E] text-[#DFB76C] mx-auto flex items-center justify-center border border-[#C89B48]/40 shadow-sm">
+                <Lock className="w-8 h-8 text-[#38BDF8]" />
               </div>
 
               <div className="space-y-1">
-                <h4 className="font-amiri text-2xl font-bold text-[#1a4d2e]">
+                <h4 className="font-amiri text-2xl font-bold text-[#08192E]">
                   دخول المشرفين المصرح لهم
                 </h4>
-                <p className="text-xs text-stone-500 font-tajawal">
-                  يرجى إدخال رمز المرور الخاص بلجنة إدارة دورة الخطباء
+                <p className="text-xs text-slate-500 font-tajawal">
+                  يرجى إدخال رمز المرور الخاص بلجنة إدارة برنامج إعداد
                 </p>
               </div>
 
               <form onSubmit={handleLogin} className="space-y-4 text-right">
                 <div>
-                  <label className="block text-xs font-bold text-[#2d3436] mb-1 font-cairo">
-                    كلمة المرور المشرف:
+                  <label className="block text-xs font-bold text-slate-700 mb-1 font-cairo">
+                    كلمة مرور المشرف:
                   </label>
                   <input
                     type="password"
@@ -392,10 +392,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     placeholder="أدخل كلمة المرور (الافتراضية: khateeb1448)"
-                    className="w-full px-4 py-3 rounded-2xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] focus:border-[#1a4d2e] text-sm bg-[#f4f1ea]/30"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50"
                   />
-                  <div className="text-[11px] text-stone-400 mt-1">
-                    * كلمة المرور الافتراضية للتجربة: <code className="text-[#1a4d2e] font-bold">khateeb1448</code>
+                  <div className="text-[11px] text-slate-400 mt-1">
+                    * كلمة المرور الافتراضية للتجربة: <code className="text-[#08192E] font-bold">khateeb1448</code>
                   </div>
                 </div>
 
@@ -409,7 +409,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   type="submit"
                   id="admin-login-submit-btn"
                   disabled={loginLoading || !password}
-                  className="w-full py-3.5 bg-[#1a4d2e] hover:bg-[#153e25] text-white font-bold text-sm rounded-2xl transition shadow-md border border-[#d4af37]/40 disabled:opacity-60"
+                  className="w-full py-3.5 bg-[#08192E] hover:bg-[#0B2545] text-white font-bold text-sm rounded-2xl transition shadow-md border border-[#C89B48]/40 disabled:opacity-60"
                 >
                   {loginLoading ? 'جارٍ التحقق...' : 'تسجيل الدخول للوحة التحكم'}
                 </button>
@@ -418,44 +418,44 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           </div>
         ) : (
           /* Authenticated Dashboard View */
-          <div className="flex-1 flex flex-col p-4 sm:p-6 bg-[#f4f1ea]/40 space-y-6 overflow-y-auto">
+          <div className="flex-1 flex flex-col p-4 sm:p-6 bg-slate-50/50 space-y-6 overflow-y-auto">
             
             {/* Statistics Cards - Bento style */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 no-print">
-              <div className="bg-white p-4 rounded-3xl border border-stone-200 shadow-2xs">
-                <div className="text-xs text-stone-500 font-semibold mb-1">إجمالي المسجلين</div>
-                <div className="text-2xl font-black text-[#1a4d2e] font-mono">{stats?.total ?? registrations.length}</div>
-                <div className="text-[10px] text-[#1a4d2e] font-medium mt-1">طلبات مقدمة</div>
+              <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+                <div className="text-xs text-slate-500 font-semibold mb-1">إجمالي المسجلين</div>
+                <div className="text-2xl font-black text-[#08192E] font-mono">{stats?.total ?? registrations.length}</div>
+                <div className="text-[10px] text-[#0284C7] font-semibold mt-1">طلبات مقدمة</div>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border border-stone-200 shadow-2xs">
-                <div className="text-xs text-[#1a4d2e] font-semibold mb-1">مقبول مبدئياً</div>
-                <div className="text-2xl font-black text-[#1a4d2e] font-mono">{stats?.acceptedInitial ?? 0}</div>
-                <div className="text-[10px] text-[#1a4d2e] font-medium mt-1">مطابق للشروط</div>
+              <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+                <div className="text-xs text-emerald-800 font-semibold mb-1">مقبول مبدئياً</div>
+                <div className="text-2xl font-black text-emerald-600 font-mono">{stats?.acceptedInitial ?? 0}</div>
+                <div className="text-[10px] text-emerald-700 font-medium mt-1">مطابق للشروط</div>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border border-stone-200 shadow-2xs">
-                <div className="text-xs text-[#d4af37] font-semibold mb-1">مقبول نهائياً</div>
-                <div className="text-2xl font-black text-[#1a4d2e] font-mono">{stats?.acceptedFinal ?? 0}</div>
-                <div className="text-[10px] text-stone-600 font-medium mt-1">اجتاز المقابلة</div>
+              <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+                <div className="text-xs text-[#DFB76C] font-semibold mb-1">مقبول نهائياً</div>
+                <div className="text-2xl font-black text-[#C89B48] font-mono">{stats?.acceptedFinal ?? 0}</div>
+                <div className="text-[10px] text-slate-600 font-medium mt-1">اجتاز المقابلة</div>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border border-stone-200 shadow-2xs">
+              <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
                 <div className="text-xs text-amber-800 font-semibold mb-1">قيد المراجعة</div>
                 <div className="text-2xl font-black text-amber-600 font-mono">{stats?.underReview ?? 0}</div>
                 <div className="text-[10px] text-amber-600 font-medium mt-1">تحت التدقيق</div>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border border-stone-200 shadow-2xs">
-                <div className="text-xs text-stone-700 font-semibold mb-1">طلب سكن داخلي</div>
-                <div className="text-2xl font-black text-[#1a4d2e] font-mono">{stats?.housingRequested ?? 0}</div>
-                <div className="text-[10px] text-stone-500 font-medium mt-1">بحاجة للإقامة</div>
+              <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+                <div className="text-xs text-slate-700 font-semibold mb-1">طلب سكن داخلي</div>
+                <div className="text-2xl font-black text-[#08192E] font-mono">{stats?.housingRequested ?? 0}</div>
+                <div className="text-[10px] text-slate-500 font-medium mt-1">بحاجة للإقامة</div>
               </div>
 
-              <div className="bg-white p-4 rounded-3xl border border-stone-200 shadow-2xs">
-                <div className="text-xs text-stone-600 font-semibold mb-1">حفظة القرآن كاملاً</div>
-                <div className="text-2xl font-black text-[#1a4d2e] font-mono">{stats?.fullQuranMemorizers ?? 0}</div>
-                <div className="text-[10px] text-[#d4af37] font-bold mt-1">أهل القرآن</div>
+              <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+                <div className="text-xs text-slate-600 font-semibold mb-1">حفظة القرآن كاملاً</div>
+                <div className="text-2xl font-black text-[#0284C7] font-mono">{stats?.fullQuranMemorizers ?? 0}</div>
+                <div className="text-[10px] text-[#C89B48] font-bold mt-1">أهل القرآن</div>
               </div>
             </div>
 
@@ -533,10 +533,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             </div>
 
             {/* Registrations Table */}
-            <div className="bg-white rounded-3xl border border-stone-200 shadow-2xs overflow-hidden">
+            <div className="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-right text-xs font-tajawal border-collapse">
-                  <thead className="bg-[#e8e4d9]/50 text-[#1a4d2e] font-bold border-b border-stone-200">
+                  <thead className="bg-slate-100 text-[#08192E] font-bold border-b border-slate-200">
                     <tr>
                       <th className="py-3 px-4 text-center">الرقم المتسلسل</th>
                       <th className="py-3 px-4">اسم المتقدم</th>
@@ -548,27 +548,27 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <th className="py-3 px-4 text-center no-print">الإجراءات</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-stone-100">
+                  <tbody className="divide-y divide-slate-100">
                     {registrations.length === 0 ? (
                       <tr>
-                        <td colSpan={8} className="py-8 text-center text-stone-500 font-medium">
+                        <td colSpan={8} className="py-8 text-center text-slate-500 font-medium">
                           {loading ? 'جارٍ تحميل السجلات...' : 'لا يوجد مسجلون يطابقون خيارات البحث الحالية.'}
                         </td>
                       </tr>
                     ) : (
                       registrations.map((reg) => (
-                        <tr key={reg.id} className="hover:bg-[#f4f1ea]/30 transition">
+                        <tr key={reg.id} className="hover:bg-slate-50/70 transition">
                           {/* Serial Number */}
                           <td className="py-3 px-4 text-center">
-                            <span className="font-mono font-bold text-xs bg-[#1a4d2e] text-[#d4af37] px-2.5 py-1 rounded-xl inline-block border border-[#d4af37]/30">
+                            <span className="font-mono font-bold text-xs bg-[#08192E] text-[#DFB76C] px-2.5 py-1 rounded-xl inline-block border border-[#C89B48]/30">
                               {reg.serialNumber}
                             </span>
                           </td>
 
                           {/* Full Name & Age */}
                           <td className="py-3 px-4">
-                            <div className="font-bold text-[#2d3436] text-sm font-cairo">{reg.fullName}</div>
-                            <div className="text-[11px] text-stone-500">
+                            <div className="font-bold text-slate-900 text-sm font-cairo">{reg.fullName}</div>
+                            <div className="text-[11px] text-slate-500">
                               العمر: {reg.age} سنة | مسجل في: {formatArabicDateTime(reg.createdAt)}
                             </div>
                             {reg.supervisorNotes && (
@@ -580,30 +580,30 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                           {/* National ID & Phone */}
                           <td className="py-3 px-4 font-mono">
-                            <div className="text-stone-800 font-semibold">{reg.nationalId}</div>
-                            <div className="text-[#1a4d2e] text-[11px]">{reg.phone}</div>
+                            <div className="text-slate-900 font-semibold">{reg.nationalId}</div>
+                            <div className="text-[#0284C7] text-[11px]">{reg.phone}</div>
                           </td>
 
                           {/* City & Address */}
                           <td className="py-3 px-4">
-                            <div className="font-semibold text-stone-800">{reg.city}</div>
-                            <div className="text-[11px] text-stone-500 truncate max-w-[150px]">{reg.address}</div>
+                            <div className="font-semibold text-slate-900">{reg.city}</div>
+                            <div className="text-[11px] text-slate-500 truncate max-w-[150px]">{reg.address}</div>
                           </td>
 
                           {/* Education & Quran */}
                           <td className="py-3 px-4">
-                            <div className="text-stone-900 font-medium">{reg.educationalLevel}</div>
-                            <div className="text-[#1a4d2e] font-semibold text-[11px]">{reg.quranMemorization}</div>
+                            <div className="text-slate-900 font-medium">{reg.educationalLevel}</div>
+                            <div className="text-[#0284C7] font-semibold text-[11px]">{reg.quranMemorization}</div>
                           </td>
 
                           {/* Housing */}
                           <td className="py-3 px-4 text-center">
                             {reg.housingNeeded ? (
-                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#d4af37]/20 text-[#1a4d2e] border border-[#d4af37]">
+                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#C89B48]/20 text-[#08192E] border border-[#C89B48]">
                                 سكن داخلي
                               </span>
                             ) : (
-                              <span className="text-stone-400 text-[11px]">سكن خارجي</span>
+                              <span className="text-slate-400 text-[11px]">سكن خارجي</span>
                             )}
                           </td>
 
@@ -618,7 +618,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               <button
                                 id={`action-view-card-${reg.id}`}
                                 onClick={() => onViewRegistrationCard(reg)}
-                                className="p-1.5 text-[#1a4d2e] hover:bg-[#f4f1ea] rounded-xl transition"
+                                className="p-1.5 text-[#08192E] hover:bg-slate-100 rounded-xl transition"
                                 title="عرض وطباعة بطاقة المراجعة"
                               >
                                 <Eye className="w-4 h-4" />
@@ -657,32 +657,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Edit Status Modal */}
         {editingRegistration && (
           <div className="fixed inset-0 z-60 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl border-2 border-[#d4af37]/40">
-              <div className="flex items-center justify-between pb-3 border-b border-stone-200">
-                <h4 className="font-cairo font-bold text-base text-[#1a4d2e]">
+            <div className="bg-white rounded-3xl w-full max-w-lg p-6 space-y-4 shadow-2xl border-2 border-[#C89B48]/40">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+                <h4 className="font-cairo font-bold text-base text-[#08192E]">
                   تحديث حالة المشارك: {editingRegistration.fullName}
                 </h4>
                 <button
                   onClick={() => setEditingRegistration(null)}
-                  className="text-stone-400 hover:text-stone-700"
+                  className="text-slate-400 hover:text-slate-700"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="text-xs text-stone-600 space-y-1">
-                <div>الرقم المتسلسل: <strong className="font-mono text-[#1a4d2e]">{editingRegistration.serialNumber}</strong></div>
+              <div className="text-xs text-slate-600 space-y-1">
+                <div>الرقم المتسلسل: <strong className="font-mono text-[#08192E]">{editingRegistration.serialNumber}</strong></div>
                 <div>الرقم الوطني: <strong className="font-mono">{editingRegistration.nationalId}</strong></div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   تغيير حالة القبول:
                 </label>
                 <select
                   value={newStatus}
                   onChange={(e) => setNewStatus(e.target.value as RegistrationStatus)}
-                  className="w-full px-3 py-2 rounded-2xl border border-stone-300 text-sm font-medium bg-[#f4f1ea]/30"
+                  className="w-full px-3 py-2 rounded-2xl border border-slate-300 text-sm font-medium bg-slate-50"
                 >
                   <option value="pending">جديد / قيد التدقيق</option>
                   <option value="under_review">قيد المراجعة والفرز</option>
@@ -693,7 +693,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-stone-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   ملاحظات المشرف / لجنة المقابلات:
                 </label>
                 <textarea
@@ -701,21 +701,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   value={supervisorNotes}
                   onChange={(e) => setSupervisorNotes(e.target.value)}
                   placeholder="أدخل أي ملاحظات خاصة بالوثائق، المقابلة، أو السكن..."
-                  className="w-full px-3 py-2 rounded-2xl border border-stone-300 text-sm bg-[#f4f1ea]/30"
+                  className="w-full px-3 py-2 rounded-2xl border border-slate-300 text-sm bg-slate-50"
                 ></textarea>
               </div>
 
-              <div className="flex justify-end gap-2 pt-2 border-t border-stone-200">
+              <div className="flex justify-end gap-2 pt-2 border-t border-slate-200">
                 <button
                   onClick={() => setEditingRegistration(null)}
-                  className="px-4 py-2 text-xs font-semibold text-stone-600 hover:bg-stone-100 rounded-2xl"
+                  className="px-4 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-2xl"
                 >
                   إلغاء
                 </button>
                 <button
                   onClick={handleSaveEdit}
                   disabled={savingStatus}
-                  className="px-5 py-2 bg-[#1a4d2e] hover:bg-[#153e25] text-white rounded-2xl text-xs font-bold transition border border-[#d4af37]/40 disabled:opacity-60"
+                  className="px-5 py-2 bg-[#08192E] hover:bg-[#0B2545] text-white rounded-2xl text-xs font-bold transition border border-[#C89B48]/40 disabled:opacity-60"
                 >
                   {savingStatus ? 'جارٍ الحفظ...' : 'حفظ التحديثات'}
                 </button>

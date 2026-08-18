@@ -13,7 +13,7 @@ export const Footer: React.FC<FooterProps> = ({
   onScrollToSection
 }) => {
   return (
-    <footer id="main-footer" className="bg-[#1a4d2e] text-white border-t-4 border-[#d4af37] font-tajawal no-print mt-12">
+    <footer id="main-footer" className="bg-[#061526] text-white border-t-4 border-[#C89B48] font-tajawal no-print mt-12">
       {/* Upper Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -21,53 +21,58 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 1: Identity & Quran verse */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-white text-[#1a4d2e] flex items-center justify-center border border-[#d4af37] shadow-sm">
-                <BookOpen className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-black overflow-hidden flex items-center justify-center border border-[#C89B48]/60 shadow-md">
+                <img 
+                  src="/assets/program-logo.jpg" 
+                  alt="شعار برنامج إعداد" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
-                <div className="font-amiri text-lg font-bold text-white">دورة إعداد وتأهيل الخطباء</div>
-                <div className="text-xs text-[#d4af37] font-semibold">النسخة الخامسة 1448هـ / 2026م</div>
+                <div className="font-amiri text-lg font-bold text-white">برنامج (إعداد) لتأهيل الخطباء</div>
+                <div className="text-xs text-[#DFB76C] font-semibold">الدفعة الثالثة (3) - 1447هـ / 2025م</div>
               </div>
             </div>
 
-            <p className="text-xs text-white/80 leading-relaxed">
-              برنامج نوعي مكثف تنظمه إدارة الشؤون الثقافية والدعوية لتأهيل فرسان المنابر وحفظة كتاب الله وفق المنهج الشرعي الوسطي.
+            <p className="text-xs text-slate-300 leading-relaxed">
+              برنامج نوعي مكثف تنظمه إدارة الشؤون الثقافية والدعوية بالهيئة العامة للأوقاف والشؤون الإسلامية لتأهيل فرسان المنابر وحفظة كتاب الله.
             </p>
 
-            <div className="p-3 bg-white/10 border border-white/20 rounded-2xl text-[#d4af37] text-xs font-amiri leading-relaxed">
+            <div className="p-3 bg-white/5 border border-white/15 rounded-2xl text-[#DFB76C] text-xs font-amiri leading-relaxed">
               ﴿ ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ ﴾
             </div>
           </div>
 
-          {/* Col 2: Course Quick Info */}
+          {/* Col 2: Program Quick Info */}
           <div className="space-y-3">
-            <h4 className="font-cairo text-sm font-bold text-[#d4af37] pb-1 border-b border-white/20 flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-[#d4af37]" />
-              <span>بيانات ومقر الانعقاد</span>
+            <h4 className="font-cairo text-sm font-bold text-[#DFB76C] pb-1 border-b border-white/15 flex items-center gap-1.5">
+              <Award className="w-4 h-4 text-[#DFB76C]" />
+              <span>بيانات وفترة القبول</span>
             </h4>
 
-            <ul className="space-y-2.5 text-xs text-white/90">
+            <ul className="space-y-2.5 text-xs text-slate-200">
               <li className="flex items-start gap-2">
-                <Calendar className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                <Calendar className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-white">تاريخ الدورة:</strong>
-                  <div>24 أغسطس 2026م (11 ربيع الأول 1448هـ)</div>
+                  <strong className="text-white">فترة القبول:</strong>
+                  <div>السبت 5 يوليو - السبت 12 يوليو 2025م</div>
                 </div>
               </li>
 
               <li className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
-                <div>
-                  <strong className="text-white">المكان والمقر:</strong>
-                  <div>مسجد حي دمشق - منطقة حي دمشق</div>
-                </div>
-              </li>
-
-              <li className="flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white">الجهة المنظمة:</strong>
-                  <div>إدارة الشؤون الثقافية والدعوية</div>
+                  <div>الهيئة العامة للأوقاف والشؤون الإسلامية</div>
+                  <div className="text-sky-300 text-[11px]">إدارة الشؤون الثقافية والدعوية</div>
+                </div>
+              </li>
+
+              <li className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-white">حسابات التواصل:</strong>
+                  <div>@AwqafLibya | @AwqafofLibya</div>
                 </div>
               </li>
             </ul>
@@ -75,23 +80,23 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Col 3: Navigation Links */}
           <div className="space-y-3">
-            <h4 className="font-cairo text-sm font-bold text-[#d4af37] pb-1 border-b border-white/20">
+            <h4 className="font-cairo text-sm font-bold text-[#DFB76C] pb-1 border-b border-white/15">
               روابط وتصفح سريع
             </h4>
 
-            <ul className="space-y-2 text-xs text-white/85">
+            <ul className="space-y-2 text-xs text-slate-300">
               <li>
                 <button
                   onClick={() => onScrollToSection('about-section')}
-                  className="hover:text-[#d4af37] transition"
+                  className="hover:text-[#38BDF8] transition"
                 >
-                  التعريف بالدورة والأهداف
+                  عن البرنامج والأهداف
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onScrollToSection('terms-section')}
-                  className="hover:text-[#d4af37] transition font-bold text-white"
+                  className="hover:text-[#38BDF8] transition font-bold text-white"
                 >
                   شروط وضوابط القبول
                 </button>
@@ -99,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={() => onScrollToSection('registration-form-section')}
-                  className="hover:text-[#d4af37] transition font-semibold text-[#d4af37]"
+                  className="hover:text-[#38BDF8] transition font-semibold text-[#DFB76C]"
                 >
                   استمارة التسجيل الإلكتروني
                 </button>
@@ -107,18 +112,18 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   onClick={onOpenLookup}
-                  className="hover:text-[#d4af37] transition flex items-center gap-1.5"
+                  className="hover:text-[#38BDF8] transition flex items-center gap-1.5"
                 >
-                  <Search className="w-3.5 h-3.5 text-[#d4af37]" />
+                  <Search className="w-3.5 h-3.5 text-[#38BDF8]" />
                   <span>استعلام وطباعة رقم المراجعة</span>
                 </button>
               </li>
               <li>
                 <button
                   onClick={onOpenAdmin}
-                  className="hover:text-[#d4af37] transition flex items-center gap-1.5 text-white/80"
+                  className="hover:text-[#38BDF8] transition flex items-center gap-1.5 text-slate-300"
                 >
-                  <Lock className="w-3.5 h-3.5 text-[#d4af37]" />
+                  <Lock className="w-3.5 h-3.5 text-[#DFB76C]" />
                   <span>لوحة تحكم المشرفين</span>
                 </button>
               </li>
@@ -127,17 +132,17 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Col 4: Important Notice */}
           <div className="space-y-3">
-            <h4 className="font-cairo text-sm font-bold text-[#d4af37] pb-1 border-b border-white/20 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-[#d4af37]" />
-              <span>تنبيهات للمشاركين</span>
+            <h4 className="font-cairo text-sm font-bold text-[#DFB76C] pb-1 border-b border-white/15 flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-[#38BDF8]" />
+              <span>تنبيهات للمتقدمين</span>
             </h4>
 
-            <div className="bg-white/10 border border-white/20 p-3.5 rounded-2xl text-xs space-y-2 text-white/90 backdrop-blur-xs">
+            <div className="bg-white/5 border border-white/15 p-3.5 rounded-2xl text-xs space-y-2 text-slate-200 backdrop-blur-xs">
               <p>
-                يُشترط للحضور إحضار بطاقة المراجعة المطبوعة الحاملة للرقم المتسلسل مع نسخة ورقية من الاستبيان.
+                يُشترط عند المقابلة إبراز بطاقة المراجعة الإلكترونية المحتوية على الرقم المتسلسل والباركود.
               </p>
-              <p className="text-[#d4af37] font-semibold">
-                يبدأ استقبال المشاركين صباح يوم الاثنين 24 أغسطس 2026م الساعة 08:00 صباحاً.
+              <p className="text-[#DFB76C] font-semibold">
+                فترة التسجيل محددة من 5 إلى 12 يوليو 2025م (1447هـ).
               </p>
             </div>
           </div>
@@ -146,13 +151,13 @@ export const Footer: React.FC<FooterProps> = ({
       </div>
 
       {/* Bottom Copyright Bar */}
-      <div className="bg-[#133a22] border-t border-white/10 py-4 text-center text-xs text-white/70">
+      <div className="bg-[#030B14] border-t border-white/10 py-4 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
-            دورة إعداد وتأهيل الخطباء 1448هـ / 2026م – تنظيم إدارة الشؤون الثقافية والدعوية
+            برنامج (إعداد) لتأهيل الخطباء 1447هـ / 2025م – الهيئة العامة للأوقاف والشؤون الإسلامية
           </div>
-          <div className="text-[11px] text-white/60">
-            جميع الحقوق محفوظة © 2026م - 1448هـ
+          <div className="text-[11px] text-slate-500 font-mono">
+            جميع الحقوق محفوظة © 2025م - 1447هـ
           </div>
         </div>
       </div>

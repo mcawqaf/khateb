@@ -31,7 +31,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f4f1ea] text-[#2d3436] font-tajawal selection:bg-[#1a4d2e] selection:text-white" dir="rtl">
+    <div className="min-h-screen flex flex-col bg-[#061526] text-slate-100 font-tajawal selection:bg-[#0284C7] selection:text-white" dir="rtl">
       
       {/* Top Header */}
       <Header
@@ -75,21 +75,21 @@ export default function App() {
         <button
           id="floating-lookup-btn"
           onClick={() => setIsLookupOpen(true)}
-          className="p-3.5 bg-white text-[#1a4d2e] rounded-2xl shadow-lg border border-[#d4af37]/30 hover:bg-[#e8e4d9] hover:scale-105 transition-all flex items-center gap-2 text-xs font-bold"
+          className="p-3.5 bg-[#08192E] text-white rounded-2xl shadow-xl border border-[#C89B48]/50 hover:bg-[#0B2545] hover:scale-105 transition-all flex items-center gap-2 text-xs font-bold"
           title="استعلام وطباعة استمارة التسجيل"
         >
-          <Search className="w-5 h-5 text-[#1a4d2e]" />
+          <Search className="w-5 h-5 text-[#38BDF8]" />
           <span className="hidden sm:inline">استعلام / طباعة استمارة</span>
         </button>
 
         <button
           id="floating-register-btn"
           onClick={() => scrollToSection('registration-form-section')}
-          className="p-3.5 bg-[#d4af37] text-[#1a4d2e] rounded-2xl shadow-2xl hover:bg-[#c49b2c] hover:scale-105 transition-all flex items-center gap-2 text-xs font-black border-2 border-amber-300 ring-2 ring-amber-400/30"
-          title="التسجيل في الدورة"
+          className="p-3.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] text-[#08192E] rounded-2xl shadow-2xl hover:brightness-110 hover:scale-105 transition-all flex items-center gap-2 text-xs font-black border-2 border-amber-300 ring-2 ring-[#DFB76C]/30"
+          title="التسجيل في برنامج إعداد"
         >
-          <FileText className="w-5 h-5 text-[#1a4d2e]" />
-          <span className="hidden sm:inline">سجل الآن بالدورة</span>
+          <FileText className="w-5 h-5 text-[#08192E]" />
+          <span className="hidden sm:inline">سجل الآن بالبرنامج</span>
         </button>
       </div>
 

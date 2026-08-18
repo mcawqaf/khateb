@@ -15,22 +15,23 @@ export const Header: React.FC<HeaderProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
   return (
-    <header id="main-header" className="sticky top-0 z-40 bg-[#f4f1ea]/95 backdrop-blur border-b border-[#d4af37]/20 shadow-xs no-print">
+    <header id="main-header" className="sticky top-0 z-40 bg-[#08192E]/95 backdrop-blur border-b border-[#C89B48]/30 shadow-lg no-print">
       {/* Top Islamic Banner Bar */}
-      <div id="top-announcement-bar" className="bg-[#1a4d2e] text-[#f4f1ea] text-xs py-2 px-4 border-b border-[#d4af37]/30">
+      <div id="top-announcement-bar" className="bg-[#051120] text-[#EDF2F7] text-xs py-2 px-4 border-b border-[#C89B48]/20">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center gap-2 font-medium">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#d4af37] animate-pulse"></span>
-            <span>إدارة الشؤون الثقافية والدعوية | دورة إعداد وتأهيل الخطباء - النسخة الخامسة</span>
+            <span className="inline-block w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse"></span>
+            <span className="text-[#DFB76C] font-semibold">الهيئة العامة للأوقاف والشؤون الإسلامية</span>
+            <span className="text-white/40">|</span>
+            <span className="text-slate-300">إدارة الشؤون الثقافية والدعوية</span>
           </div>
-          <div className="flex items-center gap-4 text-[#e8e4d9]">
-            <span className="flex items-center gap-1">
-              <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
-              24 أغسطس 2026م (11 ربيع الأول 1448هـ)
+          <div className="flex items-center gap-4 text-slate-300">
+            <span className="flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-[#DFB76C]" />
+              <span>فترة القبول: 5 يوليو - 12 يوليو 2025م (1447هـ)</span>
             </span>
-            <span className="hidden sm:flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-              مسجد حي دمشق
+            <span className="hidden sm:flex items-center gap-1.5 text-sky-300 font-mono">
+              <span>الدفعة الثالثة (3)</span>
             </span>
           </div>
         </div>
@@ -43,51 +44,57 @@ export const Header: React.FC<HeaderProps> = ({
           <div 
             id="brand-logo-button"
             onClick={() => onScrollToSection('hero-section')}
-            className="flex items-center gap-3 cursor-pointer group"
+            className="flex items-center gap-3.5 cursor-pointer group"
           >
-            <div className="w-12 h-12 rounded-2xl bg-[#1a4d2e] text-[#d4af37] flex items-center justify-center shadow-md border-2 border-[#d4af37]/40 group-hover:scale-105 transition-transform">
-              <BookOpen className="w-6 h-6" />
+            <div className="w-13 h-13 rounded-2xl overflow-hidden shadow-lg border-2 border-[#C89B48]/60 group-hover:scale-105 transition-transform bg-black flex items-center justify-center p-0.5">
+              <img 
+                src="/assets/program-logo.jpg" 
+                alt="شعار برنامج إعداد لتأهيل الخطباء" 
+                className="w-full h-full object-cover rounded-xl"
+              />
             </div>
             <div>
-              <div className="font-amiri text-2xl font-bold text-[#1a4d2e] leading-tight">
-                دورة إعداد وتأهيل الخطباء
+              <div className="font-amiri text-2xl font-bold text-white leading-tight flex items-center gap-2">
+                <span>برنامج</span>
+                <span className="text-[#38BDF8] drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">(إعداد)</span>
+                <span>لتأهيل الخطباء</span>
               </div>
-              <div className="text-xs text-[#1a4d2e]/80 font-semibold tracking-wide flex items-center gap-1.5">
-                <span className="bg-[#1a4d2e] text-white px-2.5 py-0.5 rounded-full text-[10px] font-bold">النسخة الخامسة</span>
-                <span className="text-[#2d3436]/70">1448هـ - 2026م</span>
+              <div className="text-xs text-slate-300 font-semibold tracking-wide flex items-center gap-2 mt-0.5">
+                <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2 py-0.5 rounded-full text-[10px] font-black">الدفعة 3</span>
+                <span className="text-[#DFB76C]">1447هـ / 2025م</span>
               </div>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav id="desktop-nav" className="hidden lg:flex items-center gap-1.5 font-medium text-sm text-[#2d3436]">
+          <nav id="desktop-nav" className="hidden lg:flex items-center gap-1.5 font-medium text-sm text-slate-200">
             <button
               id="nav-btn-about"
               onClick={() => onScrollToSection('about-section')}
-              className="px-3.5 py-2 rounded-xl hover:text-[#1a4d2e] hover:bg-[#e8e4d9]/70 transition"
+              className="px-3.5 py-2 rounded-xl hover:text-[#38BDF8] hover:bg-white/10 transition"
             >
-              عن الدورة والأهداف
+              عن البرنامج والأهداف
             </button>
             <button
               id="nav-btn-terms"
               onClick={() => onScrollToSection('terms-section')}
-              className="px-3.5 py-2 rounded-xl hover:text-[#1a4d2e] hover:bg-[#e8e4d9]/70 transition font-bold text-[#1a4d2e]"
+              className="px-3.5 py-2 rounded-xl hover:text-[#38BDF8] hover:bg-white/10 transition text-sky-400 font-bold"
             >
               شروط القبول
             </button>
             <button
               id="nav-btn-details"
               onClick={() => onScrollToSection('details-section')}
-              className="px-3.5 py-2 rounded-xl hover:text-[#1a4d2e] hover:bg-[#e8e4d9]/70 transition"
+              className="px-3.5 py-2 rounded-xl hover:text-[#38BDF8] hover:bg-white/10 transition"
             >
-              المكان والمواعيد
+              مواعيد القبول
             </button>
             <button
               id="nav-btn-register"
               onClick={() => onScrollToSection('registration-form-section')}
-              className="px-4 py-2 bg-[#d4af37] hover:bg-[#c49b2c] text-[#1a4d2e] rounded-xl transition shadow-md flex items-center gap-1.5 font-bold border border-amber-300"
+              className="px-4 py-2.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] hover:brightness-110 text-[#08192E] rounded-xl transition shadow-lg shadow-amber-950/40 flex items-center gap-1.5 font-black border border-amber-300"
             >
-              <UserCheck className="w-4 h-4 text-[#1a4d2e]" />
+              <UserCheck className="w-4 h-4 text-[#08192E]" />
               <span>استمارة التسجيل</span>
             </button>
           </nav>
@@ -97,20 +104,20 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-lookup-btn"
               onClick={onOpenLookup}
-              className="px-3 py-2 text-sm font-medium text-[#1a4d2e] hover:text-[#153e25] bg-white hover:bg-[#e8e4d9] rounded-xl transition border border-[#d4af37]/30 flex items-center gap-1.5 shadow-2xs"
+              className="px-3.5 py-2 text-sm font-semibold text-slate-100 hover:text-white bg-white/10 hover:bg-white/20 rounded-xl transition border border-[#C89B48]/40 flex items-center gap-1.5 shadow-sm"
               title="طباعة أو استعلام عن رقم التسجيل"
             >
-              <Search className="w-4 h-4 text-[#1a4d2e]" />
+              <Search className="w-4 h-4 text-[#38BDF8]" />
               <span>استعلام / طباعة استمارة</span>
             </button>
 
             <button
               id="header-admin-btn"
               onClick={onOpenAdmin}
-              className="px-3 py-2 text-sm font-medium text-[#2d3436]/80 hover:text-[#1a4d2e] hover:bg-[#e8e4d9]/60 rounded-xl transition flex items-center gap-1.5"
+              className="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition flex items-center gap-1.5"
               title="دخول المشرفين لإدارة المسجلين"
             >
-              <ShieldCheck className="w-4 h-4 text-[#1a4d2e]/70" />
+              <ShieldCheck className="w-4 h-4 text-[#DFB76C]" />
               <span>لوحة المشرفين</span>
             </button>
           </div>
@@ -120,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-lookup-quick-btn"
               onClick={onOpenLookup}
-              className="p-2 text-[#1a4d2e] bg-[#e8e4d9] rounded-xl"
+              className="p-2 text-[#38BDF8] bg-white/10 rounded-xl"
               aria-label="استعلام"
             >
               <Search className="w-5 h-5" />
@@ -128,7 +135,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#2d3436] hover:text-[#1a4d2e] hover:bg-[#e8e4d9] rounded-xl"
+              className="p-2 text-slate-200 hover:text-white hover:bg-white/10 rounded-xl"
               aria-label="القائمة"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -139,17 +146,17 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div id="mobile-menu-drawer" className="lg:hidden border-t border-[#d4af37]/20 bg-[#f4f1ea] px-4 pt-3 pb-6 space-y-3">
-          <div className="grid grid-cols-1 gap-2 font-medium text-[#2d3436]">
+        <div id="mobile-menu-drawer" className="lg:hidden border-t border-[#C89B48]/30 bg-[#0A1C30] px-4 pt-3 pb-6 space-y-3">
+          <div className="grid grid-cols-1 gap-2 font-medium text-slate-200">
             <button
               id="m-nav-about"
               onClick={() => {
                 onScrollToSection('about-section');
                 setMobileMenuOpen(false);
               }}
-              className="text-right px-3 py-2.5 rounded-xl hover:bg-[#e8e4d9]"
+              className="text-right px-3 py-2.5 rounded-xl hover:bg-white/10"
             >
-              عن الدورة والأهداف
+              عن البرنامج والأهداف
             </button>
             <button
               id="m-nav-terms"
@@ -157,7 +164,7 @@ export const Header: React.FC<HeaderProps> = ({
                 onScrollToSection('terms-section');
                 setMobileMenuOpen(false);
               }}
-              className="text-right px-3 py-2.5 rounded-xl bg-[#e8e4d9] text-[#1a4d2e] font-bold"
+              className="text-right px-3 py-2.5 rounded-xl bg-white/10 text-[#38BDF8] font-bold"
             >
               شروط وضوابط القبول
             </button>
@@ -167,9 +174,9 @@ export const Header: React.FC<HeaderProps> = ({
                 onScrollToSection('details-section');
                 setMobileMenuOpen(false);
               }}
-              className="text-right px-3 py-2.5 rounded-xl hover:bg-[#e8e4d9]"
+              className="text-right px-3 py-2.5 rounded-xl hover:bg-white/10"
             >
-              المكان والمواعيد
+              مواعيد القبول
             </button>
             <button
               id="m-nav-register"
@@ -177,23 +184,23 @@ export const Header: React.FC<HeaderProps> = ({
                 onScrollToSection('registration-form-section');
                 setMobileMenuOpen(false);
               }}
-              className="w-full text-center px-4 py-3 bg-[#d4af37] hover:bg-[#c49b2c] text-[#1a4d2e] rounded-xl font-extrabold shadow-md flex items-center justify-center gap-2 border border-amber-300"
+              className="w-full text-center px-4 py-3 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] text-[#08192E] rounded-xl font-extrabold shadow-md flex items-center justify-center gap-2 border border-amber-300"
             >
-              <UserCheck className="w-5 h-5 text-[#1a4d2e]" />
-              <span>تسجيل جديد بالدورة</span>
+              <UserCheck className="w-5 h-5 text-[#08192E]" />
+              <span>تسجيل جديد بالبرنامج</span>
             </button>
           </div>
 
-          <div className="pt-3 border-t border-[#d4af37]/20 flex flex-col gap-2">
+          <div className="pt-3 border-t border-[#C89B48]/20 flex flex-col gap-2">
             <button
               id="m-nav-lookup"
               onClick={() => {
                 onOpenLookup();
                 setMobileMenuOpen(false);
               }}
-              className="w-full text-center px-3 py-2.5 text-sm font-semibold text-[#1a4d2e] bg-white rounded-xl border border-[#d4af37]/30 flex items-center justify-center gap-2"
+              className="w-full text-center px-3 py-2.5 text-sm font-semibold text-white bg-white/10 rounded-xl border border-[#C89B48]/30 flex items-center justify-center gap-2"
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-4 h-4 text-[#38BDF8]" />
               <span>استعلام وطباعة رقم المراجعة</span>
             </button>
             <button
@@ -202,9 +209,9 @@ export const Header: React.FC<HeaderProps> = ({
                 onOpenAdmin();
                 setMobileMenuOpen(false);
               }}
-              className="w-full text-center px-3 py-2.5 text-sm font-semibold text-[#2d3436] bg-[#e8e4d9] rounded-xl flex items-center justify-center gap-2"
+              className="w-full text-center px-3 py-2.5 text-sm font-semibold text-slate-300 bg-white/5 rounded-xl flex items-center justify-center gap-2"
             >
-              <ShieldCheck className="w-4 h-4" />
+              <ShieldCheck className="w-4 h-4 text-[#DFB76C]" />
               <span>لوحة دخول المشرفين</span>
             </button>
           </div>

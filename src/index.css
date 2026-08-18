@@ -28,45 +28,71 @@
   font-family: 'Tajawal', sans-serif;
 }
 
-/* Bento Grid Theme Helpers */
-.bg-bento-base {
-  background-color: #f4f1ea;
+/* Theme Helpers based on Official Brand Palette */
+.bg-navy-950 {
+  background-color: #061526;
 }
 
-.bg-bento-subtle {
-  background-color: #e8e4d9;
+.bg-navy-900 {
+  background-color: #0a1c30;
 }
 
-.bg-bento-green {
-  background-color: #1a4d2e;
+.bg-navy-800 {
+  background-color: #0f2744;
 }
 
-.text-bento-green {
-  color: #1a4d2e;
+.bg-navy-700 {
+  background-color: #16365c;
 }
 
-.border-bento-gold {
-  border-color: rgba(212, 175, 55, 0.4);
+.text-navy-900 {
+  color: #0a1c30;
 }
 
-.bg-bento-gold {
-  background-color: #d4af37;
+.text-navy-800 {
+  color: #0f2744;
 }
 
-.text-bento-gold {
-  color: #d4af37;
+.text-navy-700 {
+  color: #16365c;
 }
 
-/* Islamic Geometric Subtle Background Pattern with Bento Palette */
+.text-sky-brand {
+  color: #38bdf8;
+}
+
+.bg-sky-brand {
+  background-color: #0284c7;
+}
+
+.border-brand-gold {
+  border-color: rgba(200, 155, 72, 0.4);
+}
+
+.bg-brand-gold {
+  background-color: #c89b48;
+}
+
+.text-brand-gold {
+  color: #c89b48;
+}
+
+/* Islamic Geometric Subtle Background Pattern with Navy Palette */
 .bg-islamic-pattern {
-  background-color: #1a4d2e;
-  background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#153e25 0.75px, #1a4d2e 0.75px);
+  background-color: #0a1c30;
+  background-image: radial-gradient(#c89b48 0.75px, transparent 0.75px), radial-gradient(#16365c 0.75px, #0a1c30 0.75px);
   background-size: 28px 28px;
   background-position: 0 0, 14px 14px;
 }
 
+.bg-navy-glow {
+  background: radial-gradient(circle at 50% 30%, rgba(14, 165, 233, 0.15), transparent 70%),
+              radial-gradient(circle at 80% 80%, rgba(200, 155, 72, 0.12), transparent 50%),
+              #0a1c30;
+}
+
 .bg-bento-dots {
-  background-image: radial-gradient(rgba(26, 77, 46, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(10, 28, 48, 0.1) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
