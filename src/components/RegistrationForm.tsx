@@ -1,5 +1,5 @@
 import React from 'react';
-import { PROGRAM } from '../lib/programInfo.js';
+import { PROGRAM, registrationWindow } from '../lib/programInfo.js';
 import confetti from 'canvas-confetti';
 import { UserCheck, AlertCircle, CheckCircle2, Calendar, Phone, IdCard, MapPin, GraduationCap, BookOpen, BedDouble, FileText, Send } from 'lucide-react';
 import { Registration } from '../types.js';
@@ -33,6 +33,14 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
   const [loading, setLoading] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
   const [calculatedAge, setCalculatedAge] = React.useState<number | null>(null);
+
+  // Re-evaluated each minute so the form opens and closes on its own without
+  // the visitor needing to reload the page.
+  const [windowState, setWindowState] = React.useState(() => registrationWindow());
+  React.useEffect(() => {
+    const id = setInterval(() => setWindowState(registrationWindow()), 60_000);
+    return () => clearInterval(id);
+  }, []);
 
   // Age calculation
   React.useEffect(() => {
@@ -172,9 +180,63 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
     }
   };
 
+  // Outside the announced window the form is not shown at all. The database
+  // refuses submissions on the same bounds, so a stale page or an altered
+  // clock cannot get a late application in.
+  if (windowState !== 'open') {
+    const isBefore = windowState === 'before';
+    return (
+      <section id="registration-form-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-3xl border border-[#d4af37]/30 shadow-sm overflow-hidden">
+          <div className="bg-gradient-to-r from-[#061526] via-[#0A1C30] to-[#061526] text-white p-6 sm:p-8 border-b-4 border-[#C89B48]">
+            <h3 className="font-amiri text-2xl sm:text-3xl font-bold text-white">
+              استمارة التسجيل — {PROGRAM.edition}
+            </h3>
+          </div>
+
+          <div className="p-8 sm:p-12 text-center space-y-5">
+            <div
+              className={`w-16 h-16 mx-auto rounded-2xl flex items-center justify-center border ${
+                isBefore
+                  ? 'bg-sky-50 border-sky-300 text-[#0284C7]'
+                  : 'bg-rose-50 border-rose-300 text-rose-600'
+              }`}
+            >
+              {isBefore ? <Calendar className="w-8 h-8" /> : <AlertCircle className="w-8 h-8" />}
+            </div>
+
+            <h4 className="font-cairo text-xl font-bold text-[#08192E]">
+              {isBefore ? 'لم يُفتح باب التسجيل بعد' : 'أُغلق باب التسجيل'}
+            </h4>
+
+            <p className="text-sm text-slate-700 font-tajawal leading-relaxed max-w-xl mx-auto">
+              {isBefore ? (
+                <>
+                  يبدأ التسجيل يوم <strong className="text-[#08192E]">{PROGRAM.registration.from}</strong> ويستمر إلى يوم{' '}
+                  <strong className="text-[#08192E]">{PROGRAM.registration.to}</strong>. يرجى العودة إلى هذه الصفحة في موعده.
+                </>
+              ) : (
+                <>
+                  انتهت فترة التسجيل بتاريخ <strong className="text-[#08192E]">{PROGRAM.registration.to}</strong>، ولا يُنظر
+                  في الطلبات بعد انتهاء مدة التسجيل.
+                </>
+              )}
+            </p>
+
+            <div className="pt-2">
+              <p className="text-xs text-slate-500 font-tajawal">
+                من سجّل خلال الفترة المحددة يمكنه استعراض بطاقته وطباعتها من صفحة الاستعلام.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="registration-form-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
+
       {/* Bento Main Form Container */}
       <div className="bg-white rounded-3xl border border-[#d4af37]/30 shadow-sm overflow-hidden">
         

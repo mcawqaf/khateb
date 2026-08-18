@@ -15,9 +15,11 @@ export const PROGRAM = {
     to: 'الجمعة 21 أغسطس 2026م',
     short: '19 - 21 أغسطس 2026م',
     // Used to open and close the form automatically. End is inclusive: the
-    // window closes at the end of the 21st.
-    startsAt: '2026-08-19T00:00:00',
-    endsAt: '2026-08-21T23:59:59'
+    // window closes at the end of the 21st. The +02:00 offset is Libya's, and
+    // is stated explicitly so a visitor abroad sees the same window as one in
+    // Tripoli. The database enforces the same bounds regardless.
+    startsAt: '2026-08-19T00:00:00+02:00',
+    endsAt: '2026-08-21T23:59:59+02:00'
   },
 
   interview: {
