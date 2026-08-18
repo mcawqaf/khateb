@@ -17,8 +17,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Bento Grid Master Container */}
       <div className="grid grid-cols-12 gap-4 lg:gap-5">
 
-        {/* 1. Main Headline Bento Tile (Col 12 / Lg 8) */}
-        <div className="col-span-12 lg:col-span-8 bg-[#0B223D] rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#C89B48]/40 shadow-xl flex flex-col justify-between relative overflow-hidden text-white">
+        {/* 1. Main Headline Bento Tile (Col 12 — full width now the poster tile is gone) */}
+        <div className="col-span-12 bg-[#0B223D] rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#C89B48]/40 shadow-xl flex flex-col justify-between relative overflow-hidden text-white">
           {/* Subtle glowing radial background */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#38BDF8]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#C89B48]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
@@ -98,35 +98,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
 
-        {/* 2. Official Poster Preview Tile (Col 12 / Lg 4) */}
-        <div className="col-span-12 lg:col-span-4 bg-[#08192E] rounded-3xl p-5 text-white flex flex-col justify-between border-2 border-[#C89B48]/40 shadow-xl relative overflow-hidden group">
-          <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-black aspect-4/3 sm:aspect-square flex items-center justify-center">
-            <img 
-              src="./assets/official-poster.jpg" 
-              alt="الملصق الرسمي لبرنامج إعداد لتأهيل الخطباء"
-              className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#08192E] via-transparent to-transparent opacity-80"></div>
-            <div className="absolute bottom-3 right-3 left-3 flex justify-between items-center text-xs">
-              <span className="bg-[#08192E]/90 text-[#DFB76C] px-3 py-1 rounded-lg border border-[#C89B48]/40 font-bold">
-                الإعلان الرسمي المعتمد
-              </span>
-              <span className="text-[#38BDF8] font-bold">@AwqafLibya</span>
-            </div>
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-xs text-slate-300">
-            <span className="flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-[#DFB76C]" />
-              <span>الدورة الخامسة (5)</span>
-            </span>
-            <span className="bg-white/10 text-sky-300 px-2.5 py-0.5 rounded-full font-bold text-[11px]">
-              1448هـ / 2026م
-            </span>
-          </div>
-        </div>
-
-        {/* 3. Acceptance Dates Bento Tile (Col 12 / Sm 6 / Lg 4) */}
+        {/* 2. Acceptance Dates Bento Tile (Col 12 / Sm 6 / Lg 4) */}
         <div className="col-span-12 sm:col-span-6 lg:col-span-4 bg-[#0F2744] text-white rounded-3xl p-6 border border-[#C89B48]/30 flex flex-col justify-between shadow-md">
           <div>
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
@@ -153,7 +125,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </p>
         </div>
 
-        {/* 4. Core Features Bento Tile (Col 12 / Sm 6 / Lg 4) */}
+        {/* 3. Core Features Bento Tile (Col 12 / Sm 6 / Lg 4) */}
         <div className="col-span-12 sm:col-span-6 lg:col-span-4 bg-white rounded-3xl p-6 border border-slate-200 shadow-md flex flex-col justify-between">
           <div>
             <h3 className="font-cairo text-base font-bold text-[#08192E] mb-3 border-r-4 border-[#C89B48] pr-3 flex items-center justify-between">
@@ -187,7 +159,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
         </div>
 
-        {/* 5. Instant Serial Review Number Notice (Col 12 / Lg 4) */}
+        {/* 4. Instant Serial Review Number Notice (Col 12 / Lg 4) */}
         <div className="col-span-12 lg:col-span-4 bg-[#08192E] text-white rounded-3xl p-6 border border-[#C89B48]/40 shadow-xl flex flex-col justify-between relative overflow-hidden">
           <div className="absolute top-0 left-0 w-24 h-24 bg-[#C89B48]/10 rounded-br-full pointer-events-none"></div>
 
@@ -216,7 +188,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </button>
         </div>
 
-        {/* 6. Bento Bottom Master Ribbon (Col 12) */}
+        {/* 5. Bento Bottom Master Ribbon (Col 12) */}
         <div className="col-span-12 bg-gradient-to-r from-[#061526] via-[#0A1C30] to-[#061526] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between text-white text-xs gap-4 shadow-lg border border-[#C89B48]/30">
           <div className="flex flex-wrap items-center gap-4 sm:gap-8 text-slate-300">
             <span className="flex items-center gap-1.5">
