@@ -75,11 +75,11 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
                 <div className="text-[#0284C7] font-mono font-bold">الدورة الخامسة (5) - 1448هـ</div>
               </div>
 
-              <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-[#08192E] p-2 print-solid flex items-center justify-center shadow-lg border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/20 shrink-0">
+              <div className="rounded-md overflow-hidden inline-flex shrink-0 bg-[#08192E] print-solid shadow-lg border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/20">
                 <img 
                   src="./assets/program-logo.png" 
                   alt="شعار برنامج إعداد" 
-                  className="w-full h-full object-contain"
+                  className="h-14 sm:h-16 w-auto block"
                 />
               </div>
 
