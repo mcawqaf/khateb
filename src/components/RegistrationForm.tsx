@@ -49,6 +49,28 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
     }
   }, [formData.birthDate]);
 
+  // The national ID carries the birth year in digits 2-5, so the two fields can
+  // check each other. Shown live while typing; the database enforces the same
+  // rule on submit, this is only to catch the typo earlier.
+  const nationalIdIssue = React.useMemo(() => {
+    const nid = formData.nationalId.trim();
+    if (!nid) return null;
+
+    if (!/^[12][0-9]{11}$/.test(nid)) {
+      return `الرقم الوطني يجب أن يتكون من 12 رقماً ويبدأ بالرقم 1 أو 2 (المُدخل ${nid.length} خانة).`;
+    }
+
+    const birthYear = formData.birthDate.slice(0, 4);
+    if (!birthYear) return null;
+
+    const idYear = nid.slice(1, 5);
+    if (idYear !== birthYear) {
+      return `الرقم الوطني لا يطابق تاريخ الميلاد: الرقم الوطني يشير إلى سنة ${idYear}، وتاريخ الميلاد المُدخل سنة ${birthYear}. يرجى تصحيح أحد الحقلين.`;
+    }
+
+    return null;
+  }, [formData.nationalId, formData.birthDate]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
@@ -69,6 +91,11 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
     // Validation
     if (!formData.fullName.trim() || !formData.nationalId.trim() || !formData.phone.trim() || !formData.birthDate || !formData.address.trim()) {
       setErrorMsg('يرجى ملء جميع الحقول الأساسية المطلوبة.');
+      return;
+    }
+
+    if (nationalIdIssue) {
+      setErrorMsg(nationalIdIssue);
       return;
     }
 
@@ -225,9 +252,22 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   value={formData.nationalId}
                   onChange={handleChange}
                   required
-                  placeholder="أدخل الرقم الوطني المعتمد"
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm font-mono bg-slate-50/50"
+                  inputMode="numeric"
+                  maxLength={12}
+                  placeholder="12 رقماً كما في بطاقة الرقم الوطني"
+                  aria-invalid={Boolean(nationalIdIssue)}
+                  className={`w-full px-4 py-2.5 rounded-xl border transition text-slate-900 text-sm font-mono bg-slate-50/50 focus:ring-2 ${
+                    nationalIdIssue
+                      ? 'border-rose-400 focus:ring-rose-400 focus:border-rose-400'
+                      : 'border-slate-300 focus:ring-[#0284C7] focus:border-[#0284C7]'
+                  }`}
                 />
+                {nationalIdIssue && (
+                  <p className="mt-1.5 text-[11px] text-rose-700 font-semibold leading-relaxed flex items-start gap-1.5">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                    <span>{nationalIdIssue}</span>
+                  </p>
+                )}
               </div>
 
               {/* Phone */}

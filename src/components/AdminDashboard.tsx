@@ -450,7 +450,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   autoComplete="username"
                   dir="ltr"
                   placeholder="supervisor@example.com"
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 text-left"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 text-slate-900 text-left"
                 />
               </div>
 
@@ -466,7 +466,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   required
                   autoComplete="current-password"
                   dir="ltr"
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 text-left"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 text-slate-900 text-left"
                 />
               </div>
 
@@ -571,7 +571,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="ابحث بالاسم، الرقم المتسلسل KHT-1448، الهوية، الهاتف، المدينة..."
-                    className="w-full pl-3 pr-9 py-2 rounded-2xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] text-xs font-medium bg-[#f4f1ea]/30"
+                    className="w-full pl-3 pr-9 py-2 rounded-2xl border border-stone-300 focus:ring-2 focus:ring-[#1a4d2e] text-xs font-medium text-slate-900 bg-[#f4f1ea]/30"
                   />
                   <Search className="w-4 h-4 text-stone-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" />
                 </div>
@@ -783,7 +783,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <select
                   value={newStatus}
                   onChange={(e) => setNewStatus(e.target.value as RegistrationStatus)}
-                  className="w-full px-3 py-2 rounded-2xl border border-slate-300 text-sm font-medium bg-slate-50"
+                  className="w-full px-3 py-2 rounded-2xl border border-slate-300 text-sm font-medium text-slate-900 bg-slate-50"
                 >
                   <option value="pending">جديد / قيد التدقيق</option>
                   <option value="under_review">قيد المراجعة والفرز</option>
@@ -802,7 +802,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   value={supervisorNotes}
                   onChange={(e) => setSupervisorNotes(e.target.value)}
                   placeholder="أدخل أي ملاحظات خاصة بالوثائق، المقابلة، أو السكن..."
-                  className="w-full px-3 py-2 rounded-2xl border border-slate-300 text-sm bg-slate-50"
+                  className="w-full px-3 py-2 rounded-2xl border border-slate-300 text-sm text-slate-900 bg-slate-50"
                 ></textarea>
               </div>
 
