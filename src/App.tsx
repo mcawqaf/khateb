@@ -7,7 +7,6 @@ import { RegistrationForm } from './components/RegistrationForm.js';
 import { RegistrationCardModal } from './components/RegistrationCardModal.js';
 import { LookupModal } from './components/LookupModal.js';
 import { AdminDashboard } from './components/AdminDashboard.js';
-import { SupabaseGuideModal } from './components/SupabaseGuideModal.js';
 import { Footer } from './components/Footer.js';
 import { Registration } from './types.js';
 import { FileText, Search, ShieldCheck } from 'lucide-react';
@@ -17,7 +16,6 @@ export default function App() {
   const [selectedRegistration, setSelectedRegistration] = React.useState<Registration | null>(null);
   const [isLookupOpen, setIsLookupOpen] = React.useState(false);
   const [isAdminOpen, setIsAdminOpen] = React.useState(false);
-  const [isSupabaseGuideOpen, setIsSupabaseGuideOpen] = React.useState(false);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -113,13 +111,6 @@ export default function App() {
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
         onViewRegistrationCard={(reg) => setSelectedRegistration(reg)}
-        onOpenSupabaseGuide={() => setIsSupabaseGuideOpen(true)}
-      />
-
-      {/* 4. Supabase SQL Guide & Setup Modal */}
-      <SupabaseGuideModal
-        isOpen={isSupabaseGuideOpen}
-        onClose={() => setIsSupabaseGuideOpen(false)}
       />
 
     </div>
