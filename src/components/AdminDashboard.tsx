@@ -22,21 +22,28 @@ import {
   X,
   FileSpreadsheet,
   Check,
-  BookOpen
+  BookOpen,
+  ArrowRight,
+  Link,
+  Copy
 } from 'lucide-react';
 import { Registration, RegistrationStatus, AdminStats } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
 import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord } from '../lib/clientData.js';
 
 interface AdminDashboardProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  isStandalone?: boolean;
+  onClose?: () => void;
+  onBackToHome?: () => void;
   onViewRegistrationCard: (reg: Registration) => void;
 }
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
-  isOpen,
+  isOpen = true,
+  isStandalone = false,
   onClose,
+  onBackToHome,
   onViewRegistrationCard
 }) => {
   const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(() => {
@@ -45,6 +52,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [password, setPassword] = React.useState('');
   const [loginError, setLoginError] = React.useState<string | null>(null);
   const [loginLoading, setLoginLoading] = React.useState(false);
+  const [copiedLink, setCopiedLink] = React.useState(false);
 
   // Registrations state
   const [registrations, setRegistrations] = React.useState<Registration[]>([]);
@@ -80,10 +88,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   React.useEffect(() => {
-    if (isAuthenticated && isOpen) {
+    if (isAuthenticated && (isOpen || isStandalone)) {
       fetchData();
     }
-  }, [isAuthenticated, isOpen, searchQuery, statusFilter, housingFilter]);
+  }, [isAuthenticated, isOpen, isStandalone, searchQuery, statusFilter, housingFilter]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -107,12 +115,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         // Fallback for static hosting
       }
 
-      // Static fallback check
-      if (password === 'khateeb1448' || password === 'admin1448') {
+      // Static fallback check (passcode: 123456)
+      if (password.trim() === '123456' || password.trim() === 'khateeb1448') {
         setIsAuthenticated(true);
         localStorage.setItem('khateeb_admin_auth', 'true');
       } else {
-        throw new Error('كلمة المرور غير صحيحة');
+        throw new Error('رمز المرور غير صحيح');
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'فشل تسجيل الدخول';
@@ -120,6 +128,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     } finally {
       setLoginLoading(false);
     }
+  };
+
+  const handleCopyLink = () => {
+    const url = window.location.origin + window.location.pathname + '#admin';
+    navigator.clipboard.writeText(url);
+    setCopiedLink(true);
+    setTimeout(() => setCopiedLink(false), 2500);
   };
 
   const handleLogout = () => {
@@ -270,146 +285,184 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen && !isStandalone) return null;
 
-  return (
+  const content = (
     <div
-      id="admin-dashboard-backdrop"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4"
+      id="admin-dashboard-container"
+      className="relative bg-white w-full max-w-7xl mx-auto rounded-3xl shadow-2xl border-2 border-[#d4af37]/40 overflow-hidden min-h-[85vh] flex flex-col print:m-0 print:border-none print:shadow-none"
     >
-      <div
-        id="admin-dashboard-container"
-        className="relative bg-white w-full max-w-7xl rounded-3xl shadow-2xl border-2 border-[#d4af37]/40 overflow-hidden min-h-[85vh] flex flex-col my-4 print:m-0 print:border-none print:shadow-none"
-      >
-        {/* Top Bar */}
-        <div className="bg-[#08192E] text-white px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#C89B48] no-print">
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-white/10 text-[#38BDF8] flex items-center justify-center shadow-xs border border-[#C89B48]/40">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-cairo text-lg sm:text-xl font-bold text-white">
-                  لوحة تحكم المشرفين واللجنة العلمية
-                </h3>
-                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-[#DFB76C] border border-white/20 font-semibold">
-                  برنامج إعداد 1447هـ
-                </span>
-              </div>
-              <p className="text-xs text-slate-300 font-tajawal">
-                متابعة المسجلين، اعتماد المقبولين، تصدير الكشوفات وإصدار بطاقات المراجعة
-              </p>
-            </div>
+      {/* Top Bar */}
+      <div className="bg-[#08192E] text-white px-6 py-4 flex flex-wrap items-center justify-between gap-4 border-b-2 border-[#C89B48] no-print">
+        <div className="flex items-center gap-3">
+          <div className="w-11 h-11 rounded-2xl bg-white/10 text-[#38BDF8] flex items-center justify-center shadow-xs border border-[#C89B48]/40">
+            <ShieldCheck className="w-6 h-6" />
           </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h3 className="font-cairo text-lg sm:text-xl font-bold text-white">
+                لوحة تحكم المشرفين واللجنة العلمية
+              </h3>
+              <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-[#DFB76C] border border-white/20 font-semibold">
+                برنامج إعداد 1447هـ
+              </span>
+            </div>
+            <p className="text-xs text-slate-300 font-tajawal">
+              متابعة المسجلين، اعتماد المقبولين، تصدير الكشوفات وإصدار بطاقات المراجعة
+            </p>
+          </div>
+        </div>
 
-          <div className="flex items-center gap-2">
-            {isAuthenticated && (
-              <>
-                <div
-                  id="admin-supabase-status"
-                  className="px-3 py-1.5 bg-emerald-950/80 text-emerald-300 rounded-xl text-xs font-bold flex items-center gap-1.5 border border-emerald-500/40 shadow-xs"
-                  title="قاعدة بيانات Supabase السحابية متصلة ومباشرة"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <Database className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="hidden sm:inline">Supabase Online</span>
-                </div>
+        <div className="flex items-center gap-2">
+          {isAuthenticated && (
+            <>
+              {/* Copy Admin URL button */}
+              <button
+                id="admin-copy-link-btn"
+                onClick={handleCopyLink}
+                className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-[#DFB76C] rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-white/20"
+                title="نسخ رابط لوحة التحكم المباشر"
+              >
+                {copiedLink ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>تم النسخ!</span>
+                  </>
+                ) : (
+                  <>
+                    <Link className="w-3.5 h-3.5 text-[#38BDF8]" />
+                    <span className="hidden sm:inline">نسخ الرابط</span>
+                  </>
+                )}
+              </button>
 
-                <button
-                  id="admin-export-csv-btn"
-                  onClick={handleExportCSV}
-                  disabled={registrations.length === 0}
-                  className="px-3.5 py-2 bg-gradient-to-r from-[#C89B48] to-[#DFB76C] hover:brightness-110 text-[#08192E] rounded-xl text-xs font-black transition flex items-center gap-1.5 shadow-sm border border-amber-300 disabled:opacity-50"
-                  title="تصدير كشف إكسل CSV"
-                >
-                  <FileSpreadsheet className="w-4 h-4 text-[#08192E]" />
-                  <span className="hidden sm:inline">تصدير كشف Excel/CSV</span>
-                </button>
+              {/* Supabase Online Live Badge */}
+              <div
+                id="admin-supabase-status"
+                className="px-3 py-1.5 bg-emerald-950/80 text-emerald-300 rounded-xl text-xs font-bold flex items-center gap-1.5 border border-emerald-500/40 shadow-xs"
+                title="قاعدة بيانات Supabase السحابية متصلة ومباشرة"
+              >
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <Database className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="hidden sm:inline">Supabase Online</span>
+              </div>
 
-                <button
-                  id="admin-logout-btn"
-                  onClick={handleLogout}
-                  className="p-2 text-rose-300 hover:text-rose-100 hover:bg-rose-950/60 rounded-xl transition"
-                  title="تسجيل الخروج"
-                >
-                  <LogOut className="w-5 h-5" />
-                </button>
-              </>
-            )}
+              {/* Export CSV */}
+              <button
+                id="admin-export-csv-btn"
+                onClick={handleExportCSV}
+                disabled={registrations.length === 0}
+                className="px-3.5 py-2 bg-gradient-to-r from-[#C89B48] to-[#DFB76C] hover:brightness-110 text-[#08192E] rounded-xl text-xs font-black transition flex items-center gap-1.5 shadow-sm border border-amber-300 disabled:opacity-50"
+                title="تصدير كشف إكسل CSV"
+              >
+                <FileSpreadsheet className="w-4 h-4 text-[#08192E]" />
+                <span className="hidden sm:inline">تصدير Excel/CSV</span>
+              </button>
 
+              {/* Logout */}
+              <button
+                id="admin-logout-btn"
+                onClick={handleLogout}
+                className="p-2 text-rose-300 hover:text-rose-100 hover:bg-rose-950/60 rounded-xl transition"
+                title="تسجيل الخروج"
+              >
+                <LogOut className="w-5 h-5" />
+              </button>
+            </>
+          )}
+
+          {/* Return to Home / Close Button */}
+          {isStandalone ? (
+            <button
+              id="admin-back-home-btn"
+              onClick={onBackToHome || (() => { window.location.hash = ''; })}
+              className="px-3.5 py-2 bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-sky-400/30"
+              title="العودة إلى الصفحة الرئيسية للموقع"
+            >
+              <ArrowRight className="w-4 h-4 text-sky-400" />
+              <span>العودة للموقع</span>
+            </button>
+          ) : (
             <button
               id="admin-close-btn"
               onClick={onClose}
               className="p-2 text-slate-300 hover:text-white rounded-xl transition"
-              title="إإغلاق"
+              title="إغلاق"
             >
               <X className="w-6 h-6" />
             </button>
+          )}
+        </div>
+      </div>
+
+      {/* Auth Barrier if not authenticated */}
+      {!isAuthenticated ? (
+        <div className="flex-1 flex items-center justify-center p-6 bg-[#08192E]/5">
+          <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-[#C89B48]/40 shadow-2xl text-center space-y-6">
+            <div className="w-16 h-16 rounded-2xl bg-[#08192E] text-[#DFB76C] mx-auto flex items-center justify-center border border-[#C89B48]/40 shadow-sm">
+              <Lock className="w-8 h-8 text-[#38BDF8]" />
+            </div>
+
+            <div className="space-y-1">
+              <h4 className="font-amiri text-2xl font-bold text-[#08192E]">
+                دخول المشرفين المصرح لهم
+              </h4>
+              <p className="text-xs text-slate-500 font-tajawal">
+                يرجى إدخال رمز المرور الخاص بلجنة إدارة برنامج إعداد
+              </p>
+            </div>
+
+            <form onSubmit={handleLogin} className="space-y-4 text-right">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1 font-cairo">
+                  رمز مرور المشرف:
+                </label>
+                <input
+                  type="password"
+                  id="admin-password-input"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="أدخل رمز المرور: 123456"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 font-mono tracking-widest text-center"
+                />
+              </div>
+
+              {loginError && (
+                <div className="p-3 bg-rose-50 border border-rose-200 rounded-2xl text-rose-700 text-xs font-semibold text-center">
+                  {loginError}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                id="admin-login-submit-btn"
+                disabled={loginLoading || !password}
+                className="w-full py-3.5 bg-[#08192E] hover:bg-[#0B2545] text-white font-bold text-sm rounded-2xl transition shadow-md border border-[#C89B48]/40 disabled:opacity-60"
+              >
+                {loginLoading ? 'جارٍ التحقق...' : 'تسجيل الدخول للوحة التحكم'}
+              </button>
+
+              {isStandalone && (
+                <div className="pt-2">
+                  <button
+                    type="button"
+                    onClick={onBackToHome || (() => { window.location.hash = ''; })}
+                    className="text-xs text-slate-500 hover:text-slate-800 transition font-tajawal"
+                  >
+                    ← العودة إلى الصفحة الرئيسية للموقع
+                  </button>
+                </div>
+              )}
+            </form>
           </div>
         </div>
-
-        {/* Auth Barrier if not authenticated */}
-        {!isAuthenticated ? (
-          <div className="flex-1 flex items-center justify-center p-6 bg-[#08192E]/5">
-            <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-[#C89B48]/40 shadow-2xl text-center space-y-6">
-              <div className="w-16 h-16 rounded-2xl bg-[#08192E] text-[#DFB76C] mx-auto flex items-center justify-center border border-[#C89B48]/40 shadow-sm">
-                <Lock className="w-8 h-8 text-[#38BDF8]" />
-              </div>
-
-              <div className="space-y-1">
-                <h4 className="font-amiri text-2xl font-bold text-[#08192E]">
-                  دخول المشرفين المصرح لهم
-                </h4>
-                <p className="text-xs text-slate-500 font-tajawal">
-                  يرجى إدخال رمز المرور الخاص بلجنة إدارة برنامج إعداد
-                </p>
-              </div>
-
-              <form onSubmit={handleLogin} className="space-y-4 text-right">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1 font-cairo">
-                    كلمة مرور المشرف:
-                  </label>
-                  <input
-                    type="password"
-                    id="admin-password-input"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    placeholder="أدخل كلمة المرور (الافتراضية: khateeb1448)"
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50"
-                  />
-                  <div className="text-[11px] text-slate-400 mt-1">
-                    * كلمة المرور الافتراضية للتجربة: <code className="text-[#08192E] font-bold">khateeb1448</code>
-                  </div>
-                </div>
-
-                {loginError && (
-                  <div className="p-3 bg-rose-50 border border-rose-200 rounded-2xl text-rose-700 text-xs font-semibold text-center">
-                    {loginError}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  id="admin-login-submit-btn"
-                  disabled={loginLoading || !password}
-                  className="w-full py-3.5 bg-[#08192E] hover:bg-[#0B2545] text-white font-bold text-sm rounded-2xl transition shadow-md border border-[#C89B48]/40 disabled:opacity-60"
-                >
-                  {loginLoading ? 'جارٍ التحقق...' : 'تسجيل الدخول للوحة التحكم'}
-                </button>
-              </form>
-            </div>
-          </div>
-        ) : (
-          /* Authenticated Dashboard View */
-          <div className="flex-1 flex flex-col p-4 sm:p-6 bg-slate-50/50 space-y-6 overflow-y-auto">
-            
-            {/* Statistics Cards - Bento style */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 no-print">
+      ) : (
+        /* Authenticated Dashboard View */
+        <div className="flex-1 flex flex-col p-4 sm:p-6 bg-slate-50/50 space-y-6 overflow-y-auto">
+          
+          {/* Statistics Cards - Bento style */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 no-print">
               <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
                 <div className="text-xs text-slate-500 font-semibold mb-1">إجمالي المسجلين</div>
                 <div className="text-2xl font-black text-[#08192E] font-mono">{stats?.total ?? registrations.length}</div>
@@ -713,6 +766,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         )}
 
       </div>
+  );
+
+  if (isStandalone) {
+    return (
+      <div id="admin-standalone-wrapper" className="min-h-screen bg-[#061526] p-2 sm:p-6 flex flex-col justify-center font-tajawal" dir="rtl">
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <div
+      id="admin-dashboard-backdrop"
+      onClick={(e) => {
+        if (e.target === e.currentTarget && onClose) onClose();
+      }}
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4 font-tajawal"
+      dir="rtl"
+    >
+      {content}
     </div>
   );
 };

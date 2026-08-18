@@ -12,10 +12,41 @@ import { Registration } from './types.js';
 import { FileText, Search, ShieldCheck } from 'lucide-react';
 
 export default function App() {
+  // Route state
+  const [currentRoute, setCurrentRoute] = React.useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (hash.includes('admin') || search.includes('admin')) {
+        return 'admin';
+      }
+    }
+    return 'home';
+  });
+
   // Modal states
   const [selectedRegistration, setSelectedRegistration] = React.useState<Registration | null>(null);
   const [isLookupOpen, setIsLookupOpen] = React.useState(false);
-  const [isAdminOpen, setIsAdminOpen] = React.useState(false);
+
+  // Sync route on hash/history change
+  React.useEffect(() => {
+    const handleRouteChange = () => {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (hash.includes('admin') || search.includes('admin')) {
+        setCurrentRoute('admin');
+      } else {
+        setCurrentRoute('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleRouteChange);
+    window.addEventListener('popstate', handleRouteChange);
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange);
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -28,13 +59,39 @@ export default function App() {
     setSelectedRegistration(newReg);
   };
 
+  // ----------------------------------------------------
+  // STANDALONE ADMIN ROUTE (Separated URL: #admin)
+  // ----------------------------------------------------
+  if (currentRoute === 'admin') {
+    return (
+      <div className="min-h-screen bg-[#061526] text-slate-100 font-tajawal" dir="rtl">
+        <AdminDashboard
+          isStandalone={true}
+          onBackToHome={() => {
+            window.location.hash = '';
+            setCurrentRoute('home');
+          }}
+          onViewRegistrationCard={(reg) => setSelectedRegistration(reg)}
+        />
+
+        {/* Printable Card Modal if supervisor clicks view */}
+        <RegistrationCardModal
+          registration={selectedRegistration}
+          onClose={() => setSelectedRegistration(null)}
+        />
+      </div>
+    );
+  }
+
+  // ----------------------------------------------------
+  // PUBLIC WEBSITE (Home View)
+  // ----------------------------------------------------
   return (
     <div className="min-h-screen flex flex-col bg-[#061526] text-slate-100 font-tajawal selection:bg-[#0284C7] selection:text-white" dir="rtl">
       
       {/* Top Header */}
       <Header
         onOpenLookup={() => setIsLookupOpen(true)}
-        onOpenAdmin={() => setIsAdminOpen(true)}
         onScrollToSection={scrollToSection}
       />
 
@@ -64,7 +121,10 @@ export default function App() {
       {/* Footer */}
       <Footer
         onOpenLookup={() => setIsLookupOpen(true)}
-        onOpenAdmin={() => setIsAdminOpen(true)}
+        onOpenAdmin={() => {
+          window.location.hash = 'admin';
+          setCurrentRoute('admin');
+        }}
         onScrollToSection={scrollToSection}
       />
 
@@ -104,13 +164,6 @@ export default function App() {
         isOpen={isLookupOpen}
         onClose={() => setIsLookupOpen(false)}
         onSelectRegistration={(reg) => setSelectedRegistration(reg)}
-      />
-
-      {/* 3. Supervisor Admin Dashboard */}
-      <AdminDashboard
-        isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
-        onViewRegistrationCard={(reg) => setSelectedRegistration(reg)}
       />
 
     </div>

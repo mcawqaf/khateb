@@ -3,13 +3,12 @@ import { BookOpen, MapPin, Calendar, ShieldCheck, Search, Award, Lock, Sparkles 
 
 interface FooterProps {
   onOpenLookup: () => void;
-  onOpenAdmin: () => void;
+  onOpenAdmin?: () => void;
   onScrollToSection: (sectionId: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onOpenLookup,
-  onOpenAdmin,
   onScrollToSection
 }) => {
   return (
@@ -119,13 +118,14 @@ export const Footer: React.FC<FooterProps> = ({
                 </button>
               </li>
               <li>
-                <button
-                  onClick={onOpenAdmin}
-                  className="hover:text-[#38BDF8] transition flex items-center gap-1.5 text-slate-300"
+                <a
+                  href="#admin"
+                  className="hover:text-[#38BDF8] transition flex items-center gap-1.5 text-slate-400 text-xs"
+                  title="بوابة دخول المشرفين ولجنة القبول"
                 >
                   <Lock className="w-3.5 h-3.5 text-[#DFB76C]" />
-                  <span>لوحة تحكم المشرفين</span>
-                </button>
+                  <span>بوابة المشرفين المصرح لهم</span>
+                </a>
               </li>
             </ul>
           </div>

@@ -236,7 +236,7 @@ app.get('/api/health', (req, res) => {
 // Admin login
 app.post('/api/admin/login', (req, res) => {
   const { password } = req.body;
-  const adminSecret = process.env.ADMIN_PASSWORD || 'khateeb1448';
+  const adminSecret = process.env.ADMIN_PASSWORD || '123456';
   if (password && password.trim() === adminSecret) {
     res.json({ success: true, token: 'admin_authenticated_' + Date.now() });
   } else {

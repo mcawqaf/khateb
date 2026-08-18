@@ -3,13 +3,11 @@ import { BookOpen, Calendar, MapPin, Search, ShieldCheck, UserCheck, Menu, X } f
 
 interface HeaderProps {
   onOpenLookup: () => void;
-  onOpenAdmin: () => void;
   onScrollToSection: (sectionId: string) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   onOpenLookup,
-  onOpenAdmin,
   onScrollToSection
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
@@ -110,16 +108,6 @@ export const Header: React.FC<HeaderProps> = ({
               <Search className="w-4 h-4 text-[#38BDF8]" />
               <span>استعلام / طباعة استمارة</span>
             </button>
-
-            <button
-              id="header-admin-btn"
-              onClick={onOpenAdmin}
-              className="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition flex items-center gap-1.5"
-              title="دخول المشرفين لإدارة المسجلين"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#DFB76C]" />
-              <span>لوحة المشرفين</span>
-            </button>
           </div>
 
           {/* Mobile menu toggle */}
@@ -202,17 +190,6 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Search className="w-4 h-4 text-[#38BDF8]" />
               <span>استعلام وطباعة رقم المراجعة</span>
-            </button>
-            <button
-              id="m-nav-admin"
-              onClick={() => {
-                onOpenAdmin();
-                setMobileMenuOpen(false);
-              }}
-              className="w-full text-center px-3 py-2.5 text-sm font-semibold text-slate-300 bg-white/5 rounded-xl flex items-center justify-center gap-2"
-            >
-              <ShieldCheck className="w-4 h-4 text-[#DFB76C]" />
-              <span>لوحة دخول المشرفين</span>
             </button>
           </div>
         </div>
