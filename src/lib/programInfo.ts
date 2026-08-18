@@ -11,15 +11,18 @@ export const PROGRAM = {
 
   registration: {
     label: 'فترة التسجيل',
-    from: 'الأربعاء 19 أغسطس 2026م',
-    to: 'الجمعة 21 أغسطس 2026م',
+    from: 'الأربعاء 19 أغسطس 2026م — الساعة 3:00 عصراً',
+    to: 'الجمعة 21 أغسطس 2026م — منتصف الليل',
     short: '19 - 21 أغسطس 2026م',
-    // Used to open and close the form automatically. End is inclusive: the
-    // window closes at the end of the 21st. The +02:00 offset is Libya's, and
-    // is stated explicitly so a visitor abroad sees the same window as one in
-    // Tripoli. The database enforces the same bounds regardless.
-    startsAt: '2026-08-19T00:00:00+02:00',
-    endsAt: '2026-08-21T23:59:59+02:00'
+    opensTime: 'الساعة 3:00 عصراً',
+    closesTime: 'منتصف ليلة الجمعة',
+    // Used to open and close the form automatically. The +02:00 offset is
+    // Libya's, stated explicitly so a visitor abroad sees the same window as
+    // one in Tripoli. The database enforces the same bounds regardless.
+    startsAt: '2026-08-19T15:00:00+02:00',
+    // Midnight at the end of Friday, written as Saturday 00:00 so there is no
+    // doubt about which side of Friday the deadline falls on.
+    endsAt: '2026-08-22T00:00:00+02:00'
   },
 
   interview: {
