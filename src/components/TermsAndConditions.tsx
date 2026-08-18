@@ -68,7 +68,7 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
     {
       id: 8,
       title: 'تعبئة الاستمارة والالتزام بمواعيد القبول',
-      explanation: 'إتمام التسجيل خلال فترة القبول المحددة (5 - 12 يوليو 2026م) وطباعة بطاقة المراجعة المحتوية على الرقم المتسلسل والباركود.',
+      explanation: 'إتمام التسجيل خلال فترة القبول التي يُعلن عنها قريباً وطباعة بطاقة المراجعة المحتوية على الرقم المتسلسل والباركود.',
       icon: FileText,
       badge: 'إجراء إداري',
       highlight: true

@@ -11,7 +11,7 @@ import {
   Eye,
   CheckCircle,
   Clock,
-  XCircle,
+  Ban,
   AlertCircle,
   RefreshCw,
   Database,
@@ -19,7 +19,6 @@ import {
   GraduationCap,
   Users,
   LogOut,
-  X,
   FileSpreadsheet,
   Check,
   BookOpen,
@@ -254,7 +253,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       case 'rejected':
         return (
           <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-300">
-            <XCircle className="w-3.5 h-3.5 text-rose-600" />
+            <Ban className="w-3.5 h-3.5 text-rose-600" />
             <span>غير مطابق للشروط</span>
           </span>
         );
@@ -389,7 +388,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               className="p-2 text-slate-300 hover:text-white rounded-xl transition"
               title="إغلاق"
             >
-              <X className="w-6 h-6" />
+              <span className="text-xs font-bold">إغلاق</span>
             </button>
           )}
         </div>
@@ -707,7 +706,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   onClick={() => setEditingRegistration(null)}
                   className="text-slate-400 hover:text-slate-700"
                 >
-                  <X className="w-5 h-5" />
+                  <span className="text-xs font-bold">إغلاق</span>
                 </button>
               </div>
 

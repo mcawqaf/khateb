@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Calendar, MapPin, Search, ShieldCheck, UserCheck, Menu, X } from 'lucide-react';
+import { BookOpen, Calendar, MapPin, Search, ShieldCheck, UserCheck, Menu } from 'lucide-react';
 
 interface HeaderProps {
   onOpenLookup: () => void;
@@ -26,10 +26,10 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-4 text-slate-300">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-[#DFB76C]" />
-              <span>فترة القبول: 5 يوليو - 12 يوليو 2026م (1448هـ)</span>
+              <span>فترة القبول: قريباً بإذن الله</span>
             </span>
             <span className="hidden sm:flex items-center gap-1.5 text-sky-300 font-mono">
-              <span>الدفعة الثالثة (3)</span>
+              <span>الدورة الخامسة (5)</span>
             </span>
           </div>
         </div>
@@ -58,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({
                 <span>لتأهيل الخطباء</span>
               </div>
               <div className="text-xs text-slate-300 font-semibold tracking-wide flex items-center gap-2 mt-0.5 font-tajawal">
-                <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs">الدفعة 3</span>
+                <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs">الدورة 5</span>
                 <span className="text-[#DFB76C] font-bold">1448هـ / 2026م</span>
               </div>
             </div>

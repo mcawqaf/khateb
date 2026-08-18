@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, X, User, Phone, IdCard, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
+import { Search, User, Phone, IdCard, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
 import { Registration } from '../types.js';
 import { lookupRegistrations } from '../lib/clientData.js';
 
@@ -77,7 +77,7 @@ export const LookupModal: React.FC<LookupModalProps> = ({
             onClick={onClose}
             className="p-1.5 text-slate-300 hover:text-white rounded-lg transition"
           >
-            <X className="w-5 h-5" />
+            <span className="text-xs font-bold">إغلاق</span>
           </button>
         </div>
 

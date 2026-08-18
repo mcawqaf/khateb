@@ -46,7 +46,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   برنامج <span className="text-[#38BDF8] drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">(إعداد)</span> لتأهيل الخطباء
                 </h1>
                 <div className="text-xs sm:text-sm text-[#DFB76C] font-semibold mt-1 font-tajawal flex items-center gap-2">
-                  <span className="bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15">الدفعة الثالثة (3)</span>
+                  <span className="bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15">الدورة الخامسة (5)</span>
                   <span>•</span>
                   <span className="font-mono">1448هـ / 2026م</span>
                 </div>
@@ -59,7 +59,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-4 py-1.5 rounded-full text-xs font-black shadow-md">
-                الدفعة الثالثة (3) - للعام 1448هـ / 2026م
+                الدورة الخامسة (5) - للعام 1448هـ / 2026م
               </span>
               <span className="text-[#DFB76C] font-amiri font-bold text-base bg-white/10 px-4 py-1 rounded-full border border-[#C89B48]/40">
                 ﴿ ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ ﴾
@@ -118,7 +118,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-xs text-slate-300">
             <span className="flex items-center gap-1.5">
               <Award className="w-4 h-4 text-[#DFB76C]" />
-              <span>الدفعة الثالثة (3)</span>
+              <span>الدورة الخامسة (5)</span>
             </span>
             <span className="bg-white/10 text-sky-300 px-2.5 py-0.5 rounded-full font-bold text-[11px]">
               1448هـ / 2026م
@@ -135,25 +135,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <span>مواعيد وفترة القبول</span>
               </h3>
               <span className="text-[11px] bg-[#C89B48]/20 text-[#DFB76C] border border-[#C89B48]/30 px-2.5 py-0.5 rounded-full font-bold">
-                محددة رسمياً
+                يُعلن قريباً
               </span>
             </div>
 
             <div className="space-y-3">
-              <div className="bg-gradient-to-r from-emerald-950/60 to-emerald-900/30 p-3.5 rounded-2xl border border-emerald-500/30">
-                <p className="text-xs text-emerald-300 font-semibold mb-0.5">بداية القبول والتسجيل:</p>
-                <p className="text-lg font-bold text-white">السبت 5 يوليو 2026 م</p>
-              </div>
-
-              <div className="bg-gradient-to-r from-rose-950/60 to-rose-900/30 p-3.5 rounded-2xl border border-rose-500/30">
-                <p className="text-xs text-rose-300 font-semibold mb-0.5">نهاية القبول والتسجيل:</p>
-                <p className="text-lg font-bold text-white">السبت 12 يوليو 2026 م</p>
+              <div className="bg-gradient-to-r from-[#C89B48]/20 to-[#DFB76C]/10 p-5 rounded-2xl border border-[#C89B48]/40 text-center">
+                <p className="text-xs text-[#DFB76C] font-semibold mb-1">بداية ونهاية القبول والتسجيل:</p>
+                <p className="text-3xl font-amiri font-bold text-white">قريباً</p>
+                <p className="text-[11px] text-slate-300 mt-1">بإذن الله تعالى</p>
               </div>
             </div>
           </div>
 
           <p className="text-xs text-slate-300 leading-relaxed font-tajawal mt-3">
-            يرجى تعبئة استمارة التسجيل الإلكترونية قبل انتهاء الموعد المحدد.
+            سيتم الإعلان عن موعد فتح التسجيل عبر هذه الصفحة والقنوات الرسمية للهيئة.
           </p>
         </div>
 

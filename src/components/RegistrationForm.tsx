@@ -157,7 +157,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
             <div className="space-y-1.5">
               <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/10 text-[#38BDF8] text-xs font-bold border border-white/20">
                 <UserCheck className="w-4 h-4 text-[#DFB76C]" />
-                <span>استمارة التسجيل الرسمية - الدفعة الثالثة (3)</span>
+                <span>استمارة التسجيل الرسمية - الدورة الخامسة (5)</span>
               </div>
               <h3 className="font-amiri text-2xl sm:text-3xl font-bold text-white">
                 طلب الالتحاق ببرنامج (إعداد) لتأهيل الخطباء
@@ -169,7 +169,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
 
             <div className="bg-white/10 border border-[#C89B48]/40 p-3.5 rounded-2xl text-center shrink-0 backdrop-blur-xs">
               <div className="text-[11px] text-[#DFB76C] font-semibold">فترة القبول المعتمدة</div>
-              <div className="text-base font-bold text-white font-mono">5 - 12 يوليو 2026م</div>
+              <div className="text-base font-bold text-white">قريباً بإذن الله</div>
               <div className="text-[11px] text-sky-300 font-mono">1448هـ</div>
             </div>
           </div>

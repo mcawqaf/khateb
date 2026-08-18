@@ -1,5 +1,5 @@
 import React from 'react';
-import { Printer, Copy, Check, X, ShieldCheck, Calendar, MapPin, Sparkles, BookOpen, AlertCircle, Phone, IdCard, User, QrCode } from 'lucide-react';
+import { Printer, Copy, Check, ShieldCheck, Calendar, MapPin, Sparkles, BookOpen, AlertCircle, Phone, IdCard, User, QrCode } from 'lucide-react';
 import { Registration } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
 
@@ -58,7 +58,7 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
               onClick={onClose}
               className="p-1.5 text-slate-300 hover:text-white rounded-lg transition"
             >
-              <X className="w-5 h-5" />
+              <span className="text-xs font-bold">إغلاق</span>
             </button>
           </div>
         </div>
@@ -72,7 +72,7 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
               <div className="text-right text-xs font-bold text-slate-700 font-tajawal">
                 <div>الهيئة العامة للأوقاف والشؤون الإسلامية</div>
                 <div>إدارة الشؤون الثقافية والدعوية</div>
-                <div className="text-[#0284C7] font-mono font-bold">الدفعة الثالثة (3) - 1448هـ</div>
+                <div className="text-[#0284C7] font-mono font-bold">الدورة الخامسة (5) - 1448هـ</div>
               </div>
 
               <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full overflow-hidden flex items-center justify-center shadow-lg border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/20 shrink-0">
@@ -188,7 +188,7 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
             </div>
             <ul className="list-disc list-inside space-y-1 text-slate-700 text-xs sm:text-sm leading-relaxed pr-2">
               <li>يرجى <strong>حفظ أو طباعة هذه الاستمارة</strong> وإبرازها عند المراجعة.</li>
-              <li><strong>فترة القبول الرسمية:</strong> من السبت 5 يوليو إلى السبت 12 يوليو 2026م (1448هـ).</li>
+              <li><strong>فترة القبول الرسمية:</strong> يُعلن عنها قريباً بإذن الله (1448هـ).</li>
               <li><strong>الجهة المشرفة:</strong> الهيئة العامة للأوقاف والشؤون الإسلامية - إدارة الشؤون الثقافية والدعوية.</li>
               <li>سيخضع المتقدم لمقابلة التحقق من سلامة النطق ومطابقة الضوابط الشرعية المعتمدة.</li>
             </ul>

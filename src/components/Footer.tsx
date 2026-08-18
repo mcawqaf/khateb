@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
               <div>
                 <div className="font-amiri text-lg font-bold text-white">برنامج (إعداد) لتأهيل الخطباء</div>
-                <div className="text-xs text-[#DFB76C] font-semibold">الدفعة الثالثة (3) - 1448هـ / 2026م</div>
+                <div className="text-xs text-[#DFB76C] font-semibold">الدورة الخامسة (5) - 1448هـ / 2026م</div>
               </div>
             </div>
 
@@ -54,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <Calendar className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white">فترة القبول:</strong>
-                  <div>السبت 5 يوليو - السبت 12 يوليو 2026م</div>
+                  <div>يُعلن عنها قريباً بإذن الله</div>
                 </div>
               </li>
 
@@ -142,7 +142,7 @@ export const Footer: React.FC<FooterProps> = ({
                 يُشترط عند المقابلة إبراز بطاقة المراجعة الإلكترونية المحتوية على الرقم المتسلسل والباركود.
               </p>
               <p className="text-[#DFB76C] font-semibold">
-                فترة التسجيل محددة من 5 إلى 12 يوليو 2026م (1448هـ).
+                فترة التسجيل يُعلن عنها قريباً بإذن الله (1448هـ).
               </p>
             </div>
           </div>
