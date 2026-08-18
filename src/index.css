@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #f4f1ea;
+    color: #2d3436;
+  }
+  body {
+    background-color: #f4f1ea;
+    color: #2d3436;
+    font-family: 'Tajawal', sans-serif;
+  }
+  button, [role="button"], input[type="submit"], input[type="button"], input[type="checkbox"], input[type="radio"], select {
+    cursor: pointer;
+  }
+}
+
+.font-amiri {
+  font-family: 'Amiri', serif;
+}
+
+.font-cairo {
+  font-family: 'Cairo', sans-serif;
+}
+
+.font-tajawal {
+  font-family: 'Tajawal', sans-serif;
+}
+
+/* Bento Grid Theme Helpers */
+.bg-bento-base {
+  background-color: #f4f1ea;
+}
+
+.bg-bento-subtle {
+  background-color: #e8e4d9;
+}
+
+.bg-bento-green {
+  background-color: #1a4d2e;
+}
+
+.text-bento-green {
+  color: #1a4d2e;
+}
+
+.border-bento-gold {
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.bg-bento-gold {
+  background-color: #d4af37;
+}
+
+.text-bento-gold {
+  color: #d4af37;
+}
+
+/* Islamic Geometric Subtle Background Pattern with Bento Palette */
+.bg-islamic-pattern {
+  background-color: #1a4d2e;
+  background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#153e25 0.75px, #1a4d2e 0.75px);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+.bg-bento-dots {
+  background-image: radial-gradient(rgba(26, 77, 46, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Print Optimization */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
+
