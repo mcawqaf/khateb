@@ -1,5 +1,5 @@
 -- ============================================================================
--- 0002_revoke_public_access.sql        STEP 2 of 2 — THE LOCKDOWN
+-- 0003_revoke_public_access.sql        THE LOCKDOWN — RUN LAST
 --
 -- ⚠ RUN THIS ONLY AFTER THE NEW FRONTEND IS DEPLOYED AND VERIFIED.
 --
