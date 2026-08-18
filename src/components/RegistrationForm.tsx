@@ -1,6 +1,6 @@
 import React from 'react';
 import confetti from 'canvas-confetti';
-import { UserCheck, AlertCircle, CheckCircle2, Calendar, Phone, IdCard, MapPin, GraduationCap, BookOpen, BedDouble, FileText, Send, Sparkles } from 'lucide-react';
+import { UserCheck, AlertCircle, CheckCircle2, Calendar, Phone, IdCard, MapPin, GraduationCap, BookOpen, BedDouble, FileText, Send } from 'lucide-react';
 import { Registration } from '../types.js';
 import { submitRegistration } from '../lib/clientData.js';
 

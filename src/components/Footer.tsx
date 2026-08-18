@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, MapPin, Calendar, ShieldCheck, Search, Award, Lock, Sparkles } from 'lucide-react';
+import { BookOpen, MapPin, Calendar, ShieldCheck, Search, Award, Lock, Bell } from 'lucide-react';
 
 interface FooterProps {
   onOpenLookup: () => void;
@@ -133,7 +133,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 4: Important Notice */}
           <div className="space-y-3">
             <h4 className="font-cairo text-sm font-bold text-[#DFB76C] pb-1 border-b border-white/15 flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-[#38BDF8]" />
+              <Bell className="w-4 h-4 text-[#38BDF8]" />
               <span>تنبيهات للمتقدمين</span>
             </h4>
 

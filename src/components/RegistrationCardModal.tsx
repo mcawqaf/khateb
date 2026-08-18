@@ -1,5 +1,5 @@
 import React from 'react';
-import { Printer, Copy, Check, ShieldCheck, Calendar, MapPin, Sparkles, BookOpen, AlertCircle, Phone, IdCard, User, QrCode } from 'lucide-react';
+import { Printer, Copy, Check, ShieldCheck, Calendar, MapPin, BookOpen, AlertCircle, Phone, IdCard, User, QrCode } from 'lucide-react';
 import { Registration } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, CheckCircle2, BookMarked, Sparkles, MapPin, Calendar, Building, GraduationCap, Mic, HeartHandshake } from 'lucide-react';
+import { BookOpen, Target, CheckCircle2, BookMarked, MapPin, Calendar, Building, GraduationCap, Mic, HeartHandshake } from 'lucide-react';
 
 export const AboutAndGoals: React.FC = () => {
   const goals = [
@@ -77,7 +77,7 @@ export const AboutAndGoals: React.FC = () => {
 
           <div className="relative z-10">
             <div className="w-11 h-11 rounded-2xl bg-white/10 text-[#DFB76C] flex items-center justify-center mb-4 border border-[#C89B48]/30 shadow-inner">
-              <Sparkles className="w-6 h-6 text-[#DFB76C]" />
+              <BookOpen className="w-6 h-6 text-[#DFB76C]" />
             </div>
 
             <div className="font-amiri text-2xl font-bold text-[#DFB76C] mb-2 leading-relaxed">

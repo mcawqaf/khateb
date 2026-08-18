@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, Sparkles, UserCheck, Search, ShieldAlert, Award, Compass, Home, Clock, CheckCircle2, BookOpen } from 'lucide-react';
+import { Calendar, MapPin, UserCheck, Search, ShieldAlert, Award, Compass, Home, Clock, CheckCircle2, BookOpen } from 'lucide-react';
 
 interface HeroSectionProps {
   onRegisterClick: () => void;
@@ -158,7 +158,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div>
             <h3 className="font-cairo text-base font-bold text-[#08192E] mb-3 border-r-4 border-[#C89B48] pr-3 flex items-center justify-between">
               <span>مميزات البرنامج العلمي</span>
-              <Sparkles className="w-4 h-4 text-[#C89B48]" />
+              <Award className="w-4 h-4 text-[#C89B48]" />
             </h3>
             
             <ul className="space-y-2.5 text-xs text-slate-700 font-tajawal">
