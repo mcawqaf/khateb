@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onScrollToSection('hero-section')}
             className="flex items-center gap-3.5 cursor-pointer group py-1"
           >
-            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full overflow-hidden shadow-xl border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/30 group-hover:scale-105 group-hover:border-[#F7E7CE] transition-all flex items-center justify-center shrink-0">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-2xl border-2 sm:border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 group-hover:scale-105 group-hover:border-[#F7E7CE] transition-all flex items-center justify-center shrink-0 bg-[#08192E]">
               <img 
                 src="./assets/program-logo.jpg" 
                 alt="شعار برنامج إعداد لتأهيل الخطباء" 
@@ -52,14 +52,14 @@ export const Header: React.FC<HeaderProps> = ({
               />
             </div>
             <div>
-              <div className="font-amiri text-2xl font-bold text-white leading-tight flex items-center gap-2">
+              <div className="font-amiri text-2xl sm:text-3xl font-bold text-white leading-tight flex items-center gap-2">
                 <span>برنامج</span>
                 <span className="text-[#38BDF8] drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">(إعداد)</span>
                 <span>لتأهيل الخطباء</span>
               </div>
-              <div className="text-xs text-slate-300 font-semibold tracking-wide flex items-center gap-2 mt-0.5">
-                <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2 py-0.5 rounded-full text-[10px] font-black">الدفعة 3</span>
-                <span className="text-[#DFB76C]">1448هـ / 2026م</span>
+              <div className="text-xs text-slate-300 font-semibold tracking-wide flex items-center gap-2 mt-0.5 font-tajawal">
+                <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs">الدفعة 3</span>
+                <span className="text-[#DFB76C] font-bold">1448هـ / 2026م</span>
               </div>
             </div>
           </div>
@@ -123,10 +123,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-200 hover:text-white hover:bg-white/10 rounded-xl"
+              className="px-3 py-2 text-slate-200 hover:text-white bg-white/10 hover:bg-white/20 rounded-xl text-xs font-bold flex items-center gap-1"
               aria-label="القائمة"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <span>إغلاق</span> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>

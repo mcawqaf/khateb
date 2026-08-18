@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar, MapPin, Sparkles, UserPlus, Search, ShieldAlert, Award, Compass, Home, Clock, CheckCircle2, BookOpen } from 'lucide-react';
+import { Calendar, MapPin, Sparkles, UserCheck, Search, ShieldAlert, Award, Compass, Home, Clock, CheckCircle2, BookOpen } from 'lucide-react';
 
 interface HeroSectionProps {
   onRegisterClick: () => void;
@@ -12,26 +12,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onTermsClick,
   onLookupClick
 }) => {
-  // Course Date: 2026-08-24
-  const [timeLeft, setTimeLeft] = React.useState({ days: 0, hours: 0, minutes: 0 });
-
-  React.useEffect(() => {
-    const target = new Date('2026-08-24T08:00:00');
-    const updateCountdown = () => {
-      const now = new Date();
-      const diff = target.getTime() - now.getTime();
-      if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((diff / (1000 * 60)) % 60);
-        setTimeLeft({ days, hours, minutes });
-      }
-    };
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 60000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section id="hero-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
       {/* Bento Grid Master Container */}
@@ -44,16 +24,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#C89B48]/10 rounded-full blur-3xl pointer-events-none -ml-20 -mb-20"></div>
           
           <div className="relative z-10">
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2 mb-4">
               <span className="w-2.5 h-2.5 rounded-full bg-[#38BDF8] animate-ping"></span>
               <p className="text-[#DFB76C] font-bold text-xs sm:text-sm tracking-wider uppercase">
                 الهيئة العامة للأوقاف والشؤون الإسلامية | إدارة الشؤون الثقافية والدعوية
               </p>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-5xl font-amiri font-bold text-white leading-tight mb-4">
-              برنامج <span className="text-[#38BDF8] drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">(إعداد)</span> لتأهيل الخطباء
-            </h1>
+            {/* Prominent Circular Logo and Main Heading */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-5">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shadow-2xl border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 bg-[#08192E] flex items-center justify-center shrink-0">
+                <img 
+                  src="./assets/program-logo.jpg" 
+                  alt="شعار برنامج إعداد لتأهيل الخطباء" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div>
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-amiri font-bold text-white leading-tight">
+                  برنامج <span className="text-[#38BDF8] drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">(إعداد)</span> لتأهيل الخطباء
+                </h1>
+                <div className="text-xs sm:text-sm text-[#DFB76C] font-semibold mt-1 font-tajawal flex items-center gap-2">
+                  <span className="bg-white/10 px-2.5 py-0.5 rounded-full border border-white/15">الدفعة الثالثة (3)</span>
+                  <span>•</span>
+                  <span className="font-mono">1448هـ / 2026م</span>
+                </div>
+              </div>
+            </div>
 
             <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-tajawal mb-6 max-w-2xl">
               برنامج نوعي مكثف لتأهيل فرسان المنابر وحفظة كتاب الله وطلبة العلم وفق المنهج الشرعي الوسطي الأصيل، لإعداد خطباء متمكنين في حسن البيان ومعالجة قضايا المجتمع بالحكمة والموعظة الحسنة.
@@ -76,7 +74,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               onClick={onRegisterClick}
               className="px-6 py-3.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] hover:brightness-110 text-[#08192E] font-black text-sm sm:text-base rounded-2xl shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 border border-amber-300 ring-4 ring-amber-400/20"
             >
-              <UserPlus className="w-5 h-5 text-[#08192E]" />
+              <UserCheck className="w-5 h-5 text-[#08192E]" />
               <span>تعبئة استمارة التسجيل الآن</span>
             </button>
 

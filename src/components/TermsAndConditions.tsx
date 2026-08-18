@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, AlertOctagon, CheckCircle, FileText, UserX, History, Calendar, Mic, Sparkles, Shirt, BedDouble, ArrowDown } from 'lucide-react';
+import { ShieldCheck, AlertOctagon, CheckCircle, FileText, ShieldAlert, History, Calendar, Mic, Sparkles, Shirt, BedDouble, ArrowDown } from 'lucide-react';
 
 interface TermsAndConditionsProps {
   onProceedToRegister: () => void;
@@ -13,7 +13,7 @@ export const TermsAndConditions: React.FC<TermsAndConditionsProps> = ({ onProcee
       id: 1,
       title: 'ألا يكون المتقدم خطيباً حالياً',
       explanation: 'الدورة مخصصة لتأهيل وإعداد الكوادر الجديدة التي لم تمارس الخطابة المنبرية الرسمية بعد.',
-      icon: UserX,
+      icon: ShieldAlert,
       badge: 'شرط أساسي',
       highlight: true
     },
