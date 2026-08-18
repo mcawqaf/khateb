@@ -1,4 +1,5 @@
 import React from 'react';
+import { PROGRAM } from '../lib/programInfo.js';
 import { BookOpen, MapPin, Calendar, ShieldCheck, Search, Award, Bell } from 'lucide-react';
 
 interface FooterProps {
@@ -53,7 +54,8 @@ export const Footer: React.FC<FooterProps> = ({
                 <Calendar className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white">فترة القبول:</strong>
-                  <div>يُعلن عنها قريباً بإذن الله</div>
+                  <div>{PROGRAM.registration.from}</div>
+                  <div>إلى {PROGRAM.registration.to}</div>
                 </div>
               </li>
 
@@ -133,7 +135,7 @@ export const Footer: React.FC<FooterProps> = ({
                 يُشترط عند المقابلة إبراز بطاقة المراجعة الإلكترونية المحتوية على الرقم المتسلسل والباركود.
               </p>
               <p className="text-[#DFB76C] font-semibold">
-                فترة التسجيل يُعلن عنها قريباً بإذن الله (1448هـ).
+                {PROGRAM.notice}
               </p>
             </div>
           </div>

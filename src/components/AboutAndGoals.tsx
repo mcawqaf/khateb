@@ -1,4 +1,5 @@
 import React from 'react';
+import { PROGRAM } from '../lib/programInfo.js';
 import { BookOpen, Target, CheckCircle2, BookMarked, MapPin, Calendar, Building, GraduationCap, Mic, HeartHandshake } from 'lucide-react';
 
 export const AboutAndGoals: React.FC = () => {
@@ -141,14 +142,14 @@ export const AboutAndGoals: React.FC = () => {
             </div>
 
             <h3 className="font-cairo text-base font-bold text-white mb-3">
-              فترة التسجيل: قريباً بإذن الله
+              فترة التسجيل: {PROGRAM.registration.short}
             </h3>
 
             <div className="space-y-2.5 text-xs text-slate-200">
               <div className="flex items-center gap-2 bg-white/10 p-2.5 rounded-xl border border-white/15">
                 <Calendar className="w-4 h-4 text-[#DFB76C] shrink-0" />
                 <div>
-                  <strong>بداية ونهاية القبول:</strong> يُعلن عنهما قريباً
+                  <strong>التسجيل:</strong> {PROGRAM.registration.from} إلى {PROGRAM.registration.to}
                 </div>
               </div>
             </div>

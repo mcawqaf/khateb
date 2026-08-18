@@ -1,4 +1,5 @@
 import React from 'react';
+import { PROGRAM } from '../lib/programInfo.js';
 import confetti from 'canvas-confetti';
 import { UserCheck, AlertCircle, CheckCircle2, Calendar, Phone, IdCard, MapPin, GraduationCap, BookOpen, BedDouble, FileText, Send } from 'lucide-react';
 import { Registration } from '../types.js';
@@ -15,7 +16,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
     phone: '',
     email: '',
     birthDate: '',
-    city: 'حي دمشق',
+    city: '',
     address: '',
     educationalLevel: 'بكالوريوس دراسات إسلامية / شريعة',
     quranMemorization: 'حافظ للقرآن الكريم كاملاً',
@@ -198,7 +199,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
 
             <div className="bg-white/10 border border-[#C89B48]/40 p-3.5 rounded-2xl text-center shrink-0 backdrop-blur-xs">
               <div className="text-[11px] text-[#DFB76C] font-semibold">فترة القبول المعتمدة</div>
-              <div className="text-base font-bold text-white">قريباً بإذن الله</div>
+              <div className="text-base font-bold text-white">{PROGRAM.registration.short}</div>
               <div className="text-[11px] text-sky-300 font-mono">1448هـ</div>
             </div>
           </div>

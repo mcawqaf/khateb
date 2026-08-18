@@ -1,4 +1,5 @@
 import React from 'react';
+import { PROGRAM } from '../lib/programInfo.js';
 import { Calendar, MapPin, UserCheck, Search, ShieldAlert, Award, Compass, Home, Clock, CheckCircle2, BookOpen } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -107,21 +108,43 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <span>مواعيد وفترة القبول</span>
               </h3>
               <span className="text-[11px] bg-[#C89B48]/20 text-[#DFB76C] border border-[#C89B48]/30 px-2.5 py-0.5 rounded-full font-bold">
-                يُعلن قريباً
+                معتمدة رسمياً
               </span>
             </div>
 
-            <div className="space-y-3">
-              <div className="bg-gradient-to-r from-[#C89B48]/20 to-[#DFB76C]/10 p-5 rounded-2xl border border-[#C89B48]/40 text-center">
-                <p className="text-xs text-[#DFB76C] font-semibold mb-1">بداية ونهاية القبول والتسجيل:</p>
-                <p className="text-3xl font-amiri font-bold text-white">قريباً</p>
-                <p className="text-[11px] text-slate-300 mt-1">بإذن الله تعالى</p>
+            <div className="space-y-2.5">
+              <div className="bg-gradient-to-r from-[#C89B48]/20 to-[#DFB76C]/10 p-3.5 rounded-2xl border border-[#C89B48]/40">
+                <p className="text-[11px] text-[#DFB76C] font-bold mb-1">{PROGRAM.registration.label}</p>
+                <p className="text-sm font-bold text-white leading-relaxed">
+                  {PROGRAM.registration.from}
+                  <span className="text-slate-300 font-normal"> إلى </span>
+                  {PROGRAM.registration.to}
+                </p>
+              </div>
+
+              <div className="bg-white/5 p-3.5 rounded-2xl border border-white/15">
+                <p className="text-[11px] text-[#38BDF8] font-bold mb-1">{PROGRAM.interview.label}</p>
+                <p className="text-sm font-bold text-white">{PROGRAM.interview.date}</p>
+                <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed">{PROGRAM.interview.place}</p>
+              </div>
+
+              <div className="bg-white/5 p-3.5 rounded-2xl border border-white/15">
+                <p className="text-[11px] text-emerald-300 font-bold mb-1">{PROGRAM.course.label}</p>
+                <p className="text-sm font-bold text-white leading-relaxed">
+                  {PROGRAM.course.from}
+                  <span className="text-slate-300 font-normal"> ولمدة {PROGRAM.course.duration} إلى </span>
+                  {PROGRAM.course.to}
+                </p>
+                <p className="text-[11px] text-[#DFB76C] mt-1 flex items-center gap-1">
+                  <MapPin className="w-3 h-3 shrink-0" />
+                  <span>{PROGRAM.course.venue}</span>
+                </p>
               </div>
             </div>
           </div>
 
-          <p className="text-xs text-slate-300 leading-relaxed font-tajawal mt-3">
-            سيتم الإعلان عن موعد فتح التسجيل عبر هذه الصفحة والقنوات الرسمية للهيئة.
+          <p className="text-[11px] text-slate-300 leading-relaxed font-tajawal mt-3 pt-3 border-t border-white/10">
+            {PROGRAM.notice}
           </p>
         </div>
 

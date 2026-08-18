@@ -1,4 +1,5 @@
 import React from 'react';
+import { PROGRAM } from '../lib/programInfo.js';
 import { BookOpen, Calendar, MapPin, Search, ShieldCheck, UserCheck, Menu } from 'lucide-react';
 
 interface HeaderProps {
@@ -26,7 +27,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-4 text-slate-300">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-[#DFB76C]" />
-              <span>فترة القبول: قريباً بإذن الله</span>
+              <span>فترة التسجيل: {PROGRAM.registration.short}</span>
             </span>
             <span className="hidden sm:flex items-center gap-1.5 text-sky-300 font-mono">
               <span>الدورة الخامسة (5)</span>

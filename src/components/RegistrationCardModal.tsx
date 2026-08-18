@@ -1,4 +1,5 @@
 import React from 'react';
+import { PROGRAM } from '../lib/programInfo.js';
 import { Printer, Copy, Check, ShieldCheck, Calendar, MapPin, BookOpen, AlertCircle, Phone, IdCard, User, QrCode } from 'lucide-react';
 import { Registration } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
@@ -180,6 +181,16 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
             </div>
           </div>
 
+          {/* The card is proof of registration, not of acceptance — say so before
+              the applicant reads anything else on it. */}
+          <div className="bg-amber-50 border-2 border-amber-400 rounded-2xl p-4 mb-4 text-amber-950 text-xs sm:text-sm font-tajawal flex items-start gap-2.5 print-break-inside-avoid">
+            <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+            <div>
+              <div className="font-bold mb-0.5">تنبيه:</div>
+              <p className="leading-relaxed">{PROGRAM.notice}</p>
+            </div>
+          </div>
+
           {/* Verification & Reception Instructions */}
           <div className="bg-slate-100 border border-slate-300 rounded-2xl p-4 mb-6 text-slate-800 text-xs sm:text-sm font-tajawal space-y-2">
             <div className="flex items-center gap-2 font-bold text-[#08192E] text-sm">
@@ -188,7 +199,10 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
             </div>
             <ul className="list-disc list-inside space-y-1 text-slate-700 text-xs sm:text-sm leading-relaxed pr-2">
               <li>يرجى <strong>حفظ أو طباعة هذه الاستمارة</strong> وإبرازها عند المراجعة.</li>
-              <li><strong>فترة القبول الرسمية:</strong> يُعلن عنها قريباً بإذن الله (1448هـ).</li>
+              <li><strong>فترة التسجيل:</strong> من {PROGRAM.registration.from} إلى {PROGRAM.registration.to}.</li>
+              <li><strong>المقابلة الشخصية:</strong> {PROGRAM.interview.date} — {PROGRAM.interview.place}.</li>
+              <li><strong>انطلاق البرنامج:</strong> {PROGRAM.course.from} ولمدة {PROGRAM.course.duration} إلى {PROGRAM.course.to}.</li>
+              <li><strong>مكان إقامة البرنامج:</strong> {PROGRAM.course.venue}.</li>
               <li><strong>الجهة المشرفة:</strong> الهيئة العامة للأوقاف والشؤون الإسلامية - إدارة الشؤون الثقافية والدعوية.</li>
               <li>سيخضع المتقدم لمقابلة التحقق من سلامة النطق ومطابقة الضوابط الشرعية المعتمدة.</li>
             </ul>
