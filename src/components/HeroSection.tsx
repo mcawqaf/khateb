@@ -104,7 +104,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <div className="col-span-12 lg:col-span-4 bg-[#08192E] rounded-3xl p-5 text-white flex flex-col justify-between border-2 border-[#C89B48]/40 shadow-xl relative overflow-hidden group">
           <div className="relative rounded-2xl overflow-hidden border border-white/20 bg-black aspect-4/3 sm:aspect-square flex items-center justify-center">
             <img 
-              src="/assets/official-poster.jpg" 
+              src="./assets/official-poster.jpg" 
               alt="الملصق الرسمي لبرنامج إعداد لتأهيل الخطباء"
               className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />

@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-black overflow-hidden flex items-center justify-center border border-[#C89B48]/60 shadow-md">
                 <img 
-                  src="/assets/program-logo.jpg" 
+                  src="./assets/program-logo.jpg" 
                   alt="شعار برنامج إعداد" 
                   className="w-full h-full object-cover"
                 />

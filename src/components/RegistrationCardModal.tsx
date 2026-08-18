@@ -77,7 +77,7 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
 
               <div className="w-16 h-16 rounded-2xl bg-black overflow-hidden flex items-center justify-center shadow-md border-2 border-[#C89B48]">
                 <img 
-                  src="/assets/program-logo.jpg" 
+                  src="./assets/program-logo.jpg" 
                   alt="شعار برنامج إعداد" 
                   className="w-full h-full object-cover"
                 />

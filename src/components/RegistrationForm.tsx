@@ -2,6 +2,7 @@ import React from 'react';
 import confetti from 'canvas-confetti';
 import { UserCheck, AlertCircle, CheckCircle2, Calendar, Phone, IdCard, MapPin, GraduationCap, BookOpen, BedDouble, FileText, Send, Sparkles } from 'lucide-react';
 import { Registration } from '../types.js';
+import { submitRegistration } from '../lib/clientData.js';
 
 interface RegistrationFormProps {
   onSuccess: (registration: Registration) => void;
@@ -123,17 +124,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
         notes: formData.notes
       };
 
-      const res = await fetch('/api/registrations', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || 'حدث خطأ أثناء التسجيل');
-      }
+      const savedRegistration = await submitRegistration(payload);
 
       // Fire confetti effect
       confetti({
@@ -142,7 +133,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
         origin: { y: 0.6 }
       });
 
-      onSuccess(data.data);
+      onSuccess(savedRegistration);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'تعذر إرسال طلب التسجيل';
       setErrorMsg(message);

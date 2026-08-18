@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
           >
             <div className="w-13 h-13 rounded-2xl overflow-hidden shadow-lg border-2 border-[#C89B48]/60 group-hover:scale-105 transition-transform bg-black flex items-center justify-center p-0.5">
               <img 
-                src="/assets/program-logo.jpg" 
+                src="./assets/program-logo.jpg" 
                 alt="شعار برنامج إعداد لتأهيل الخطباء" 
                 className="w-full h-full object-cover rounded-xl"
               />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Search, X, User, Phone, IdCard, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
 import { Registration } from '../types.js';
+import { lookupRegistrations } from '../lib/clientData.js';
 
 interface LookupModalProps {
   isOpen: boolean;
@@ -30,14 +31,11 @@ export const LookupModal: React.FC<LookupModalProps> = ({
     setHasSearched(true);
 
     try {
-      const res = await fetch(`/api/registrations/lookup?q=${encodeURIComponent(query.trim())}`);
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || 'لم يتم العثور على أي استمارة مطابقة للبيانات المدخلة');
+      const data = await lookupRegistrations(query.trim());
+      if (data.length === 0) {
+        setErrorMsg('لم يتم العثور على أي استمارة مطابقة للبيانات المدخلة');
       }
-
-      setResults(data.data || []);
+      setResults(data);
     } catch (err: unknown) {
       setResults([]);
       const message = err instanceof Error ? err.message : 'تعذر البحث';
