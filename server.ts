@@ -236,7 +236,10 @@ app.get('/api/health', (req, res) => {
 // Admin login
 app.post('/api/admin/login', (req, res) => {
   const { password } = req.body;
-  const adminSecret = process.env.ADMIN_PASSWORD || '123456';
+  const adminSecret = process.env.ADMIN_PASSWORD;
+  if (!adminSecret) {
+    return res.status(503).json({ success: false, error: 'لم يتم ضبط ADMIN_PASSWORD على الخادم' });
+  }
   if (password && password.trim() === adminSecret) {
     res.json({ success: true, token: 'admin_authenticated_' + Date.now() });
   } else {

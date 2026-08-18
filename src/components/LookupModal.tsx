@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search, User, Phone, IdCard, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
 import { Registration } from '../types.js';
-import { lookupRegistrations } from '../lib/clientData.js';
+import { lookupRegistration } from '../lib/clientData.js';
 
 interface LookupModalProps {
   isOpen: boolean;
@@ -14,7 +14,8 @@ export const LookupModal: React.FC<LookupModalProps> = ({
   onClose,
   onSelectRegistration
 }) => {
-  const [query, setQuery] = React.useState('');
+  const [nationalId, setNationalId] = React.useState('');
+  const [phone, setPhone] = React.useState('');
   const [results, setResults] = React.useState<Registration[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
@@ -24,18 +25,20 @@ export const LookupModal: React.FC<LookupModalProps> = ({
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim()) return;
+    if (!nationalId.trim() || !phone.trim()) return;
 
     setLoading(true);
     setErrorMsg(null);
     setHasSearched(true);
 
     try {
-      const data = await lookupRegistrations(query.trim());
-      if (data.length === 0) {
-        setErrorMsg('لم يتم العثور على أي استمارة مطابقة للبيانات المدخلة');
+      const found = await lookupRegistration(nationalId, phone);
+      if (!found) {
+        setResults([]);
+        setErrorMsg('لم يتم العثور على استمارة مطابقة. تأكد من الرقم الوطني ورقم الهاتف كما أُدخلا عند التسجيل.');
+      } else {
+        setResults([found]);
       }
-      setResults(data);
     } catch (err: unknown) {
       setResults([]);
       const message = err instanceof Error ? err.message : 'تعذر البحث';
@@ -68,7 +71,7 @@ export const LookupModal: React.FC<LookupModalProps> = ({
                 استعلام وطباعة استمارة برنامج (إعداد)
               </h3>
               <p className="text-xs text-slate-300 font-tajawal">
-                ابحث برقم المراجعة (KHT-1448-XXX) أو الرقم الوطني أو رقم الهاتف
+                للاستعلام أدخل الرقم الوطني ورقم الهاتف المسجلَين بالاستمارة
               </p>
             </div>
           </div>
@@ -83,25 +86,53 @@ export const LookupModal: React.FC<LookupModalProps> = ({
 
         {/* Content */}
         <div className="p-6 space-y-6 bg-slate-50/50">
-          {/* Search Form */}
+          {/* Search Form — both values are required together, so that knowing
+              a sequential serial number alone never reveals anyone's data. */}
           <form onSubmit={handleSearch} className="space-y-3">
-            <div className="relative">
-              <input
-                type="text"
-                id="lookup-input"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="أدخل الرقم المتسلسل، أو الرقم الوطني، أو الهاتف..."
-                required
-                className="w-full pl-4 pr-11 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm font-medium bg-white"
-              />
-              <Search className="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <div>
+              <label htmlFor="lookup-national-id" className="block text-xs font-bold text-slate-700 mb-1">
+                الرقم الوطني <span className="text-rose-600">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  id="lookup-national-id"
+                  value={nationalId}
+                  onChange={(e) => setNationalId(e.target.value)}
+                  placeholder="أدخل الرقم الوطني المسجل بالاستمارة"
+                  required
+                  className="w-full pl-4 pr-11 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm font-medium bg-white"
+                />
+                <IdCard className="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
             </div>
+
+            <div>
+              <label htmlFor="lookup-phone" className="block text-xs font-bold text-slate-700 mb-1">
+                رقم الهاتف <span className="text-rose-600">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="tel"
+                  id="lookup-phone"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="نفس الرقم المدخل عند التسجيل"
+                  required
+                  className="w-full pl-4 pr-11 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm font-medium bg-white"
+                />
+                <Phone className="w-5 h-5 text-slate-400 absolute right-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
+            </div>
+
+            <p className="text-[11px] text-slate-500 font-tajawal leading-relaxed">
+              حمايةً لخصوصية المتقدمين، يلزم إدخال الرقم الوطني ورقم الهاتف معاً لاستعراض البطاقة.
+            </p>
 
             <button
               type="submit"
               id="lookup-search-submit-btn"
-              disabled={loading || !query.trim()}
+              disabled={loading || !nationalId.trim() || !phone.trim()}
               className="w-full py-3.5 bg-[#08192E] hover:bg-[#0B2545] text-white font-bold text-sm rounded-2xl transition flex items-center justify-center gap-2 border border-[#C89B48]/40 disabled:opacity-60 shadow-md"
             >
               {loading ? (
@@ -127,7 +158,7 @@ export const LookupModal: React.FC<LookupModalProps> = ({
           {results.length > 0 && (
             <div className="space-y-3">
               <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                نتائج البحث ({results.length} مسجل):
+                نتيجة الاستعلام:
               </div>
 
               {results.map((reg) => (

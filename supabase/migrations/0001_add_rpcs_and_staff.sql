@@ -1,48 +1,87 @@
 -- ============================================================================
--- 0001_lock_down_registrations.sql
+-- 0001_add_rpcs_and_staff.sql        STEP 1 of 2 — ADDITIVE, SAFE TO RUN NOW
 --
--- Fixes four issues in the current schema:
---   1. RLS "SELECT USING (true)" exposes every applicant's national ID,
---      phone, birth date and home address to anyone with the anon key.
---   2. Serial numbers are generated in the browser from COUNT(*)+1, which
---      collides after any delete and under concurrent submissions.
---   3. Eligibility rules are enforced only in React, so a direct anon-key
---      insert bypasses every course condition.
---   4. No UPDATE/DELETE policies exist, so supervisor status changes fail
---      silently (PostgREST returns no error and zero rows).
+-- This migration only ADDS things. The existing permissive policies stay in
+-- place, so the currently deployed site keeps working while you run it.
+-- Migration 0002 does the actual lockdown, and must run only AFTER the new
+-- frontend is deployed.
 --
--- After this migration the anon key can do exactly two things, both through
--- SECURITY DEFINER functions: submit one registration, and look up its own
--- record given national ID + phone together. Direct table access is staff only.
+-- What this adds:
+--   * a staff registry, so being signed in is NOT enough — a user must be
+--     explicitly listed to touch registration data
+--   * submit_registration() so applicants never need table access
+--   * lookup_registration() requiring national ID + phone together
+--   * serial numbers issued atomically from a sequence
+--   * eligibility rules enforced as CHECK constraints
 --
--- HOW TO RUN: Supabase Dashboard -> SQL Editor -> paste -> Run.
---
--- BEFORE RUNNING, verify one thing: the SQL shipped in server.ts declares
--- `id UUID PRIMARY KEY DEFAULT gen_random_uuid()`, but clientData.ts inserts
--- a string id like 'reg-1755...-x7k2p'. Those cannot both be true. Check the
--- live column type; if it is UUID, registration inserts are already failing
--- in production today.
+-- RUN IN: Supabase Dashboard -> SQL Editor.
 -- ============================================================================
 
 begin;
 
 -- ---------------------------------------------------------------------------
--- 1. Integrity + eligibility, enforced by the database
+-- 1. Staff registry
+--
+-- Policies below check membership in this table, not merely "is authenticated".
+-- That matters: if signups are ever open on the project, a self-registered
+-- account still gets nothing.
 -- ---------------------------------------------------------------------------
 
--- NOT VALID applies the rule to new rows without rejecting existing ones.
--- Once you have confirmed the current table is clean, promote it with:
---   alter table public.registrations validate constraint chk_eligibility;
+create table if not exists public.staff (
+  user_id    uuid primary key references auth.users(id) on delete cascade,
+  full_name  text,
+  created_at timestamptz not null default now()
+);
 
-alter table public.registrations
-  drop constraint if exists chk_status;
+alter table public.staff enable row level security;
+
+drop policy if exists "staff read own row" on public.staff;
+create policy "staff read own row" on public.staff
+  for select to authenticated using (user_id = auth.uid());
+
+grant select on public.staff to authenticated;
+
+-- SECURITY DEFINER so the check itself is not subject to staff-table RLS,
+-- which would otherwise recurse.
+create or replace function public.is_staff()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $fn$
+  select exists (select 1 from public.staff s where s.user_id = auth.uid());
+$fn$;
+
+grant execute on function public.is_staff() to authenticated;
+
+-- ---------------------------------------------------------------------------
+-- 2. Serial numbers from a sequence, seeded past whatever already exists
+-- ---------------------------------------------------------------------------
+
+create sequence if not exists public.registration_serial_seq;
+
+select setval(
+  'public.registration_serial_seq',
+  coalesce((select max(sequence_number) from public.registrations), 0) + 1,
+  false
+);
+
+-- ---------------------------------------------------------------------------
+-- 3. Eligibility + integrity enforced by the database
+--
+-- NOT VALID applies these to new rows without rejecting rows already stored.
+-- After confirming existing data is clean:
+--   alter table public.registrations validate constraint chk_eligibility;
+-- ---------------------------------------------------------------------------
+
+alter table public.registrations drop constraint if exists chk_status;
 alter table public.registrations
   add constraint chk_status check (
     status in ('pending','under_review','accepted_initial','accepted_final','rejected')
   ) not valid;
 
-alter table public.registrations
-  drop constraint if exists chk_eligibility;
+alter table public.registrations drop constraint if exists chk_eligibility;
 alter table public.registrations
   add constraint chk_eligibility check (
     is_currently_khateeb = false
@@ -51,7 +90,6 @@ alter table public.registrations
     and agreed_to_behavior_and_appearance
     and attendance_commitment
     and age >= 18
-    and (housing_needed = false or housing_commitment)
   ) not valid;
 
 create index if not exists idx_registrations_national_id on public.registrations (national_id);
@@ -59,7 +97,10 @@ create index if not exists idx_registrations_phone       on public.registrations
 create index if not exists idx_registrations_status      on public.registrations (status);
 
 -- ---------------------------------------------------------------------------
--- 2. Registration: one RPC, serial issued atomically from the sequence
+-- 4. Registration RPC
+--
+-- SECURITY DEFINER, so applicants need no table privileges at all. Status and
+-- supervisor notes are set here, never taken from the client.
 -- ---------------------------------------------------------------------------
 
 create or replace function public.submit_registration(payload jsonb)
@@ -83,7 +124,7 @@ begin
       using errcode = 'unique_violation';
   end if;
 
-  v_seq := nextval('public.registrations_sequence_number_seq');
+  v_seq := nextval('public.registration_serial_seq');
 
   insert into public.registrations (
     serial_number, sequence_number, full_name, national_id, phone, email,
@@ -112,7 +153,7 @@ begin
     coalesce((payload->>'housingNeeded')::boolean, false),
     coalesce((payload->>'housingCommitment')::boolean, false),
     nullif(trim(coalesce(payload->>'notes', '')), ''),
-    'pending',   -- status and supervisor_notes are never client-controlled
+    'pending',
     now(), now()
   )
   returning * into v_row;
@@ -122,17 +163,17 @@ end;
 $fn$;
 
 -- ---------------------------------------------------------------------------
--- 3. Applicant lookup: national ID AND phone together
+-- 5. Applicant lookup RPC — national ID AND phone together
 --
--- Serial numbers run KHT-1448-001..NNN, so a serial alone is trivially
--- enumerable and must never unlock a full record on its own. Requiring two
--- values the applicant knows keeps the printable card available to them
--- without opening the register to everyone.
+-- Serials run KHT-1448-001..NNN and are trivially enumerable, so a serial
+-- alone must never unlock a full record. Two values the applicant knows keeps
+-- their printable card reachable without opening the register to everyone.
 -- ---------------------------------------------------------------------------
 
 create or replace function public.lookup_registration(p_national_id text, p_phone text)
 returns public.registrations
 language sql
+stable
 security definer
 set search_path = public
 as $fn$
@@ -144,36 +185,27 @@ as $fn$
 $fn$;
 
 -- ---------------------------------------------------------------------------
--- 4. RLS: staff only on the table itself
+-- 6. Grants + staff policies
 -- ---------------------------------------------------------------------------
-
-alter table public.registrations enable row level security;
-
-drop policy if exists "Allow public insert"                    on public.registrations;
-drop policy if exists "Allow public select by serial or phone" on public.registrations;
-drop policy if exists "staff read all"                         on public.registrations;
-drop policy if exists "staff update"                           on public.registrations;
-drop policy if exists "staff delete"                           on public.registrations;
-
-create policy "staff read all" on public.registrations
-  for select to authenticated using (true);
-
-create policy "staff update" on public.registrations
-  for update to authenticated using (true) with check (true);
-
-create policy "staff delete" on public.registrations
-  for delete to authenticated using (true);
-
--- ---------------------------------------------------------------------------
--- 5. Grants
--- ---------------------------------------------------------------------------
-
-revoke all on public.registrations from anon;
-grant select, insert, update, delete on public.registrations to authenticated;
 
 revoke all on function public.submit_registration(jsonb)      from public;
 revoke all on function public.lookup_registration(text, text) from public;
 grant execute on function public.submit_registration(jsonb)      to anon, authenticated;
 grant execute on function public.lookup_registration(text, text) to anon, authenticated;
+
+alter table public.registrations enable row level security;
+grant select, insert, update, delete on public.registrations to authenticated;
+
+drop policy if exists "staff read all" on public.registrations;
+create policy "staff read all" on public.registrations
+  for select to authenticated using (public.is_staff());
+
+drop policy if exists "staff update" on public.registrations;
+create policy "staff update" on public.registrations
+  for update to authenticated using (public.is_staff()) with check (public.is_staff());
+
+drop policy if exists "staff delete" on public.registrations;
+create policy "staff delete" on public.registrations
+  for delete to authenticated using (public.is_staff());
 
 commit;

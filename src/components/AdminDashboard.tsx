@@ -29,6 +29,7 @@ import {
 import { Registration, RegistrationStatus, AdminStats } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
 import { adminUrl } from '../lib/adminRoute.js';
+import { signIn, signOut, getStaffIdentity } from '../lib/adminAuth.js';
 import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord } from '../lib/clientData.js';
 
 interface AdminDashboardProps {
@@ -46,9 +47,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   onBackToHome,
   onViewRegistrationCard
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = React.useState<boolean>(() => {
-    return localStorage.getItem('khateeb_admin_auth') === 'true';
-  });
+  // Authentication is a live Supabase session, not a local flag. Nothing the
+  // browser can be told to remember grants access; every read and write is
+  // re-authorised by the database against public.staff.
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [checkingSession, setCheckingSession] = React.useState(true);
+  const [staffEmail, setStaffEmail] = React.useState<string | null>(null);
+  const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loginError, setLoginError] = React.useState<string | null>(null);
   const [loginLoading, setLoginLoading] = React.useState(false);
@@ -69,6 +74,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [newStatus, setNewStatus] = React.useState<RegistrationStatus>('pending');
   const [supervisorNotes, setSupervisorNotes] = React.useState('');
   const [savingStatus, setSavingStatus] = React.useState(false);
+  const [actionError, setActionError] = React.useState<string | null>(null);
 
   // Fetch data
   const fetchData = async () => {
@@ -80,8 +86,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       ]);
       setRegistrations(list);
       setStats(s);
+      setActionError(null);
     } catch (err) {
-      console.error('Error fetching registrations:', err);
+      setActionError(
+        err instanceof Error ? err.message : 'تعذر تحميل بيانات المسجلين'
+      );
     } finally {
       setLoading(false);
     }
@@ -93,35 +102,33 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   }, [isAuthenticated, isOpen, isStandalone, searchQuery, statusFilter, housingFilter]);
 
+  // Restore an existing supervisor session on mount.
+  React.useEffect(() => {
+    let cancelled = false;
+    getStaffIdentity()
+      .then((identity) => {
+        if (cancelled) return;
+        setIsAuthenticated(Boolean(identity));
+        setStaffEmail(identity?.email ?? null);
+      })
+      .finally(() => {
+        if (!cancelled) setCheckingSession(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginLoading(true);
     setLoginError(null);
 
     try {
-      // 1. Try server login
-      try {
-        const res = await fetch('/api/admin/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password })
-        });
-        if (res.ok) {
-          setIsAuthenticated(true);
-          localStorage.setItem('khateeb_admin_auth', 'true');
-          return;
-        }
-      } catch {
-        // Fallback for static hosting
-      }
-
-      // Static fallback check (passcode: 123456)
-      if (password.trim() === '123456' || password.trim() === 'khateeb1448') {
-        setIsAuthenticated(true);
-        localStorage.setItem('khateeb_admin_auth', 'true');
-      } else {
-        throw new Error('رمز المرور غير صحيح');
-      }
+      const identity = await signIn(email, password);
+      setStaffEmail(identity.email);
+      setIsAuthenticated(true);
+      setPassword('');
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'فشل تسجيل الدخول';
       setLoginError(message);
@@ -139,8 +146,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    localStorage.removeItem('khateeb_admin_auth');
+    setStaffEmail(null);
     setPassword('');
+    setRegistrations([]);
+    setStats(null);
+    void signOut();
   };
 
   const handleOpenEdit = (reg: Registration) => {
@@ -152,14 +162,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const handleSaveEdit = async () => {
     if (!editingRegistration) return;
     setSavingStatus(true);
+    setActionError(null);
     try {
       const ok = await updateRegistrationStatus(editingRegistration.id, newStatus, supervisorNotes);
       if (ok) {
         setEditingRegistration(null);
         fetchData();
+      } else {
+        // Zero rows changed: the database refused the write.
+        setActionError('لم يتم حفظ التعديل. الحساب الحالي غير مُصرَّح له بتعديل السجلات.');
       }
     } catch (err) {
-      console.error('Error saving status:', err);
+      setActionError(err instanceof Error ? err.message : 'تعذر حفظ التعديل');
     } finally {
       setSavingStatus(false);
     }
@@ -167,13 +181,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   const handleDelete = async (id: string, name: string) => {
     if (!window.confirm(`هل أنت متأكد من حذف استمارة المسجل: ${name}؟`)) return;
+    setActionError(null);
     try {
       const ok = await deleteRegistrationRecord(id);
       if (ok) {
         fetchData();
+      } else {
+        setActionError('لم يتم الحذف. الحساب الحالي غير مُصرَّح له بحذف السجلات.');
       }
     } catch (err) {
-      console.error('Error deleting registration:', err);
+      setActionError(err instanceof Error ? err.message : 'تعذر حذف السجل');
     }
   };
 
@@ -396,7 +413,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       </div>
 
       {/* Auth Barrier if not authenticated */}
-      {!isAuthenticated ? (
+      {checkingSession ? (
+        <div className="flex-1 flex items-center justify-center p-6 bg-[#08192E]/5">
+          <div className="flex items-center gap-3 text-slate-600 text-sm font-tajawal">
+            <span className="w-5 h-5 border-2 border-[#08192E] border-t-transparent rounded-full animate-spin"></span>
+            <span>جارٍ التحقق من الجلسة...</span>
+          </div>
+        </div>
+      ) : !isAuthenticated ? (
         <div className="flex-1 flex items-center justify-center p-6 bg-[#08192E]/5">
           <div className="w-full max-w-md bg-white rounded-3xl p-8 border border-[#C89B48]/40 shadow-2xl text-center space-y-6">
             <div className="w-16 h-16 rounded-2xl bg-[#08192E] text-[#DFB76C] mx-auto flex items-center justify-center border border-[#C89B48]/40 shadow-sm">
@@ -408,14 +432,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 دخول المشرفين المصرح لهم
               </h4>
               <p className="text-xs text-slate-500 font-tajawal">
-                يرجى إدخال رمز المرور الخاص بلجنة إدارة برنامج إعداد
+                حساب المشرف الرسمي الصادر من إدارة الشؤون الثقافية والدعوية
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4 text-right">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1 font-cairo">
-                  رمز مرور المشرف:
+                <label htmlFor="admin-email-input" className="block text-xs font-bold text-slate-700 mb-1 font-cairo">
+                  البريد الإلكتروني:
+                </label>
+                <input
+                  type="email"
+                  id="admin-email-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="username"
+                  dir="ltr"
+                  placeholder="supervisor@example.com"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 text-left"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="admin-password-input" className="block text-xs font-bold text-slate-700 mb-1 font-cairo">
+                  كلمة المرور:
                 </label>
                 <input
                   type="password"
@@ -423,8 +464,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  placeholder="أدخل رمز المرور: 123456"
-                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 font-mono tracking-widest text-center"
+                  autoComplete="current-password"
+                  dir="ltr"
+                  className="w-full px-4 py-3 rounded-2xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] text-sm bg-slate-50 text-left"
                 />
               </div>
 
@@ -437,7 +479,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <button
                 type="submit"
                 id="admin-login-submit-btn"
-                disabled={loginLoading || !password}
+                disabled={loginLoading || !email || !password}
                 className="w-full py-3.5 bg-[#08192E] hover:bg-[#0B2545] text-white font-bold text-sm rounded-2xl transition shadow-md border border-[#C89B48]/40 disabled:opacity-60"
               >
                 {loginLoading ? 'جارٍ التحقق...' : 'تسجيل الدخول للوحة التحكم'}
@@ -460,7 +502,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       ) : (
         /* Authenticated Dashboard View */
         <div className="flex-1 flex flex-col p-4 sm:p-6 bg-slate-50/50 space-y-6 overflow-y-auto">
-          
+
+          {/* Signed-in supervisor + any failed operation */}
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            {staffEmail && (
+              <div className="inline-flex items-center gap-2 text-xs text-slate-600 bg-white border border-slate-200 rounded-xl px-3 py-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="font-semibold">مسجل الدخول:</span>
+                <span dir="ltr" className="font-mono text-slate-800">{staffEmail}</span>
+              </div>
+            )}
+          </div>
+
+          {actionError && (
+            <div className="flex items-start gap-2 p-3.5 bg-rose-50 border border-rose-300 rounded-2xl text-rose-800 text-xs font-semibold">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span>{actionError}</span>
+            </div>
+          )}
+
           {/* Statistics Cards - Bento style */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 no-print">
               <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
