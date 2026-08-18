@@ -9,20 +9,14 @@ import { LookupModal } from './components/LookupModal.js';
 import { AdminDashboard } from './components/AdminDashboard.js';
 import { Footer } from './components/Footer.js';
 import { Registration } from './types.js';
+import { isAdminRoute } from './lib/adminRoute.js';
 import { FileText, Search, ShieldCheck } from 'lucide-react';
 
 export default function App() {
   // Route state
-  const [currentRoute, setCurrentRoute] = React.useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      const hash = window.location.hash.toLowerCase();
-      const search = window.location.search.toLowerCase();
-      if (hash.includes('admin') || search.includes('admin')) {
-        return 'admin';
-      }
-    }
-    return 'home';
-  });
+  const [currentRoute, setCurrentRoute] = React.useState<string>(() =>
+    isAdminRoute() ? 'admin' : 'home'
+  );
 
   // Modal states
   const [selectedRegistration, setSelectedRegistration] = React.useState<Registration | null>(null);
@@ -31,13 +25,7 @@ export default function App() {
   // Sync route on hash/history change
   React.useEffect(() => {
     const handleRouteChange = () => {
-      const hash = window.location.hash.toLowerCase();
-      const search = window.location.search.toLowerCase();
-      if (hash.includes('admin') || search.includes('admin')) {
-        setCurrentRoute('admin');
-      } else {
-        setCurrentRoute('home');
-      }
+      setCurrentRoute(isAdminRoute() ? 'admin' : 'home');
     };
 
     window.addEventListener('hashchange', handleRouteChange);
@@ -60,7 +48,7 @@ export default function App() {
   };
 
   // ----------------------------------------------------
-  // STANDALONE ADMIN ROUTE (Separated URL: #admin)
+  // STANDALONE ADMIN ROUTE (private slug, see lib/adminRoute.ts)
   // ----------------------------------------------------
   if (currentRoute === 'admin') {
     return (
@@ -121,10 +109,6 @@ export default function App() {
       {/* Footer */}
       <Footer
         onOpenLookup={() => setIsLookupOpen(true)}
-        onOpenAdmin={() => {
-          window.location.hash = 'admin';
-          setCurrentRoute('admin');
-        }}
         onScrollToSection={scrollToSection}
       />
 

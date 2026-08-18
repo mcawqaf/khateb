@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { Registration, RegistrationStatus, AdminStats } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
+import { adminUrl } from '../lib/adminRoute.js';
 import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord } from '../lib/clientData.js';
 
 interface AdminDashboardProps {
@@ -130,7 +131,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   const handleCopyLink = () => {
-    const url = window.location.origin + window.location.pathname + '#admin';
+    const url = adminUrl();
     navigator.clipboard.writeText(url);
     setCopiedLink(true);
     setTimeout(() => setCopiedLink(false), 2500);

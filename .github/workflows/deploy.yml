@@ -38,6 +38,7 @@ jobs:
         env:
           VITE_SUPABASE_URL: "https://zukcgoukezoimrpyjokm.supabase.co"
           VITE_SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1a2Nnb3VrZXpvaW1ycHlqb2ttIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODcwNDgxMzMsImV4cCI6MjEwMjYyNDEzM30.g1zUJ_vLSzsVb0FCfulnW0ursHLwMFyfsNHetPJ62HY"
+          VITE_ADMIN_ROUTE: ${{ secrets.ADMIN_ROUTE }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

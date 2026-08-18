@@ -1,9 +1,8 @@
 import React from 'react';
-import { BookOpen, MapPin, Calendar, ShieldCheck, Search, Award, Lock, Bell } from 'lucide-react';
+import { BookOpen, MapPin, Calendar, ShieldCheck, Search, Award, Bell } from 'lucide-react';
 
 interface FooterProps {
   onOpenLookup: () => void;
-  onOpenAdmin?: () => void;
   onScrollToSection: (sectionId: string) => void;
 }
 
@@ -117,16 +116,8 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>استعلام وطباعة رقم المراجعة</span>
                 </button>
               </li>
-              <li>
-                <a
-                  href="#admin"
-                  className="hover:text-[#38BDF8] transition flex items-center gap-1.5 text-slate-400 text-xs"
-                  title="بوابة دخول المشرفين ولجنة القبول"
-                >
-                  <Lock className="w-3.5 h-3.5 text-[#DFB76C]" />
-                  <span>بوابة المشرفين المصرح لهم</span>
-                </a>
-              </li>
+              {/* The supervisor dashboard is deliberately not linked in public
+                  navigation. Staff reach it via the private route directly. */}
             </ul>
           </div>
 
