@@ -109,8 +109,10 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
       return;
     }
 
-    if (calculatedAge !== null && calculatedAge < 18) {
-      setErrorMsg('يشترط ألا يقل عمر المتقدم عن 18 سنة.');
+    if (calculatedAge !== null && (calculatedAge < 18 || calculatedAge > 30)) {
+      setErrorMsg(
+        `يشترط ألا يقل عمر المتقدم عن 18 سنة وألا يزيد على 30 سنة. العمر المحسوب: ${calculatedAge} سنة.`
+      );
       return;
     }
 
@@ -290,7 +292,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
               {/* Birth date & Age calculation */}
               <div>
                 <label htmlFor="birthDate" className="block text-xs sm:text-sm font-bold text-slate-800 mb-1">
-                  تاريخ الميلاد <span className="text-rose-600">* (يشترط 18 عاماً فما فوق)</span>
+                  تاريخ الميلاد <span className="text-rose-600">* (من 18 إلى 30 سنة)</span>
                 </label>
                 <input
                   type="date"
@@ -302,8 +304,13 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0284C7] focus:border-[#0284C7] transition text-slate-900 text-sm bg-slate-50/50"
                 />
                 {calculatedAge !== null && (
-                  <div className={`text-xs mt-1 font-semibold ${calculatedAge >= 18 ? 'text-[#0284C7]' : 'text-rose-600'}`}>
-                    العمر المحسوب: {calculatedAge} سنة {calculatedAge < 18 ? '(غير مطابق لشرط السن الأدنى)' : '✓ (مستوفٍ لشرط السن)'}
+                  <div className={`text-xs mt-1 font-semibold ${calculatedAge >= 18 && calculatedAge <= 30 ? 'text-[#0284C7]' : 'text-rose-600'}`}>
+                    العمر المحسوب: {calculatedAge} سنة{' '}
+                    {calculatedAge < 18
+                      ? '(أقل من الحد الأدنى 18 سنة)'
+                      : calculatedAge > 30
+                        ? '(يتجاوز الحد الأعلى 30 سنة)'
+                        : '✓ (مستوفٍ لشرط السن)'}
                   </div>
                 )}
               </div>
