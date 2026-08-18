@@ -169,8 +169,8 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
 
             <div className="bg-white/10 border border-[#C89B48]/40 p-3.5 rounded-2xl text-center shrink-0 backdrop-blur-xs">
               <div className="text-[11px] text-[#DFB76C] font-semibold">فترة القبول المعتمدة</div>
-              <div className="text-base font-bold text-white font-mono">5 - 12 يوليو 2025م</div>
-              <div className="text-[11px] text-sky-300 font-mono">1447هـ</div>
+              <div className="text-base font-bold text-white font-mono">5 - 12 يوليو 2026م</div>
+              <div className="text-[11px] text-sky-300 font-mono">1448هـ</div>
             </div>
           </div>
         </div>

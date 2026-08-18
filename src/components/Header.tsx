@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-4 text-slate-300">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-[#DFB76C]" />
-              <span>فترة القبول: 5 يوليو - 12 يوليو 2025م (1447هـ)</span>
+              <span>فترة القبول: 5 يوليو - 12 يوليو 2026م (1448هـ)</span>
             </span>
             <span className="hidden sm:flex items-center gap-1.5 text-sky-300 font-mono">
               <span>الدفعة الثالثة (3)</span>
@@ -37,18 +37,18 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-22">
           {/* Logo & Identity */}
           <div 
             id="brand-logo-button"
             onClick={() => onScrollToSection('hero-section')}
-            className="flex items-center gap-3.5 cursor-pointer group"
+            className="flex items-center gap-3.5 cursor-pointer group py-1"
           >
-            <div className="w-13 h-13 rounded-2xl overflow-hidden shadow-lg border-2 border-[#C89B48]/60 group-hover:scale-105 transition-transform bg-black flex items-center justify-center p-0.5">
+            <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full overflow-hidden shadow-xl border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/30 group-hover:scale-105 group-hover:border-[#F7E7CE] transition-all flex items-center justify-center shrink-0">
               <img 
                 src="./assets/program-logo.jpg" 
                 alt="شعار برنامج إعداد لتأهيل الخطباء" 
-                className="w-full h-full object-cover rounded-xl"
+                className="w-full h-full object-cover"
               />
             </div>
             <div>
@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({
               </div>
               <div className="text-xs text-slate-300 font-semibold tracking-wide flex items-center gap-2 mt-0.5">
                 <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2 py-0.5 rounded-full text-[10px] font-black">الدفعة 3</span>
-                <span className="text-[#DFB76C]">1447هـ / 2025م</span>
+                <span className="text-[#DFB76C]">1448هـ / 2026م</span>
               </div>
             </div>
           </div>

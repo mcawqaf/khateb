@@ -304,7 +304,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 لوحة تحكم المشرفين واللجنة العلمية
               </h3>
               <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-white/10 text-[#DFB76C] border border-white/20 font-semibold">
-                برنامج إعداد 1447هـ
+                برنامج إعداد 1448هـ
               </span>
             </div>
             <p className="text-xs text-slate-300 font-tajawal">

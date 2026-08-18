@@ -72,10 +72,10 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
               <div className="text-right text-xs font-bold text-slate-700 font-tajawal">
                 <div>الهيئة العامة للأوقاف والشؤون الإسلامية</div>
                 <div>إدارة الشؤون الثقافية والدعوية</div>
-                <div className="text-[#0284C7] font-mono font-bold">الدفعة الثالثة (3) - 1447هـ</div>
+                <div className="text-[#0284C7] font-mono font-bold">الدفعة الثالثة (3) - 1448هـ</div>
               </div>
 
-              <div className="w-16 h-16 rounded-2xl bg-black overflow-hidden flex items-center justify-center shadow-md border-2 border-[#C89B48]">
+              <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full overflow-hidden flex items-center justify-center shadow-lg border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/20 shrink-0">
                 <img 
                   src="./assets/program-logo.jpg" 
                   alt="شعار برنامج إعداد" 
@@ -98,7 +98,7 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
               بطاقة مراجعة واستمارة التسجيل الرسمية
             </h2>
             <div className="text-xs sm:text-sm text-slate-600 font-medium font-tajawal">
-              برنامج (إعداد) لتأهيل الخطباء لعام 1447هـ / 2025م
+              برنامج (إعداد) لتأهيل الخطباء لعام 1448هـ / 2026م
             </div>
           </div>
 
@@ -188,7 +188,7 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
             </div>
             <ul className="list-disc list-inside space-y-1 text-slate-700 text-xs sm:text-sm leading-relaxed pr-2">
               <li>يرجى <strong>حفظ أو طباعة هذه الاستمارة</strong> وإبرازها عند المراجعة.</li>
-              <li><strong>فترة القبول الرسمية:</strong> من السبت 5 يوليو إلى السبت 12 يوليو 2025م (1447هـ).</li>
+              <li><strong>فترة القبول الرسمية:</strong> من السبت 5 يوليو إلى السبت 12 يوليو 2026م (1448هـ).</li>
               <li><strong>الجهة المشرفة:</strong> الهيئة العامة للأوقاف والشؤون الإسلامية - إدارة الشؤون الثقافية والدعوية.</li>
               <li>سيخضع المتقدم لمقابلة التحقق من سلامة النطق ومطابقة الضوابط الشرعية المعتمدة.</li>
             </ul>

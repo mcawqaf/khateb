@@ -61,7 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             <div className="flex flex-wrap items-center gap-3 mb-6">
               <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-4 py-1.5 rounded-full text-xs font-black shadow-md">
-                الدفعة الثالثة (3) - للعام 1447هـ / 2025م
+                الدفعة الثالثة (3) - للعام 1448هـ / 2026م
               </span>
               <span className="text-[#DFB76C] font-amiri font-bold text-base bg-white/10 px-4 py-1 rounded-full border border-[#C89B48]/40">
                 ﴿ ادْعُ إِلَىٰ سَبِيلِ رَبِّكَ بِالْحِكْمَةِ ﴾
@@ -123,7 +123,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span>الدفعة الثالثة (3)</span>
             </span>
             <span className="bg-white/10 text-sky-300 px-2.5 py-0.5 rounded-full font-bold text-[11px]">
-              1447هـ / 2025م
+              1448هـ / 2026م
             </span>
           </div>
         </div>
@@ -144,12 +144,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <div className="space-y-3">
               <div className="bg-gradient-to-r from-emerald-950/60 to-emerald-900/30 p-3.5 rounded-2xl border border-emerald-500/30">
                 <p className="text-xs text-emerald-300 font-semibold mb-0.5">بداية القبول والتسجيل:</p>
-                <p className="text-lg font-bold text-white">السبت 5 يوليو 2025 م</p>
+                <p className="text-lg font-bold text-white">السبت 5 يوليو 2026 م</p>
               </div>
 
               <div className="bg-gradient-to-r from-rose-950/60 to-rose-900/30 p-3.5 rounded-2xl border border-rose-500/30">
                 <p className="text-xs text-rose-300 font-semibold mb-0.5">نهاية القبول والتسجيل:</p>
-                <p className="text-lg font-bold text-white">السبت 12 يوليو 2025 م</p>
+                <p className="text-lg font-bold text-white">السبت 12 يوليو 2026 م</p>
               </div>
             </div>
           </div>

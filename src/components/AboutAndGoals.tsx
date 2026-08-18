@@ -60,7 +60,7 @@ export const AboutAndGoals: React.FC = () => {
             </h2>
 
             <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-tajawal">
-              انطلاقًا من عِظَم شأن خطبة الجمعة وأثرها في إصلاح المجتمع ومكانة الخطيب في البلاغ عن الله تعالى، تُطلق <strong className="text-[#DFB76C] font-bold">الهيئة العامة للأوقاف والشؤون الإسلامية</strong> عبر <strong className="text-[#38BDF8] font-bold">إدارة الشؤون الثقافية والدعوية</strong>، <strong className="text-white font-bold">برنامج (إعداد) لتأهيل الخطباء – الدفعة الثالثة (3) لعام 1447هـ / 2025م</strong> بهدف صقل الكفاءات العلمية والدعوية ومهارات الخطابة والإلقاء بما يعزز الخطاب الديني الوسطي الرصين.
+              انطلاقًا من عِظَم شأن خطبة الجمعة وأثرها في إصلاح المجتمع ومكانة الخطيب في البلاغ عن الله تعالى، تُطلق <strong className="text-[#DFB76C] font-bold">الهيئة العامة للأوقاف والشؤون الإسلامية</strong> عبر <strong className="text-[#38BDF8] font-bold">إدارة الشؤون الثقافية والدعوية</strong>، <strong className="text-white font-bold">برنامج (إعداد) لتأهيل الخطباء – الدفعة الثالثة (3) لعام 1448هـ / 2026م</strong> بهدف صقل الكفاءات العلمية والدعوية ومهارات الخطابة والإلقاء بما يعزز الخطاب الديني الوسطي الرصين.
             </p>
           </div>
 
@@ -141,20 +141,20 @@ export const AboutAndGoals: React.FC = () => {
             </div>
 
             <h3 className="font-cairo text-base font-bold text-white mb-3">
-              فترة التسجيل: 5 - 12 يوليو 2025م
+              فترة التسجيل: 5 - 12 يوليو 2026م
             </h3>
 
             <div className="space-y-2.5 text-xs text-slate-200">
               <div className="flex items-center gap-2 bg-white/10 p-2.5 rounded-xl border border-white/15">
                 <Calendar className="w-4 h-4 text-[#DFB76C] shrink-0" />
                 <div>
-                  <strong>بداية القبول:</strong> السبت 5 يوليو 2025 م
+                  <strong>بداية القبول:</strong> السبت 5 يوليو 2026 م
                 </div>
               </div>
               <div className="flex items-center gap-2 bg-white/10 p-2.5 rounded-xl border border-white/15">
                 <Calendar className="w-4 h-4 text-[#38BDF8] shrink-0" />
                 <div>
-                  <strong>نهاية القبول:</strong> السبت 12 يوليو 2025 م
+                  <strong>نهاية القبول:</strong> السبت 12 يوليو 2026 م
                 </div>
               </div>
             </div>

@@ -20,7 +20,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 1: Identity & Quran verse */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-black overflow-hidden flex items-center justify-center border border-[#C89B48]/60 shadow-md">
+              <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/30 shadow-lg shrink-0">
                 <img 
                   src="./assets/program-logo.jpg" 
                   alt="شعار برنامج إعداد" 
@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
               <div>
                 <div className="font-amiri text-lg font-bold text-white">برنامج (إعداد) لتأهيل الخطباء</div>
-                <div className="text-xs text-[#DFB76C] font-semibold">الدفعة الثالثة (3) - 1447هـ / 2025م</div>
+                <div className="text-xs text-[#DFB76C] font-semibold">الدفعة الثالثة (3) - 1448هـ / 2026م</div>
               </div>
             </div>
 
@@ -54,7 +54,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <Calendar className="w-4 h-4 text-[#38BDF8] shrink-0 mt-0.5" />
                 <div>
                   <strong className="text-white">فترة القبول:</strong>
-                  <div>السبت 5 يوليو - السبت 12 يوليو 2025م</div>
+                  <div>السبت 5 يوليو - السبت 12 يوليو 2026م</div>
                 </div>
               </li>
 
@@ -142,7 +142,7 @@ export const Footer: React.FC<FooterProps> = ({
                 يُشترط عند المقابلة إبراز بطاقة المراجعة الإلكترونية المحتوية على الرقم المتسلسل والباركود.
               </p>
               <p className="text-[#DFB76C] font-semibold">
-                فترة التسجيل محددة من 5 إلى 12 يوليو 2025م (1447هـ).
+                فترة التسجيل محددة من 5 إلى 12 يوليو 2026م (1448هـ).
               </p>
             </div>
           </div>
@@ -154,10 +154,10 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="bg-[#030B14] border-t border-white/10 py-4 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
-            برنامج (إعداد) لتأهيل الخطباء 1447هـ / 2025م – الهيئة العامة للأوقاف والشؤون الإسلامية
+            برنامج (إعداد) لتأهيل الخطباء 1448هـ / 2026م – الهيئة العامة للأوقاف والشؤون الإسلامية
           </div>
           <div className="text-[11px] text-slate-500 font-mono">
-            جميع الحقوق محفوظة © 2025م - 1447هـ
+            جميع الحقوق محفوظة © 2026م - 1448هـ
           </div>
         </div>
       </div>
