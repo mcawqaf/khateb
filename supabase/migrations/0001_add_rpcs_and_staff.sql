@@ -97,6 +97,40 @@ create index if not exists idx_registrations_phone       on public.registrations
 create index if not exists idx_registrations_status      on public.registrations (status);
 
 -- ---------------------------------------------------------------------------
+-- 3b. Make sure the id column can fill itself in
+--
+-- The old browser code generated ids like 'reg-1755...-x7k2p' and sent them
+-- with every insert, so the column may well have no default. The RPC no longer
+-- sends one. This gives it a default matching whatever type it actually is,
+-- instead of guessing which of uuid/text is live.
+-- ---------------------------------------------------------------------------
+
+do $$
+declare
+  v_type        text;
+  v_has_default boolean;
+begin
+  select data_type, column_default is not null
+    into v_type, v_has_default
+  from information_schema.columns
+  where table_schema = 'public'
+    and table_name   = 'registrations'
+    and column_name  = 'id';
+
+  if v_type is null then
+    raise exception 'public.registrations.id not found — check the table name';
+  end if;
+
+  if not v_has_default then
+    if v_type = 'uuid' then
+      alter table public.registrations alter column id set default gen_random_uuid();
+    else
+      alter table public.registrations alter column id set default ('reg-' || gen_random_uuid()::text);
+    end if;
+  end if;
+end $$;
+
+-- ---------------------------------------------------------------------------
 -- 4. Registration RPC
 --
 -- SECURITY DEFINER, so applicants need no table privileges at all. Status and
