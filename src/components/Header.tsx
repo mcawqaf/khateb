@@ -44,11 +44,11 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => onScrollToSection('hero-section')}
             className="flex items-center gap-3.5 cursor-pointer group py-1"
           >
-            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden shadow-2xl border-2 sm:border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 group-hover:scale-105 group-hover:border-[#F7E7CE] transition-all flex items-center justify-center shrink-0 bg-[#08192E]">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1.5 shadow-2xl border-2 sm:border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 group-hover:scale-105 group-hover:border-[#F7E7CE] transition-all flex items-center justify-center shrink-0">
               <img 
-                src="./assets/program-logo.jpg" 
+                src="./assets/program-logo.png" 
                 alt="شعار برنامج إعداد لتأهيل الخطباء" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             <div>

@@ -19,11 +19,11 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Col 1: Identity & Quran verse */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/30 shadow-lg shrink-0">
+              <div className="w-16 h-16 rounded-full p-1.5 flex items-center justify-center border-2 border-[#DFB76C] ring-2 ring-[#DFB76C]/30 shadow-lg shrink-0">
                 <img 
-                  src="./assets/program-logo.jpg" 
+                  src="./assets/program-logo.png" 
                   alt="شعار برنامج إعداد" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div>

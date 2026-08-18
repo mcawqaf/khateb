@@ -33,11 +33,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Prominent Circular Logo and Main Heading */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 mb-5">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shadow-2xl border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 bg-[#08192E] flex items-center justify-center shrink-0">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full p-2 shadow-2xl border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 flex items-center justify-center shrink-0">
                 <img 
-                  src="./assets/program-logo.jpg" 
+                  src="./assets/program-logo.png" 
                   alt="شعار برنامج إعداد لتأهيل الخطباء" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
 

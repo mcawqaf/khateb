@@ -112,6 +112,13 @@
     break-inside: avoid;
     page-break-inside: avoid;
   }
+  /* The logo artwork is light, so its dark disc has to survive printing —
+     browsers drop background colours by default. */
+  .print-solid {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: #08192E !important;
+  }
 }
 
 @media screen {
