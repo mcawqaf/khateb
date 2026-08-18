@@ -210,7 +210,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       `"${r.address}"`,
       `"${r.educationalLevel}"`,
       `"${r.quranMemorization}"`,
-      r.housingNeeded ? 'مطلوب' : 'غير مطلوب',
+      r.housingNeeded ? 'نعم' : 'لا',
       `"${getStatusLabel(r.status)}"`,
       `"${r.supervisorNotes || ''}"`,
       `"${r.createdAt}"`
@@ -487,7 +487,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </div>
 
               <div className="bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
-                <div className="text-xs text-slate-700 font-semibold mb-1">طلب سكن داخلي</div>
+                <div className="text-xs text-slate-700 font-semibold mb-1">المستفيدون من السكن</div>
                 <div className="text-2xl font-black text-[#08192E] font-mono">{stats?.housingRequested ?? 0}</div>
                 <div className="text-[10px] text-slate-500 font-medium mt-1">بحاجة للإقامة</div>
               </div>
@@ -538,8 +538,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   className="px-3 py-2 rounded-2xl border border-stone-300 text-xs font-medium bg-white text-[#2d3436]"
                 >
                   <option value="all">جميع السكن</option>
-                  <option value="yes">طلب سكن داخلي</option>
-                  <option value="no">بدون سكن داخلي</option>
+                  <option value="yes">يستفيد من السكن</option>
+                  <option value="no">لا يستفيد من السكن</option>
                 </select>
               </div>
 

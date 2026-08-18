@@ -182,7 +182,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-[#08192E] font-bold">
-            <span>سكن داخلي متاح للمغتربين</span>
+            <span>سكن داخلي لجميع الطلبة المقبولين بدون استثناء</span>
             <Home className="w-4 h-4 text-[#C89B48]" />
           </div>
         </div>

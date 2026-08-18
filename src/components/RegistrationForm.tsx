@@ -375,6 +375,14 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
               <h4>خدمة السكن والإقامة الداخلية</h4>
             </div>
 
+            <div className="flex items-start gap-2.5 bg-emerald-50 border border-emerald-300 p-3.5 rounded-xl">
+              <BedDouble className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+              <p className="text-xs sm:text-sm text-emerald-900 font-semibold font-tajawal leading-relaxed">
+                السكن الداخلي مكفول <strong className="font-black">لجميع الطلبة المقبولين بدون استثناء</strong>، ولا يقتصر على القادمين من مناطق بعيدة.
+                والسؤال التالي لأغراض التنظيم وتجهيز الغرف فقط.
+              </p>
+            </div>
+
             <div className="space-y-3">
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
@@ -385,7 +393,7 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
                   className="w-5 h-5 text-[#08192E] rounded border-slate-400 focus:ring-[#08192E]"
                 />
                 <span className="text-sm font-semibold text-slate-800">
-                  أرغب في الاستفادة من السكن الداخلي المخصص للمشاركين القادمين من مناطق بعيدة.
+                  نعم، سأستفيد من السكن الداخلي خلال أيام البرنامج.
                 </span>
               </label>
 

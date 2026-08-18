@@ -172,9 +172,9 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
               </div>
 
               <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-xs">
-                <span className="text-xs text-slate-500 block font-medium">حالة طلب السكن الداخلي:</span>
+                <span className="text-xs text-slate-500 block font-medium">الاستفادة من السكن الداخلي:</span>
                 <span className={`font-bold ${registration.housingNeeded ? 'text-[#C89B48]' : 'text-slate-700'}`}>
-                  {registration.housingNeeded ? 'مطلوب (ملتزم بالمبيت)' : 'غير مطلوب (سكن خارجي)'}
+                  {registration.housingNeeded ? 'نعم (ملتزم بالمبيت)' : 'لا (سكن خارجي)'}
                 </span>
               </div>
             </div>
