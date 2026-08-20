@@ -204,12 +204,31 @@ body {
     padding-bottom: 0 !important;   /* the phone action-bar gap has no place on paper */
   }
 
-  /* Screen chrome that would otherwise print as empty boxes. */
+  /* Screen chrome that would otherwise print as empty boxes.
+   *
+   * The container and its scroll pane keep their screen padding and width cap
+   * when printing, which left the sheet narrower than the page and sitting off
+   * to one side. Clearing both lets the table span the full 186mm, which is
+   * what actually centres it — a margin alone cannot centre a box that is
+   * already narrower than its parent for the wrong reason. */
   #admin-dashboard-container {
     border: none !important;
     box-shadow: none !important;
     min-height: 0 !important;
     border-radius: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  #admin-dashboard-container > * {
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
   }
 
   /* Let the table lay itself out across pages instead of inside a scroller. */
