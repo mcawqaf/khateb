@@ -33,6 +33,7 @@ import { PROGRAM } from '../lib/programInfo.js';
 import { signIn, signOut, getStaffIdentity } from '../lib/adminAuth.js';
 import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord, mergeRegistrations, fetchAllRegistrations } from '../lib/clientData.js';
 import { findDuplicates, REASON_LABEL, STRENGTH_LABEL, type DuplicateGroup } from '../lib/duplicates.js';
+import { downloadRoster } from '../lib/rosterWorkbook.js';
 
 interface AdminDashboardProps {
   isOpen?: boolean;
@@ -236,55 +237,22 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
-  // Export to CSV
-  const handleExportCSV = () => {
+  const [exporting, setExporting] = React.useState(false);
+
+  // Formatted workbook rather than raw CSV: CSV carries no borders, colours,
+  // column widths or direction, so an Arabic roster opened from one arrives
+  // unreadable and left-to-right.
+  const handleExportExcel = async () => {
     if (registrations.length === 0) return;
-
-    const headers = [
-      'الرقم المتسلسل',
-      'الاسم الكامل',
-      'الرقم الوطني',
-      'رقم الهاتف',
-      'البريد الإلكتروني',
-      'تاريخ الميلاد',
-      'العمر',
-      'المدينة',
-      'العنوان',
-      'المؤهل العلمي',
-      'حفظ القرآن',
-      'السكن الداخلي',
-      'حالة الطلب',
-      'ملاحظات المشرف',
-      'تاريخ التسجيل'
-    ];
-
-    const rows = registrations.map((r) => [
-      `"${r.serialNumber}"`,
-      `"${r.fullName}"`,
-      `"${r.nationalId}"`,
-      `"${r.phone}"`,
-      `"${r.email || ''}"`,
-      `"${r.birthDate}"`,
-      r.age,
-      `"${r.city}"`,
-      `"${r.address}"`,
-      `"${r.educationalLevel}"`,
-      `"${r.quranMemorization}"`,
-      r.housingNeeded ? 'نعم' : 'لا',
-      `"${getStatusLabel(r.status)}"`,
-      `"${r.supervisorNotes || ''}"`,
-      `"${r.createdAt}"`
-    ]);
-
-    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map((row) => row.join(','))].join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute('download', `مسجلو_دورة_الخطباء_1448هـ_${new Date().toISOString().slice(0, 10)}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    setExporting(true);
+    setActionError(null);
+    try {
+      await downloadRoster(registrations);
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'تعذر تصدير الكشف');
+    } finally {
+      setExporting(false);
+    }
   };
 
   const getStatusBadge = (status: RegistrationStatus) => {
@@ -328,21 +296,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
-  const getStatusLabel = (status: RegistrationStatus) => {
-    switch (status) {
-      case 'accepted_final':
-        return 'مقبول نهائياً';
-      case 'accepted_initial':
-        return 'مقبول مبدئياً';
-      case 'under_review':
-        return 'قيد المراجعة';
-      case 'rejected':
-        return 'غير مطابق للشروط';
-      case 'pending':
-      default:
-        return 'جديد / قيد التدقيق';
-    }
-  };
 
   if (!isOpen && !isStandalone) return null;
 
@@ -406,16 +359,18 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 <span className="hidden sm:inline">Supabase Online</span>
               </div>
 
-              {/* Export CSV */}
+              {/* Export the formatted workbook */}
               <button
-                id="admin-export-csv-btn"
-                onClick={handleExportCSV}
-                disabled={registrations.length === 0}
+                id="admin-export-excel-btn"
+                onClick={handleExportExcel}
+                disabled={registrations.length === 0 || exporting}
                 className="px-3.5 py-2 bg-gradient-to-r from-[#C89B48] to-[#DFB76C] hover:brightness-110 text-[#08192E] rounded-xl text-xs font-black transition flex items-center gap-1.5 shadow-sm border border-amber-300 disabled:opacity-50"
-                title="تصدير كشف إكسل CSV"
+                title="تصدير كشف الطلبة بصيغة Excel منسّقة"
               >
                 <FileSpreadsheet className="w-4 h-4 text-[#08192E]" />
-                <span className="hidden sm:inline">تصدير Excel/CSV</span>
+                <span className="hidden sm:inline">
+                  {exporting ? 'جارٍ التجهيز...' : 'تصدير كشف الطلبة (Excel)'}
+                </span>
               </button>
 
               {/* Logout */}
