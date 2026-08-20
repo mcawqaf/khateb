@@ -3,7 +3,7 @@ import { PROGRAM, registrationWindow } from '../lib/programInfo.js';
 import confetti from 'canvas-confetti';
 import { UserCheck, AlertCircle, CheckCircle2, Calendar, Phone, IdCard, MapPin, GraduationCap, BookOpen, BedDouble, FileText, Send } from 'lucide-react';
 import { Registration } from '../types.js';
-import { submitRegistration } from '../lib/clientData.js';
+import { submitRegistration, fetchRegistrationState } from '../lib/clientData.js';
 
 interface RegistrationFormProps {
   onSuccess: (registration: Registration) => void;
@@ -34,12 +34,28 @@ export const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSuccess })
   const [errorMsg, setErrorMsg] = React.useState<string | null>(null);
   const [calculatedAge, setCalculatedAge] = React.useState<number | null>(null);
 
-  // Re-evaluated each minute so the form opens and closes on its own without
-  // the visitor needing to reload the page.
+  // The database is the authority: a supervisor can open or close registration
+  // by hand, and the dates compiled into this bundle would not know about it.
+  // The local calculation is only the opening guess and the offline fallback.
   const [windowState, setWindowState] = React.useState(() => registrationWindow());
+
   React.useEffect(() => {
-    const id = setInterval(() => setWindowState(registrationWindow()), 60_000);
-    return () => clearInterval(id);
+    let cancelled = false;
+
+    const sync = async () => {
+      const state = await fetchRegistrationState();
+      if (!cancelled && state) setWindowState(state);
+      else if (!cancelled && !state) setWindowState(registrationWindow());
+    };
+
+    void sync();
+    // Re-checked each minute, so the form follows the switch without the
+    // visitor reloading.
+    const id = setInterval(sync, 60_000);
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
   }, []);
 
   // Age calculation

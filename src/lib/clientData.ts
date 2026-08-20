@@ -176,6 +176,43 @@ export async function updateRegistrationStatus(
   return (data?.length ?? 0) > 0;
 }
 
+export type RegistrationState = 'before' | 'open' | 'closed';
+
+/**
+ * The effective registration state as the database sees it.
+ *
+ * The site used to work this out from dates compiled into the bundle, which
+ * meant a supervisor opening or closing registration changed nothing for
+ * visitors. Asking the database keeps the form and what the database will
+ * actually accept in step.
+ */
+export async function fetchRegistrationState(): Promise<RegistrationState | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase.rpc('registration_state');
+  if (error || !data) return null;
+  return data as RegistrationState;
+}
+
+/** Staff-only switch: 'auto' follows the dates, 'open'/'closed' override them. */
+export async function setRegistrationState(state: 'auto' | 'open' | 'closed'): Promise<RegistrationState> {
+  if (!supabase) throw notConfigured();
+  const { data, error } = await supabase.rpc('set_registration_state', { p_state: state });
+  if (error) throw new Error(error.message || 'تعذر تغيير حالة التسجيل');
+  return data as RegistrationState;
+}
+
+/** The stored switch position, for showing which mode is active. */
+export async function fetchManualState(): Promise<'auto' | 'open' | 'closed' | null> {
+  if (!supabase) return null;
+  const { data, error } = await supabase
+    .from('program_settings')
+    .select('manual_state')
+    .limit(1)
+    .maybeSingle();
+  if (error || !data) return null;
+  return (data as { manual_state: 'auto' | 'open' | 'closed' }).manual_state;
+}
+
 /**
  * Merge two applications into one.
  *

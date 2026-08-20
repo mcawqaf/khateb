@@ -34,6 +34,7 @@ import { signIn, signOut, getStaffIdentity } from '../lib/adminAuth.js';
 import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord, mergeRegistrations, fetchAllRegistrations } from '../lib/clientData.js';
 import { findDuplicates, REASON_LABEL, STRENGTH_LABEL, type DuplicateGroup } from '../lib/duplicates.js';
 import { downloadRoster } from '../lib/rosterWorkbook.js';
+import { fetchRegistrationState, setRegistrationState, fetchManualState, type RegistrationState } from '../lib/clientData.js';
 
 interface AdminDashboardProps {
   isOpen?: boolean;
@@ -79,6 +80,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [savingStatus, setSavingStatus] = React.useState(false);
   const [actionError, setActionError] = React.useState<string | null>(null);
 
+  // Registration switch
+  const [regState, setRegState] = React.useState<RegistrationState | null>(null);
+  const [manualState, setManualState] = React.useState<'auto' | 'open' | 'closed' | null>(null);
+  const [switching, setSwitching] = React.useState(false);
+
   // Duplicate review
   const [duplicates, setDuplicates] = React.useState<DuplicateGroup[]>([]);
   const [showDuplicates, setShowDuplicates] = React.useState(false);
@@ -102,6 +108,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         // A duplicate scan failing must not blank the dashboard.
         setDuplicates([]);
       }
+
+      const [eff, man] = await Promise.all([fetchRegistrationState(), fetchManualState()]);
+      setRegState(eff);
+      setManualState(man);
     } catch (err) {
       setActionError(
         err instanceof Error ? err.message : 'تعذر تحميل بيانات المسجلين'
@@ -206,6 +216,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       }
     } catch (err) {
       setActionError(err instanceof Error ? err.message : 'تعذر حذف السجل');
+    }
+  };
+
+  const handleSwitchRegistration = async (next: 'auto' | 'open' | 'closed') => {
+    const confirmText =
+      next === 'open'
+        ? 'فتح باب التسجيل الآن للجميع، بغض النظر عن المواعيد المعلنة. هل تريد المتابعة؟'
+        : next === 'closed'
+          ? 'إغلاق باب التسجيل فوراً، حتى لو لم تنتهِ المدة المعلنة. هل تريد المتابعة؟'
+          : 'العودة للوضع التلقائي: يفتح ويغلق التسجيل حسب المواعيد المعلنة. هل تريد المتابعة؟';
+    if (!window.confirm(confirmText)) return;
+
+    setSwitching(true);
+    setActionError(null);
+    try {
+      const eff = await setRegistrationState(next);
+      setRegState(eff);
+      setManualState(next);
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'تعذر تغيير حالة التسجيل');
+    } finally {
+      setSwitching(false);
     }
   };
 
@@ -517,6 +549,77 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               <span>{actionError}</span>
             </div>
           )}
+
+          {/* Registration switch. The effective state is read from the database,
+              not from the dates in this bundle, so it shows what applicants
+              actually get. */}
+          <div className="bg-white border-2 border-slate-300 rounded-3xl p-4 no-print">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div
+                  className={`w-11 h-11 rounded-2xl flex items-center justify-center border-2 shrink-0 ${
+                    regState === 'open'
+                      ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
+                      : 'bg-rose-50 border-rose-500 text-rose-700'
+                  }`}
+                >
+                  {regState === 'open' ? <CheckCircle className="w-6 h-6" /> : <Ban className="w-6 h-6" />}
+                </div>
+                <div>
+                  <div className="font-cairo font-bold text-sm text-[#08192E]">
+                    باب التسجيل:{' '}
+                    <span className={regState === 'open' ? 'text-emerald-700' : 'text-rose-700'}>
+                      {regState === 'open' ? 'مفتوح' : regState === 'before' ? 'لم يُفتح بعد' : 'مغلق'}
+                    </span>
+                  </div>
+                  <div className="text-[11px] text-slate-600 font-tajawal">
+                    {manualState === 'auto'
+                      ? `تلقائي حسب المواعيد المعلنة (${PROGRAM.registration.short})`
+                      : manualState === 'open'
+                        ? 'مفتوح يدوياً — تجاوز للمواعيد المعلنة'
+                        : manualState === 'closed'
+                          ? 'مغلق يدوياً — تجاوز للمواعيد المعلنة'
+                          : '...'}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  id="admin-open-registration-btn"
+                  onClick={() => handleSwitchRegistration('open')}
+                  disabled={switching || manualState === 'open'}
+                  className="px-3.5 py-2 rounded-xl text-xs font-bold border-2 border-emerald-600 text-emerald-800 hover:bg-emerald-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  فتح التسجيل
+                </button>
+                <button
+                  id="admin-close-registration-btn"
+                  onClick={() => handleSwitchRegistration('closed')}
+                  disabled={switching || manualState === 'closed'}
+                  className="px-3.5 py-2 rounded-xl text-xs font-bold border-2 border-rose-600 text-rose-800 hover:bg-rose-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  إغلاق التسجيل
+                </button>
+                <button
+                  id="admin-auto-registration-btn"
+                  onClick={() => handleSwitchRegistration('auto')}
+                  disabled={switching || manualState === 'auto'}
+                  className="px-3.5 py-2 rounded-xl text-xs font-bold border-2 border-slate-400 text-slate-700 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed"
+                  title="العودة للفتح والإغلاق حسب المواعيد المعلنة"
+                >
+                  تلقائي
+                </button>
+              </div>
+            </div>
+
+            {manualState && manualState !== 'auto' && (
+              <p className="mt-3 text-[11px] text-amber-900 bg-amber-50 border border-amber-300 rounded-xl px-3 py-2 font-tajawal leading-relaxed">
+                التجاوز اليدوي فعّال الآن ويتجاهل المواعيد المعلنة. المواعيد نفسها لم تتغير، والضغط على
+                «تلقائي» يعيد العمل بها كما هي.
+              </p>
+            )}
+          </div>
 
           {/* Duplicate review. Hidden entirely when there is nothing to review,
               so it never becomes a permanent empty panel. */}
