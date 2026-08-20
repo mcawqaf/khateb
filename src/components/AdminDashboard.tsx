@@ -29,6 +29,7 @@ import {
 import { Registration, RegistrationStatus, AdminStats } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
 import { adminUrl } from '../lib/adminRoute.js';
+import { PROGRAM } from '../lib/programInfo.js';
 import { signIn, signOut, getStaffIdentity } from '../lib/adminAuth.js';
 import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord } from '../lib/clientData.js';
 
@@ -621,16 +622,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   className="px-3.5 py-2 bg-[#1a4d2e] hover:bg-[#153e25] text-white rounded-2xl text-xs font-bold transition flex items-center gap-1.5 border border-[#d4af37]/30"
                 >
                   <Printer className="w-4 h-4 text-[#d4af37]" />
-                  <span>طباعة كشف الاستقبال</span>
+                  <span>طباعة كشف الطلبة</span>
                 </button>
               </div>
             </div>
 
             {/* Print Only Header for Roster */}
-            <div className="print-only text-center pb-4 mb-4 border-b-2 border-stone-900">
-              <h2 className="font-amiri text-2xl font-bold">إدارة الشؤون الثقافية والدعوية</h2>
-              <h3 className="text-lg font-bold">كشف المسجلين المعتمد لدورة إعداد وتأهيل الخطباء لعام 1448هـ / 2026م</h3>
-              <p className="text-xs">المكان: مسجد حي دمشق | التاريخ: 24 أغسطس 2026م (11 ربيع الأول 1448هـ)</p>
+            <div className="print-only text-center pb-3 mb-3 border-b-2 border-stone-900">
+              <h2 className="font-amiri text-xl font-bold">الهيئة العامة للأوقاف والشؤون الإسلامية — إدارة الشؤون الثقافية والدعوية</h2>
+              <h3 className="text-base font-bold">كشف الطلبة — برنامج (إعداد) لتأهيل الخطباء، {PROGRAM.edition} {PROGRAM.year}</h3>
+              <p className="text-[11px]">
+                المقابلة الشخصية: {PROGRAM.interview.date} | انطلاق البرنامج: {PROGRAM.course.from} | المكان: {PROGRAM.course.venue}
+              </p>
+              <p className="text-[11px] font-bold">
+                عدد الطلبة في هذا الكشف: {registrations.length} | تاريخ الطباعة: {new Date().toLocaleDateString('ar-LY')}
+              </p>
             </div>
 
             {/* Registrations Table */}
@@ -643,7 +649,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <th className="py-3 px-4">اسم المتقدم</th>
                       <th className="py-3 px-4 font-mono">الرقم الوطني / الهاتف</th>
                       <th className="py-3 px-4">المدينة / السكن</th>
-                      <th className="py-3 px-4">المؤهل / حفظ القرآن</th>
+                      <th className="py-3 px-4 print:hidden">المؤهل / حفظ القرآن</th>
                       <th className="py-3 px-4 text-center">السكن الداخلي</th>
                       <th className="py-3 px-4 text-center">حالة الطلب</th>
                       <th className="py-3 px-4 text-center no-print">الإجراءات</th>
@@ -691,8 +697,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <div className="text-[11px] text-slate-500 truncate max-w-[150px]">{reg.address}</div>
                           </td>
 
-                          {/* Education & Quran */}
-                          <td className="py-3 px-4">
+                          {/* Education & Quran — reference detail, dropped from
+                              the printed sheet so it fits A4 portrait. */}
+                          <td className="py-3 px-4 print:hidden">
                             <div className="text-slate-900 font-medium">{reg.educationalLevel}</div>
                             <div className="text-[#0284C7] font-semibold text-[11px]">{reg.quranMemorization}</div>
                           </td>

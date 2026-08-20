@@ -186,6 +186,99 @@ body {
     print-color-adjust: exact;
     background: #08192E !important;
   }
+
+  /* -------------------------------------------------------------------------
+   * A4
+   *
+   * Without an explicit @page the browser uses whatever the driver defaults to
+   * — Letter on many machines — so the sheet came out with the last column
+   * clipped. 12mm margins leave a usable 186mm, which the roster fits once the
+   * actions and qualification columns are dropped.
+   * ---------------------------------------------------------------------- */
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    padding-bottom: 0 !important;   /* the phone action-bar gap has no place on paper */
+  }
+
+  /* Screen chrome that would otherwise print as empty boxes. */
+  #admin-dashboard-container {
+    border: none !important;
+    box-shadow: none !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  /* Let the table lay itself out across pages instead of inside a scroller. */
+  .overflow-x-auto {
+    overflow: visible !important;
+  }
+
+  table {
+    width: 100% !important;
+    font-size: 9pt;
+    border-collapse: collapse;
+  }
+
+  /* Repeat the column headings at the top of every page — a roster that runs
+     to three pages is unreadable without them. */
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  th,
+  td {
+    border: 1px solid #333 !important;
+    padding: 4px 6px !important;
+    vertical-align: top;
+  }
+
+  th {
+    background: #eee !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Truncation is a screen affordance; on paper it hides the address. */
+  .truncate {
+    overflow: visible !important;
+    text-overflow: clip !important;
+    white-space: normal !important;
+    max-width: none !important;
+  }
+
+  /* The dashboard sits on a dark wrapper with text-slate-100. Browsers drop
+     background colours when printing but keep text colours, so the roster
+     would have come out as near-white text on white paper. */
+  #admin-dashboard-container,
+  #admin-dashboard-container * {
+    color: #000 !important;
+    background-color: transparent !important;
+  }
+
+  /* Printing the review card while the dashboard is behind it would emit both.
+     Whenever the card is on screen, it is the only thing that prints. */
+  body:has(#registration-card-container) #admin-dashboard-container,
+  body:has(#registration-card-container) header,
+  body:has(#registration-card-container) main,
+  body:has(#registration-card-container) footer {
+    display: none !important;
+  }
+
+  #registration-card-modal-backdrop {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
 }
 
 @media screen {
