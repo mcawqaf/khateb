@@ -861,7 +861,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <th className="py-3 px-4 font-mono">الرقم الوطني / الهاتف</th>
                       <th className="py-3 px-4">المدينة / السكن</th>
                       <th className="py-3 px-4 print:hidden">المؤهل / حفظ القرآن</th>
-                      <th className="py-3 px-4 text-center">السكن الداخلي</th>
+                      <th className="py-3 px-4 text-center whitespace-nowrap">السكن الداخلي</th>
                       <th className="py-3 px-4 text-center">حالة الطلب</th>
                       <th className="py-3 px-4 text-center no-print">الإجراءات</th>
                     </tr>
@@ -915,14 +915,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             <div className="text-[#0284C7] font-semibold text-[11px]">{reg.quranMemorization}</div>
                           </td>
 
-                          {/* Housing */}
-                          <td className="py-3 px-4 text-center">
+                          {/* Housing — kept on one line; the badge is narrower
+                              than its own label and was breaking after سكن. */}
+                          <td className="py-3 px-4 text-center whitespace-nowrap">
                             {reg.housingNeeded ? (
-                              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#C89B48]/20 text-[#08192E] border border-[#C89B48]">
+                              <span className="inline-block whitespace-nowrap px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#C89B48]/20 text-[#08192E] border border-[#C89B48]">
                                 سكن داخلي
                               </span>
                             ) : (
-                              <span className="text-slate-400 text-[11px]">سكن خارجي</span>
+                              <span className="inline-block whitespace-nowrap text-slate-400 text-[11px]">سكن خارجي</span>
                             )}
                           </td>
 
