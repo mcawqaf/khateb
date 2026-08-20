@@ -1,8 +1,9 @@
 import React from 'react';
 import { PROGRAM } from '../lib/programInfo.js';
-import { Printer, Copy, Check, ShieldCheck, Calendar, MapPin, BookOpen, AlertCircle, Phone, IdCard, User, QrCode } from 'lucide-react';
+import { Printer, Copy, Check, ShieldCheck, Calendar, MapPin, BookOpen, AlertCircle, Phone, IdCard, User, QrCode, CheckCircle2, Ban, Clock } from 'lucide-react';
 import { Registration } from '../types.js';
 import { formatArabicDateTime } from '../lib/supabase.js';
+import { statusOf } from '../lib/registrationStatus.js';
 
 interface RegistrationCardModalProps {
   registration: Registration | null;
@@ -16,6 +17,16 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
   const [copied, setCopied] = React.useState(false);
 
   if (!registration) return null;
+
+  const status = statusOf(registration.status);
+  const StatusIcon =
+    registration.status === 'accepted_final'
+      ? CheckCircle2
+      : registration.status === 'rejected'
+        ? Ban
+        : registration.status === 'accepted_initial'
+          ? ShieldCheck
+          : Clock;
 
   const handleCopySerial = () => {
     navigator.clipboard.writeText(registration.serialNumber);
@@ -87,7 +98,8 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
               <div className="text-left text-xs font-bold text-slate-700 font-tajawal">
                 <div>تاريخ التسجيل:</div>
                 <div className="font-mono text-slate-900">{formatArabicDateTime(registration.createdAt)}</div>
-                <div className="text-[#0284C7] font-bold">حالة الطلب: مسجل بالمنظومة</div>
+                <div className="text-slate-500 font-normal">آخر تحديث للحالة:</div>
+                <div className="font-mono text-slate-900">{formatArabicDateTime(registration.updatedAt)}</div>
               </div>
             </div>
 
@@ -101,6 +113,41 @@ export const RegistrationCardModal: React.FC<RegistrationCardModalProps> = ({
             <div className="text-xs sm:text-sm text-slate-600 font-medium font-tajawal">
               برنامج (إعداد) لتأهيل الخطباء لعام 1448هـ / 2026م
             </div>
+          </div>
+
+          {/*
+            Application status.
+
+            This is the first thing the applicant looks for, so it sits above
+            the serial number. It replaces a hardcoded "مسجل بالمنظومة" line
+            that printed identically for every applicant, including rejected
+            ones. Border and icon carry the meaning as well as the colour, so
+            it still reads on a black-and-white printout.
+          */}
+          <div
+            className={`rounded-3xl border-4 p-5 mb-5 print-keep-color print-break-inside-avoid ${status.tone.box}`}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-2">
+              <div className="flex items-center gap-2.5">
+                <StatusIcon className={`w-7 h-7 shrink-0 ${status.tone.text}`} />
+                <div>
+                  <div className="text-[11px] font-bold text-slate-600 font-tajawal">حالة الطلب</div>
+                  <div className={`font-cairo text-xl sm:text-2xl font-black ${status.tone.text}`}>
+                    {status.label}
+                  </div>
+                </div>
+              </div>
+
+              <span
+                className={`px-3 py-1 rounded-full border-2 text-[11px] font-black font-tajawal ${status.tone.badge}`}
+              >
+                {status.isFinal ? 'قرار نهائي' : 'غير نهائي — يخضع للمراجعة'}
+              </span>
+            </div>
+
+            <p className={`text-xs sm:text-sm font-tajawal leading-relaxed font-semibold ${status.tone.text}`}>
+              {status.applicantNote}
+            </p>
           </div>
 
           {/* Prominent Sequential Serial Number Banner */}

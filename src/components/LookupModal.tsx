@@ -2,6 +2,7 @@ import React from 'react';
 import { Search, User, Phone, IdCard, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
 import { Registration } from '../types.js';
 import { lookupRegistration } from '../lib/clientData.js';
+import { statusOf } from '../lib/registrationStatus.js';
 
 interface LookupModalProps {
   isOpen: boolean;
@@ -167,13 +168,37 @@ export const LookupModal: React.FC<LookupModalProps> = ({
                   id={`lookup-result-${reg.id}`}
                   className="p-4 rounded-2xl border border-slate-200 bg-white hover:border-[#0284C7] transition flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs"
                 >
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
+                  <div className="space-y-2 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
                       <span className="font-mono text-sm font-bold bg-[#08192E] text-[#DFB76C] px-2.5 py-0.5 rounded-lg border border-[#C89B48]/30">
                         {reg.serialNumber}
                       </span>
                       <span className="font-bold text-slate-900 text-base">{reg.fullName}</span>
                     </div>
+
+                    {/* The applicant is here to find out where their
+                        application stands, so lead with that. */}
+                    {(() => {
+                      const st = statusOf(reg.status);
+                      return (
+                        <div className={`rounded-xl border-2 p-3 ${st.tone.box}`}>
+                          <div className="flex flex-wrap items-center gap-2 mb-1">
+                            <span className="text-[11px] font-bold text-slate-600 font-tajawal">
+                              حالة الطلب:
+                            </span>
+                            <span
+                              className={`px-2.5 py-0.5 rounded-full border-2 text-xs font-black font-cairo ${st.tone.badge}`}
+                            >
+                              {st.label}
+                            </span>
+                          </div>
+                          <p className={`text-[11px] font-tajawal leading-relaxed font-semibold ${st.tone.text}`}>
+                            {st.applicantNote}
+                          </p>
+                        </div>
+                      );
+                    })()}
+
                     <div className="text-xs text-slate-600 flex flex-wrap items-center gap-3 font-tajawal">
                       <span>الرقم الوطني: <strong className="font-mono">{reg.nationalId}</strong></span>
                       <span>الهاتف: <strong className="font-mono">{reg.phone}</strong></span>

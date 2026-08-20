@@ -174,6 +174,13 @@ body {
   }
   /* The logo artwork is light, so its dark disc has to survive printing —
      browsers drop background colours by default. */
+  /* Force the browser to print an element's own colours. Unlike .print-solid
+     this does not impose a background, so each status keeps its own. */
+  .print-keep-color,
+  .print-keep-color * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
   .print-solid {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
