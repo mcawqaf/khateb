@@ -217,10 +217,31 @@ body {
     overflow: visible !important;
   }
 
+  /* Right-to-left is set on <html>, but a printed sheet must not depend on
+     that being inherited through every wrapper, so it is stated again here. */
+  #admin-dashboard-container,
+  #printable-review-card {
+    direction: rtl !important;
+    unicode-bidi: embed;
+  }
+
   table {
     width: 100% !important;
+    margin-inline: auto;          /* centre the sheet on the page */
     font-size: 9pt;
     border-collapse: collapse;
+    direction: rtl !important;
+  }
+
+  /* Centre every cell, headings included. The utility classes on these cells
+     are single-class selectors, so overriding them needs !important rather
+     than a longer selector. */
+  #admin-dashboard-container th,
+  #admin-dashboard-container td,
+  #admin-dashboard-container th *,
+  #admin-dashboard-container td * {
+    text-align: center !important;
+    vertical-align: middle !important;
   }
 
   /* Repeat the column headings at the top of every page — a roster that runs
@@ -238,7 +259,6 @@ body {
   td {
     border: 1px solid #333 !important;
     padding: 4px 6px !important;
-    vertical-align: top;
   }
 
   th {
