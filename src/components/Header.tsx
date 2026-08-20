@@ -18,13 +18,13 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Top Islamic Banner Bar */}
       <div id="top-announcement-bar" className="bg-[#051120] text-[#EDF2F7] text-xs py-2 px-4 border-b border-[#C89B48]/20">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-2 font-medium">
+          <div className="hidden sm:flex items-center gap-2 font-medium">
             <span className="inline-block w-2 h-2 rounded-full bg-[#38BDF8] animate-pulse"></span>
             <span className="text-[#DFB76C] font-semibold">الهيئة العامة للأوقاف والشؤون الإسلامية</span>
             <span className="text-white/40">|</span>
             <span className="text-slate-300">إدارة الشؤون الثقافية والدعوية</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-300">
+          <div className="flex items-center justify-center w-full sm:w-auto gap-4 text-slate-300">
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-[#DFB76C]" />
               <span>فترة التسجيل: {PROGRAM.registration.short}</span>
@@ -38,29 +38,29 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-22">
+        <div className="flex justify-between items-center gap-2 h-16 sm:h-22">
           {/* Logo & Identity */}
           <div 
             id="brand-logo-button"
             onClick={() => onScrollToSection('hero-section')}
-            className="flex items-center gap-3.5 cursor-pointer group py-1"
+            className="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group py-1 min-w-0"
           >
             <div className="rounded-md overflow-hidden inline-flex shrink-0 shadow-2xl border-2 sm:border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 group-hover:scale-105 group-hover:border-[#F7E7CE] transition-all">
               <img 
                 src="./assets/program-logo.png" 
                 alt="شعار برنامج إعداد لتأهيل الخطباء" 
-                className="h-12 sm:h-14 w-auto block"
+                className="h-9 sm:h-14 w-auto block"
               />
             </div>
-            <div>
-              <div className="font-amiri text-2xl sm:text-3xl font-bold text-white leading-tight flex items-center gap-2">
+            <div className="min-w-0">
+              <div className="font-amiri text-base sm:text-3xl font-bold text-white leading-tight flex flex-wrap items-center gap-x-1.5 sm:gap-2">
                 <span>برنامج</span>
                 <span className="text-[#38BDF8] drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">(إعداد)</span>
                 <span>لتأهيل الخطباء</span>
               </div>
-              <div className="text-xs text-slate-300 font-semibold tracking-wide flex items-center gap-2 mt-0.5 font-tajawal">
-                <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs">الدورة 5</span>
-                <span className="text-[#DFB76C] font-bold">1448هـ / 2026م</span>
+              <div className="text-xs text-slate-300 font-semibold tracking-wide flex items-center gap-1.5 sm:gap-2 mt-0.5 font-tajawal">
+                <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-2 py-0.5 rounded-full text-[10px] font-black shadow-xs">الدورة 5</span>
+                <span className="text-[#DFB76C] font-bold text-[10px] sm:text-xs">1448هـ / 2026م</span>
               </div>
             </div>
           </div>

@@ -112,25 +112,41 @@ export default function App() {
         onScrollToSection={scrollToSection}
       />
 
-      {/* Floating Quick Action Buttons for Easy Access */}
-      <div id="floating-quick-bar" className="fixed bottom-5 right-5 z-30 flex flex-col gap-2.5 no-print">
+      {/*
+        Quick actions.
+
+        On a phone these were two icon-only circles pinned bottom-right, and
+        they landed directly on top of the hero's own "register" button. Below
+        `sm` they become a full-width bar with labelled, thumb-sized targets;
+        body padding in index.css keeps it clear of page content. From `sm` up
+        the original floating stack is kept.
+      */}
+      <div
+        id="floating-quick-bar"
+        className="fixed z-30 no-print inset-x-0 bottom-0 flex gap-2 p-2.5 bg-[#061526]/95 backdrop-blur border-t border-[#C89B48]/40
+                   sm:inset-x-auto sm:bottom-5 sm:right-5 sm:flex-col sm:gap-2.5 sm:p-0 sm:bg-transparent sm:backdrop-blur-none sm:border-0"
+      >
         <button
           id="floating-lookup-btn"
           onClick={() => setIsLookupOpen(true)}
-          className="p-3.5 bg-[#08192E] text-white rounded-2xl shadow-xl border border-[#C89B48]/50 hover:bg-[#0B2545] hover:scale-105 transition-all flex items-center gap-2 text-xs font-bold"
+          className="flex-1 min-h-12 px-3 bg-[#08192E] text-white rounded-2xl shadow-xl border border-[#C89B48]/50 hover:bg-[#0B2545] sm:hover:scale-105 transition-all flex items-center justify-center gap-2 text-xs font-bold
+                     sm:flex-none sm:min-h-0 sm:p-3.5"
           title="استعلام وطباعة استمارة التسجيل"
         >
-          <Search className="w-5 h-5 text-[#38BDF8]" />
+          <Search className="w-5 h-5 text-[#38BDF8] shrink-0" />
+          <span className="sm:hidden">استعلام / طباعة</span>
           <span className="hidden sm:inline">استعلام / طباعة استمارة</span>
         </button>
 
         <button
           id="floating-register-btn"
           onClick={() => scrollToSection('registration-form-section')}
-          className="p-3.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] text-[#08192E] rounded-2xl shadow-2xl hover:brightness-110 hover:scale-105 transition-all flex items-center gap-2 text-xs font-black border-2 border-amber-300 ring-2 ring-[#DFB76C]/30"
+          className="flex-1 min-h-12 px-3 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] text-[#08192E] rounded-2xl shadow-2xl hover:brightness-110 sm:hover:scale-105 transition-all flex items-center justify-center gap-2 text-xs font-black border-2 border-amber-300 ring-2 ring-[#DFB76C]/30
+                     sm:flex-none sm:min-h-0 sm:p-3.5"
           title="التسجيل في برنامج إعداد"
         >
-          <FileText className="w-5 h-5 text-[#08192E]" />
+          <FileText className="w-5 h-5 text-[#08192E] shrink-0" />
+          <span className="sm:hidden">سجل الآن</span>
           <span className="hidden sm:inline">سجل الآن بالبرنامج</span>
         </button>
       </div>

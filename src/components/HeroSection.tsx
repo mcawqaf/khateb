@@ -43,7 +43,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
 
               <div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-amiri font-bold text-white leading-tight">
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-amiri font-bold text-white leading-snug">
                   برنامج <span className="text-[#38BDF8] drop-shadow-[0_0_12px_rgba(56,189,248,0.5)]">(إعداد)</span> لتأهيل الخطباء
                 </h1>
                 <div className="text-xs sm:text-sm text-[#DFB76C] font-semibold mt-1 font-tajawal flex items-center gap-2">
@@ -59,7 +59,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-4 py-1.5 rounded-full text-xs font-black shadow-md">
+              <span className="hidden sm:inline-block bg-gradient-to-r from-[#C89B48] to-[#DFB76C] text-[#08192E] px-4 py-1.5 rounded-full text-xs font-black shadow-md">
                 الدورة الخامسة (5) - للعام 1448هـ / 2026م
               </span>
               <span className="text-[#DFB76C] font-amiri font-bold text-base bg-white/10 px-4 py-1 rounded-full border border-[#C89B48]/40">
@@ -69,11 +69,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Action CTAs inside Main Tile */}
-          <div className="relative z-10 flex flex-wrap items-center gap-3 pt-5 border-t border-white/15">
+          <div className="relative z-10 flex flex-wrap items-stretch gap-3 pt-5 border-t border-white/15">
             <button
               id="hero-register-cta"
               onClick={onRegisterClick}
-              className="px-6 py-3.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] hover:brightness-110 text-[#08192E] font-black text-sm sm:text-base rounded-2xl shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2 border border-amber-300 ring-4 ring-amber-400/20"
+              className="w-full sm:w-auto justify-center px-6 py-3.5 bg-gradient-to-r from-[#C89B48] via-[#DFB76C] to-[#C89B48] hover:brightness-110 text-[#08192E] font-black text-sm sm:text-base rounded-2xl shadow-xl transition-all transform sm:hover:-translate-y-0.5 flex items-center gap-2 border border-amber-300 ring-4 ring-amber-400/20"
             >
               <UserCheck className="w-5 h-5 text-[#08192E]" />
               <span>تعبئة استمارة التسجيل الآن</span>
@@ -82,19 +82,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <button
               id="hero-terms-cta"
               onClick={onTermsClick}
-              className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold text-sm rounded-2xl transition border border-[#C89B48]/40 flex items-center gap-2"
+              className="flex-1 sm:flex-none justify-center px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold text-sm rounded-2xl transition border border-[#C89B48]/40 flex items-center gap-2"
             >
-              <ShieldAlert className="w-4 h-4 text-[#38BDF8]" />
-              <span>شروط وضوابط القبول</span>
+              <ShieldAlert className="w-4 h-4 text-[#38BDF8] shrink-0" />
+              <span className="sm:hidden">الشروط</span>
+              <span className="hidden sm:inline">شروط وضوابط القبول</span>
             </button>
 
             <button
               id="hero-lookup-cta"
               onClick={onLookupClick}
-              className="px-4 py-3.5 bg-white/5 hover:bg-white/15 text-slate-200 font-semibold text-xs sm:text-sm rounded-2xl border border-white/20 transition flex items-center gap-1.5"
+              className="flex-1 sm:flex-none justify-center px-4 py-3.5 bg-white/5 hover:bg-white/15 text-slate-200 font-semibold text-xs sm:text-sm rounded-2xl border border-white/20 transition flex items-center gap-1.5"
             >
-              <Search className="w-4 h-4 text-[#DFB76C]" />
-              <span>استعلام بالرقم المتسلسل</span>
+              <Search className="w-4 h-4 text-[#DFB76C] shrink-0" />
+              <span className="sm:hidden">استعلام</span>
+              <span className="hidden sm:inline">استعلام بالرقم المتسلسل</span>
             </button>
           </div>
         </div>
@@ -192,7 +194,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <Compass className="w-4 h-4 text-[#38BDF8]" />
                 <span>بطاقة المراجعة الإلكترونية</span>
               </h3>
-              <span className="font-mono text-xs bg-[#C89B48]/20 text-[#DFB76C] px-2.5 py-0.5 rounded-full border border-[#C89B48]/40 font-bold">
+              <span className="font-mono text-xs bg-[#C89B48]/20 text-[#DFB76C] px-2.5 py-1 rounded-full border border-[#C89B48]/40 font-bold">
                 KHT-1448-XXX
               </span>
             </div>

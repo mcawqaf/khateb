@@ -16,6 +16,66 @@
   }
 }
 
+/* ---------------------------------------------------------------------------
+ * Phone ergonomics
+ *
+ * These are deliberately element-and-attribute selectors rather than utility
+ * classes: they need to outrank Tailwind's .text-sm / .w-4 on the fields
+ * themselves without !important, and they must hold for every field on the
+ * page, including any added later.
+ * ------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* iOS Safari zooms the page whenever a focused field's text is under 16px.
+     On a registration form that means the layout lurches on every single tap. */
+  input:not([type="checkbox"]):not([type="radio"]),
+  select:not([size]),
+  textarea:not([rows="0"]) {
+    font-size: 16px;
+  }
+
+  /* 13px tick boxes are unusable with a thumb, and several are required to
+     submit. */
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 1.35rem;
+    height: 1.35rem;
+    flex-shrink: 0;
+  }
+
+  /* Room for the fixed action bar so it never sits on top of the page's own
+     last control. */
+  body {
+    padding-bottom: 4.5rem;
+  }
+
+  /* Header icon buttons and footer links were 36px and 16px tall. Give every
+     one of them a thumb-sized row without changing how they look. */
+  #mobile-lookup-quick-btn,
+  #mobile-menu-toggle-btn {
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+  }
+
+  #main-footer li button,
+  #main-footer li a {
+    min-height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* The whole label is the tap target for a tick box, so give the shorter
+     ones a full thumb row. */
+  label:has(input[type="checkbox"]),
+  label:has(input[type="radio"]) {
+    min-height: 2.75rem;
+  }
+}
+
+/* Never let a long unbroken string (an email, a URL) push the page sideways. */
+body {
+  overflow-wrap: break-word;
+}
+
 .font-amiri {
   font-family: 'Amiri', serif;
 }
