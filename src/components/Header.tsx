@@ -46,13 +46,16 @@ export const Header: React.FC<HeaderProps> = ({
             className="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group py-1 min-w-0"
           >
             <div className="rounded-md overflow-hidden inline-flex shrink-0 shadow-2xl border-2 sm:border-3 border-[#DFB76C] ring-4 ring-[#DFB76C]/30 group-hover:scale-105 group-hover:border-[#F7E7CE] transition-all">
-              <img 
-                src="./assets/program-logo.png" 
-                alt="شعار برنامج إعداد لتأهيل الخطباء" 
-                className="h-9 sm:h-14 w-auto block"
+              <img
+                src="./assets/program-logo.png"
+                alt="شعار برنامج إعداد لتأهيل الخطباء"
+                className="h-11 sm:h-14 w-auto block"
               />
             </div>
-            <div className="min-w-0">
+            {/* On a phone the banner carries the logo alone — the wordmark was
+                crowding it, and the page title repeats immediately below in
+                the hero anyway. */}
+            <div className="hidden sm:block min-w-0">
               <div className="font-amiri text-base sm:text-3xl font-bold text-white leading-tight flex flex-wrap items-center gap-x-1.5 sm:gap-2">
                 <span>برنامج</span>
                 <span className="text-[#38BDF8] drop-shadow-[0_0_8px_rgba(56,189,248,0.4)]">(إعداد)</span>
