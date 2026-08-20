@@ -6,3 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Runtime cache written by server.ts from live Supabase data.
+# It holds real applicants (national IDs, phones, addresses) and must never
+# reach the public repository.
+data/
