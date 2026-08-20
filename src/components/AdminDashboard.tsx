@@ -31,7 +31,8 @@ import { formatArabicDateTime } from '../lib/supabase.js';
 import { adminUrl } from '../lib/adminRoute.js';
 import { PROGRAM } from '../lib/programInfo.js';
 import { signIn, signOut, getStaffIdentity } from '../lib/adminAuth.js';
-import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord } from '../lib/clientData.js';
+import { fetchRegistrations, fetchAdminStats, updateRegistrationStatus, deleteRegistrationRecord, mergeRegistrations, fetchAllRegistrations } from '../lib/clientData.js';
+import { findDuplicates, REASON_LABEL, STRENGTH_LABEL, type DuplicateGroup } from '../lib/duplicates.js';
 
 interface AdminDashboardProps {
   isOpen?: boolean;
@@ -77,6 +78,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [savingStatus, setSavingStatus] = React.useState(false);
   const [actionError, setActionError] = React.useState<string | null>(null);
 
+  // Duplicate review
+  const [duplicates, setDuplicates] = React.useState<DuplicateGroup[]>([]);
+  const [showDuplicates, setShowDuplicates] = React.useState(false);
+  const [merging, setMerging] = React.useState<string | null>(null);
+
   // Fetch data
   const fetchData = async () => {
     setLoading(true);
@@ -88,6 +94,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       setRegistrations(list);
       setStats(s);
       setActionError(null);
+
+      try {
+        setDuplicates(findDuplicates(await fetchAllRegistrations()));
+      } catch {
+        // A duplicate scan failing must not blank the dashboard.
+        setDuplicates([]);
+      }
     } catch (err) {
       setActionError(
         err instanceof Error ? err.message : 'تعذر تحميل بيانات المسجلين'
@@ -192,6 +205,34 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       }
     } catch (err) {
       setActionError(err instanceof Error ? err.message : 'تعذر حذف السجل');
+    }
+  };
+
+  const handleMerge = async (group: DuplicateGroup, keepId: string, dropId: string) => {
+    const keep = group.members.find((m) => m.id === keepId);
+    const drop = group.members.find((m) => m.id === dropId);
+    if (!keep || !drop) return;
+
+    const ok = window.confirm(
+      `دمج السجلين:
+
+يُبقى على: ${keep.serialNumber} — ${keep.fullName}
+ويُحذف: ${drop.serialNumber} — ${drop.fullName}
+
+` +
+        'ستُنقل البيانات الناقصة من المحذوف إلى المُبقى، وتُسجَّل بياناته في ملاحظات المشرف. لا يمكن التراجع عن هذا الإجراء.'
+    );
+    if (!ok) return;
+
+    setMerging(group.key);
+    setActionError(null);
+    try {
+      await mergeRegistrations(keepId, dropId);
+      await fetchData();
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : 'تعذر دمج السجلين');
+    } finally {
+      setMerging(null);
     }
   };
 
@@ -519,6 +560,118 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             <div className="flex items-start gap-2 p-3.5 bg-rose-50 border border-rose-300 rounded-2xl text-rose-800 text-xs font-semibold">
               <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>{actionError}</span>
+            </div>
+          )}
+
+          {/* Duplicate review. Hidden entirely when there is nothing to review,
+              so it never becomes a permanent empty panel. */}
+          {duplicates.length > 0 && (
+            <div className="bg-white border-2 border-amber-400 rounded-3xl overflow-hidden no-print">
+              <button
+                id="admin-duplicates-toggle"
+                onClick={() => setShowDuplicates((v) => !v)}
+                className="w-full px-5 py-3.5 flex flex-wrap items-center justify-between gap-3 bg-amber-50 hover:bg-amber-100 transition text-right"
+              >
+                <span className="flex items-center gap-2.5">
+                  <AlertCircle className="w-5 h-5 text-amber-700 shrink-0" />
+                  <span className="font-cairo font-bold text-sm text-amber-950">
+                    تسجيلات مكررة تحتاج مراجعة
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-amber-600 text-white text-[11px] font-black">
+                    {duplicates.length}
+                  </span>
+                </span>
+                <span className="text-xs font-bold text-amber-800">
+                  {showDuplicates ? 'إخفاء' : 'عرض ومعالجة'}
+                </span>
+              </button>
+
+              {showDuplicates && (
+                <div className="p-4 space-y-4">
+                  <p className="text-[11px] text-slate-600 font-tajawal leading-relaxed">
+                    الفحص يشمل جميع السجلات، لا المعروضة بالفلتر فقط. تشابه الاسم وحده لا يعني
+                    التكرار — قد يكونان شخصين مختلفين، فراجع الرقم الوطني قبل الدمج.
+                  </p>
+
+                  {duplicates.map((group) => (
+                    <div key={group.key} className="border border-slate-300 rounded-2xl overflow-hidden">
+                      <div className="px-4 py-2.5 bg-slate-100 flex flex-wrap items-center gap-2 text-xs">
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full font-black border ${
+                            group.strength === 'certain'
+                              ? 'bg-rose-100 text-rose-900 border-rose-400'
+                              : group.strength === 'likely'
+                                ? 'bg-amber-100 text-amber-900 border-amber-400'
+                                : 'bg-slate-200 text-slate-800 border-slate-400'
+                          }`}
+                        >
+                          {STRENGTH_LABEL[group.strength]}
+                        </span>
+                        <span className="font-bold text-slate-700">
+                          تطابق في: {group.reasons.map((r) => REASON_LABEL[r]).join(' + ')}
+                        </span>
+                        <span className="font-mono text-slate-600">({group.value})</span>
+                      </div>
+
+                      <div className="divide-y divide-slate-200">
+                        {group.members.map((m) => (
+                          <div key={m.id} className="p-3 flex flex-wrap items-center justify-between gap-3">
+                            <div className="min-w-0">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="font-mono text-xs font-bold bg-[#08192E] text-[#DFB76C] px-2 py-0.5 rounded">
+                                  {m.serialNumber}
+                                </span>
+                                <span className="font-bold text-slate-900 text-sm">{m.fullName}</span>
+                                {getStatusBadge(m.status)}
+                              </div>
+                              <div className="text-[11px] text-slate-600 flex flex-wrap gap-3 mt-1 font-tajawal">
+                                <span>الوطني: <strong className="font-mono">{m.nationalId}</strong></span>
+                                <span>الهاتف: <strong className="font-mono">{m.phone}</strong></span>
+                                <span>المدينة: {m.city}</span>
+                                <span>سُجل: {formatArabicDateTime(m.createdAt)}</span>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center gap-2 shrink-0">
+                              <button
+                                onClick={() => onViewRegistrationCard(m)}
+                                className="px-2.5 py-1.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-[11px] font-bold flex items-center gap-1"
+                              >
+                                <Eye className="w-3.5 h-3.5" />
+                                <span>عرض</span>
+                              </button>
+
+                              {group.members
+                                .filter((other) => other.id !== m.id)
+                                .map((other) => (
+                                  <button
+                                    key={other.id}
+                                    disabled={merging === group.key}
+                                    onClick={() => handleMerge(group, m.id, other.id)}
+                                    className="px-2.5 py-1.5 rounded-xl bg-[#1a4d2e] hover:bg-[#153e25] text-white text-[11px] font-bold disabled:opacity-60"
+                                    title={`الإبقاء على ${m.serialNumber} ودمج ${other.serialNumber} فيه`}
+                                  >
+                                    {merging === group.key
+                                      ? 'جارٍ الدمج...'
+                                      : `أبقِ هذا وادمج ${other.serialNumber}`}
+                                  </button>
+                                ))}
+
+                              <button
+                                onClick={() => handleDelete(m.id, m.fullName)}
+                                className="px-2.5 py-1.5 rounded-xl border border-rose-300 text-rose-700 hover:bg-rose-50 text-[11px] font-bold flex items-center gap-1"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                                <span>حذف</span>
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 

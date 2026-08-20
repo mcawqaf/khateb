@@ -176,6 +176,39 @@ export async function updateRegistrationStatus(
   return (data?.length ?? 0) > 0;
 }
 
+/**
+ * Merge two applications into one.
+ *
+ * The database does the whole thing in one statement pair so a failure cannot
+ * leave the pair half-merged, and it refuses outright unless the caller is
+ * listed in public.staff.
+ */
+export async function mergeRegistrations(keepId: string, dropId: string): Promise<Registration> {
+  if (!supabase) throw notConfigured();
+
+  const { data, error } = await supabase.rpc('merge_registrations', {
+    p_keep: keepId,
+    p_drop: dropId
+  });
+
+  if (error) throw new Error(error.message || 'تعذر دمج السجلين');
+  if (!data) throw new Error('تعذر دمج السجلين');
+
+  return mapDbToRegistration(data as Record<string, unknown>);
+}
+
+/** Every record, ignoring the dashboard filters — a duplicate pair could
+ *  otherwise be missed because one of the two is filtered out of view. */
+export async function fetchAllRegistrations(): Promise<Registration[]> {
+  if (!supabase) return [];
+  const { data, error } = await supabase
+    .from('registrations')
+    .select('*')
+    .order('sequence_number', { ascending: true });
+  if (error) throw new Error(error.message);
+  return (data || []).map(mapDbToRegistration);
+}
+
 export async function deleteRegistrationRecord(id: string): Promise<boolean> {
   if (!supabase) return false;
 
